@@ -2757,8 +2757,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1cafcc3525d37b9489dc1eb4dc986f6e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Speed: 0
-  m_Bullet: {fileID: 0}
+  m_Speed: 5
+  m_Bullet: {fileID: 3087090803553382220, guid: 2688166708e201c4c9d2a88199760564,
+    type: 3}
 --- !u!1 &526784028
 GameObject:
   m_ObjectHideFlags: 0
@@ -4662,8 +4663,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Submarine: {fileID: 1591015395}
-  m_TopWeaponStation: {fileID: 0}
-  m_BottomWeaponStation: {fileID: 0}
+  m_TopWeaponStation: {fileID: 524513244}
+  m_BottomWeaponStation: {fileID: 1557646011}
   m_Shield: {fileID: 801557543}
   m_MapStation: {fileID: 1972843765}
   m_ArmoryStation: {fileID: 37258139}
@@ -8364,8 +8365,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1cafcc3525d37b9489dc1eb4dc986f6e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Speed: 0
-  m_Bullet: {fileID: 0}
+  m_Speed: 5
+  m_Bullet: {fileID: 3087090803553382220, guid: 2688166708e201c4c9d2a88199760564,
+    type: 3}
 --- !u!1 &1573933813
 GameObject:
   m_ObjectHideFlags: 0
