@@ -19,6 +19,8 @@ public class AutomaticCave : MonoBehaviour
     public Transform BgImage = null;
     public Transform MidImage = null;
 
+    private CaveCluster borderTile = null;
+
     //cave creation support
     private List<CaveCluster> clusters;
     private bool[,] claimed; //whether a tile has been claimed by a cluster already
@@ -89,7 +91,7 @@ public class AutomaticCave : MonoBehaviour
     {
         for (int x = 0; x < width; x++)
         {
-            for (int y = 1; y < height-1; y++)
+            for (int y = 0; y < height; y++)
             {
                 terrainMap[x, y] = Random.Range(1, 101) < iniChance ? 1 : 0;
             }
@@ -150,7 +152,8 @@ public class AutomaticCave : MonoBehaviour
     private void Start()
     {
         doSim(numR);
-       
+        MakeCaves();
+
     }
 
 
@@ -166,15 +169,15 @@ public class AutomaticCave : MonoBehaviour
             ToggleCamera();
         }
 
-        if (Input.GetKeyDown("r"))
-        {
-            MakeCaves();
-        }
+        //if (Input.GetKeyDown("r"))
+        //{
+        //    MakeCaves();
+        //}
 
-        if (Input.GetKeyDown("b"))
-        {
-            BuildCaves();
-        }
+        //if (Input.GetKeyDown("b"))
+        //{
+        //    BuildCaves();
+        //}
 
         MoveCamera();
     }
@@ -245,21 +248,6 @@ public class AutomaticCave : MonoBehaviour
         }
     }
 
-    CaveCluster GetClosestClusterTo(CaveCluster fromHere) {
-        float smallestDist = Vector2Int.Distance(fromHere.GetCenter(), clusters[0].GetCenter());
-        CaveCluster closestCluster = clusters[0];
-
-        foreach (CaveCluster cluster in clusters) {
-            float dist = Vector2Int.Distance(fromHere.GetCenter(),cluster.GetCenter());
-            if (dist != 0f && dist <= smallestDist)
-            {
-                smallestDist = dist;
-                closestCluster = cluster;
-            }
-        }
-        return closestCluster;
-    }
-
     void MakeClusters()
     {
         claimed = new bool[width, height];
@@ -324,7 +312,7 @@ public class AutomaticCave : MonoBehaviour
             clusters.Add(cluster);
         }
 
-        if (cluster.TouchesBorder()) cluster.ColorCluster(topMap);
+        //if (cluster.TouchesBorder()) cluster.ColorCluster(topMap, Color.red);
     }
 
     void MakeCaves()
@@ -332,27 +320,57 @@ public class AutomaticCave : MonoBehaviour
         //1. find clusters & eliminate small ones
         MakeClusters();
 
+        borderTile = clusters[0];
+
         //2. for each cluster, if not connected to border, connect to closest cluster
-        //BuildCaves();
+        BuildCaves();
     }
 
     void BuildCaves() {
 
         print("Clusters 1: " + clusters.Count());
-        foreach (CaveCluster cluster in clusters.ToList())
-        {
-            if (!cluster.TouchesBorder())
-            {
-                CaveCluster closest = GetClosestClusterTo(cluster);
-                ConnectClusters(cluster, closest);
-                cluster.Setup();
-            }
+
+        for (int i = 0; i < clusters.Count; i++){
+            if (!clusters[i].ShouldBeRemoved()) BuildCavesR(clusters[i]);
         }
 
-        clusters[0].ColorCluster(topMap);
+        foreach (CaveCluster cluster in clusters.ToList())
+        {
+            if (cluster.ShouldBeRemoved()) clusters.Remove(cluster);
+        }
+
         print("Clusters 2: " + clusters.Count());
+  
 
     }
+
+    void BuildCavesR(CaveCluster cluster)
+    {
+        if (cluster.TouchesBorder()) {
+            borderTile = cluster;
+        } else {
+            CaveCluster closest = GetClosestClusterTo(cluster);
+            ConnectClusters(cluster, closest);
+            ConnectToBorder(cluster);
+            //if (cluster.CloseToBorder(width, height)) {
+            // cluster.ColorCluster(topMap, Color.green);
+            //ConnectToBorder(cluster);
+            //}
+        }
+    }
+
+    void ConnectToBorder(CaveCluster c)
+    {
+
+        //create tiles in between and add to a
+        c.CreateBridge(borderTile, topMap, topTile);
+
+        //recalculate values (like cluster's center)
+        c.Setup();
+
+        c.MarkTouchesBorder();
+    }
+
 
     void ConnectClusters(CaveCluster a, CaveCluster b)
     {
@@ -364,9 +382,32 @@ public class AutomaticCave : MonoBehaviour
         a.AddTiles(b.GetTiles());
 
         //remove b from cluster list
-        clusters.Remove(b);
+        // clusters.Remove(b);
+        b.setShouldBeRemoved(true);
+
+        //recalculate values (like cluster's center)
+        a.Setup();
 
         if (b.TouchesBorder()) a.MarkTouchesBorder();
     }
+
+    CaveCluster GetClosestClusterTo(CaveCluster fromHere)
+    {
+        float smallestDist = Vector2Int.Distance(fromHere.GetCenter(), clusters[0].GetCenter());
+        CaveCluster closestCluster = clusters[0];
+
+        foreach (CaveCluster cluster in clusters)
+        {
+            if (cluster.ShouldBeRemoved()) continue;
+            float dist = Vector2Int.Distance(fromHere.GetCenter(), cluster.GetCenter());
+            if (dist != 0f && dist <= smallestDist)
+            {
+                smallestDist = dist;
+                closestCluster = cluster;
+            }
+        }
+        return closestCluster;
+    }
+
 
 }

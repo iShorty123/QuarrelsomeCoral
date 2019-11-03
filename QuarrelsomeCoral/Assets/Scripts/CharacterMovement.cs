@@ -20,6 +20,8 @@ public class CharacterMovement : MonoBehaviour
     private bool m_IsPilot;
     private bool m_AtTopOfLadder = true;
     private bool m_AtBottomOfLadder;
+    private const float m_DISTANCEALLOWEDBETWEENWALLANDPLAYER = 0.3f;
+    private Animator m_Animator;
 
     private string m_Horizontal = "Horizontal_P";
     private string m_Vertical = "Vertical_P";
@@ -36,7 +38,7 @@ public class CharacterMovement : MonoBehaviour
         MapPlayerControls();
         m_PlayerState = PlayerState.Walking;
         m_CanMove = true;
-        m_Speed = 3;
+        m_Speed = 5;
         m_OnLaddder = false;
         m_InStation = false;
         m_IsPilot = false;
@@ -44,6 +46,8 @@ public class CharacterMovement : MonoBehaviour
         m_SpriteRenderer = GetComponent<SpriteRenderer>();
         m_SubmarineRigidBody = m_Submarine.GetComponent<SubmarineControl>().m_RigidBody;
         m_ClosestStation = null;
+        m_Animator = GetComponent<Animator>();
+        m_Animator.SetBool("Move", false);
     }
 
     // Update is called once per frame
@@ -71,13 +75,15 @@ public class CharacterMovement : MonoBehaviour
         if (collision.name == "Submarine") // Pushing again sub walls
         {
         }
-        else if (collision.name == "SubmarineFirstFloor")
+        else if (collision.name == "FirstFloor")
         {
             m_AtBottomOfLadder = true;
+            m_AtTopOfLadder = false;
         }
-        else if (collision.name == "SubmarineSecondFloor")
+        else if (collision.name == "SecondFloor")
         {
             m_AtTopOfLadder = true;
+            m_AtBottomOfLadder = false;
         }
         else if (collision.tag == "Ladder")
         {
@@ -93,35 +99,31 @@ public class CharacterMovement : MonoBehaviour
 
     private void OnTriggerStay2D(Collider2D collision)
     {
-        if (collision.name == "SubmarineFirstFloor")
+        if (collision.name == "FirstFloor")
         {
             m_AtBottomOfLadder = true;
-            if (!m_OnLaddder)
+            if (!m_OnLaddder || m_RigidBody.velocity.y < 0)
             {
                 m_RigidBody.velocity = new Vector2(m_RigidBody.velocity.x, 0);//Remove y velocity
-                transform.localPosition = new Vector2(transform.localPosition.x, -0.5f); //Lock onto floor//////////////////////////Values dependent on sub (BAD)
-                //Directly setting the position on hard-coded value works for now - should investigate using ray casting in the future
             }
         }
-        else if (collision.name == "SubmarineSecondFloor")
+        else if (collision.name == "SecondFloor")
         {
             m_AtTopOfLadder = true;
-            if (!m_OnLaddder)
+            if (!m_OnLaddder || m_RigidBody.velocity.y > 0)
             {
                 m_RigidBody.velocity = new Vector2(m_RigidBody.velocity.x, 0); //Remove y velocity
-                transform.localPosition = new Vector2(transform.localPosition.x, 1.15f); //Lock onto floor //////////////////////////Values dependent on sub (BAD)
-                //Directly setting the position on hard-coded value works for now - should investigate using ray casting in the future
             }
         }
     }
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if (collision.name == "SubmarineFirstFloor")
+        if (collision.name == "FirstFloor")
         {
             m_AtBottomOfLadder = false;
         }
-        else if (collision.name == "SubmarineSecondFloor")
+        else if (collision.name == "SecondFloor")
         {
             m_AtTopOfLadder = false;
         }
@@ -129,7 +131,6 @@ public class CharacterMovement : MonoBehaviour
         {
             m_OnLaddder = false;
         }
-
         if (collision.tag == "Station")
         {
             m_ClosestStation = null;
@@ -152,9 +153,9 @@ public class CharacterMovement : MonoBehaviour
     private void MoveCharacter()
     {
         //Determine if against a wall
-        int layerMask = 1 << 9; //Layer: Submarine Walls
+        int layerMask = 1 << LayerMask.NameToLayer("SubmarineInterior"); //Layer: Submarine Walls
         bool canMoveRight, canMoveLeft;
-        if (Physics2D.Raycast(transform.position, Vector2.right, .55f, layerMask))
+        if (Physics2D.Raycast(transform.position, Vector2.right, m_DISTANCEALLOWEDBETWEENWALLANDPLAYER, layerMask))
         {
             canMoveRight = false;
         }
@@ -162,7 +163,7 @@ public class CharacterMovement : MonoBehaviour
         {
             canMoveRight = true;
         }
-        if (Physics2D.Raycast(transform.position, Vector2.left, .55f, layerMask))
+        if (Physics2D.Raycast(transform.localPosition, Vector2.left, m_DISTANCEALLOWEDBETWEENWALLANDPLAYER, layerMask))
         {
             canMoveLeft = false;
         }
@@ -174,22 +175,26 @@ public class CharacterMovement : MonoBehaviour
         //Horizontally
         float moveHorizontally = Input.GetAxis(m_Horizontal);
 
-        if (m_AtTopOfLadder || m_AtBottomOfLadder || m_OnLaddder)
+        if (m_AtTopOfLadder || m_AtBottomOfLadder )//|| m_OnLaddder)
         {
             if ((moveHorizontally > 0 && !canMoveRight) || (moveHorizontally < 0 && !canMoveLeft)) { moveHorizontally = 0; } //Prevent moving through a wall
             m_RigidBody.velocity = new Vector2(moveHorizontally * m_Speed, m_RigidBody.velocity.y);
         }
         else
         {
-            m_RigidBody.velocity = new Vector2(moveHorizontally * m_Speed, -m_Speed); //Free fall down as we move off the ladder before reaching the bottom
+            m_RigidBody.velocity = new Vector2(0, -m_Speed); //Free fall down as we move off the ladder before reaching the bottom
         }
 
-        FlipSprite(m_SpriteRenderer, moveHorizontally);       
+        FlipSprite(m_SpriteRenderer, Input.GetAxisRaw(m_Horizontal));       
 
         //Vertically
         float moveVertically = Input.GetAxis(m_Vertical);
         if (m_OnLaddder)
         {
+            if (!m_AtTopOfLadder && !m_AtBottomOfLadder)
+            {
+                moveHorizontally = 0;
+            }
             if (moveVertically > 0 && !m_AtTopOfLadder) //Want to go up and can go up
             {
                 m_RigidBody.velocity = new Vector2(moveHorizontally * m_Speed, (moveVertically *  m_Speed));            
@@ -198,6 +203,19 @@ public class CharacterMovement : MonoBehaviour
             {
                 m_RigidBody.velocity = new Vector2(moveHorizontally * m_Speed, (moveVertically * m_Speed));
             }
+            else if (moveVertically == 0) //Prevent player from floating up or down the ladder slowly
+            {
+                m_RigidBody.velocity = new Vector2(moveHorizontally * m_Speed, (moveVertically * m_Speed));
+            }
+        }
+
+        if (m_RigidBody.velocity.x != 0)
+        {
+            m_Animator.SetBool("Move", true);
+        }
+        else
+        {
+            m_Animator.SetBool("Move", false);
         }
     }
 

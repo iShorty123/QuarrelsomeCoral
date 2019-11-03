@@ -9,6 +9,7 @@ public class CaveCluster : MonoBehaviour
     private bool touchesBorder = false;
     private Vector2Int center;
     private List<Vector2Int> tiles;
+    private bool shouldBeRemoved = false;
 
     public CaveCluster()
     {
@@ -52,6 +53,15 @@ public class CaveCluster : MonoBehaviour
         center = new Vector2Int(centerX,centerY);
     }
 
+    public void setShouldBeRemoved(bool f){
+        shouldBeRemoved = f;
+    }
+
+    public bool ShouldBeRemoved()
+    {
+        return shouldBeRemoved;
+    }
+
     public List<Vector2Int> GetTiles() {
         return tiles;
     }
@@ -60,14 +70,12 @@ public class CaveCluster : MonoBehaviour
         tiles.Add(tile);
     }
 
-    public void AddTiles(List<Vector2Int> cluster) {
+    public void AddTiles(List<Vector2Int> newTiles) {
 
-        List<Vector2Int> newTiles = new List<Vector2Int>();
-        foreach (Vector2Int tile in cluster) {
-            newTiles.Add(tile);
+        foreach (Vector2Int tile in newTiles) {
+            tiles.Add(tile);
         }
 
-        tiles = newTiles;
     }
 
     public bool TouchesBorder() {
@@ -128,6 +136,8 @@ public class CaveCluster : MonoBehaviour
             onMe.SetTile(new Vector3Int(curr.x - onMe.cellBounds.xMax, curr.y - onMe.cellBounds.yMax + 1, 0), withMe);
             onMe.SetTile(new Vector3Int(curr.x - onMe.cellBounds.xMax, curr.y - onMe.cellBounds.yMax - 1, 0), withMe);
             AddTile(curr);
+            AddTile(new Vector2Int(curr.x, curr.y + 1));
+            AddTile(new Vector2Int(curr.x, curr.y - 1));
         }
         while (curr.y != pos2.y){
             curr.y += dirY;
@@ -135,16 +145,28 @@ public class CaveCluster : MonoBehaviour
             onMe.SetTile(new Vector3Int(curr.x - onMe.cellBounds.xMax + 1, curr.y - onMe.cellBounds.yMax, 0), withMe);
             onMe.SetTile(new Vector3Int(curr.x - onMe.cellBounds.xMax - 1, curr.y - onMe.cellBounds.yMax, 0), withMe);
             AddTile(curr);
+            AddTile(new Vector2Int(curr.x + 1, curr.y ));
+            AddTile(new Vector2Int(curr.x - 1, curr.y));
         }
     }
 
-    public void ColorCluster(Tilemap map) {
+    public void ColorCluster(Tilemap map, Color color) {
         foreach (Vector2Int tile in tiles)
         {
             Vector3Int pos = new Vector3Int(tile.x + map.cellBounds.xMin, tile.y + map.cellBounds.yMin, 0);
-            map.SetColor(pos, Color.red);
+            map.SetColor(pos, color);
         }
 
     }
+
+    public bool CloseToBorder(int w, int h) {
+
+        if (Vector2.Distance(center, new Vector2(center.x, 0)) < 20) return true;
+        if (Vector2.Distance(center, new Vector2(center.x, h)) < 20) return true;
+        if (Vector2.Distance(center, new Vector2(0, center.y)) < 20) return true;
+        if (Vector2.Distance(center, new Vector2(w, center.y)) < 20) return true;
+        return false;
+    }
+
 
 }

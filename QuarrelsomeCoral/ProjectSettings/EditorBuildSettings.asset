@@ -6,6 +6,33 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/Scenes/PrototypeManager.unity
+    guid: c74a18c583d9af645b422df82f6cc69c
+  - enabled: 1
+    path: Assets/Scenes/CharacterMovement.unity
+    guid: e474f4a6fb7129b4396109810ad69701
+  - enabled: 1
+    path: Assets/Scenes/EnterExitStation.unity
+    guid: 2c374474ce6f4354c8e239349113047c
+  - enabled: 1
+    path: Assets/Scenes/MultipleInput.unity
+    guid: ba78b09e8a790b345a43bde8a05dbb47
+  - enabled: 1
+    path: Assets/Scenes/RandomWorldGeneration.unity
+    guid: 3d66548a3c673654eb2d956cb4e50674
+  - enabled: 1
     path: Assets/Scenes/SampleScene.unity
     guid: 2cda990e2423bbf4892e6590ba056729
+  - enabled: 1
+    path: Assets/Scenes/ShieldStation.unity
+    guid: 5c7c118cf53d1a34eb8d4888ee745d41
+  - enabled: 1
+    path: Assets/Scenes/SubmarineMovement.unity
+    guid: 137c44e3a7d266b4f80c35b30e71406d
+  - enabled: 1
+    path: Assets/Scenes/WeaponStation.unity
+    guid: 04b7383d042d65848bca12137cfb9ea6
+  - enabled: 1
+    path: Assets/Scenes/World_ZB338.unity
+    guid: d624f412dcd88f34aa6a5a3ca8711aed
   m_configObjects: {}
