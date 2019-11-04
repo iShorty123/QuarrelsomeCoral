@@ -351,11 +351,7 @@ public class AutomaticCave : MonoBehaviour
         } else {
             CaveCluster closest = GetClosestClusterTo(cluster);
             ConnectClusters(cluster, closest);
-            ConnectToBorder(cluster);
-            //if (cluster.CloseToBorder(width, height)) {
-            // cluster.ColorCluster(topMap, Color.green);
-            //ConnectToBorder(cluster);
-            //}
+            if (!cluster.TouchesBorder()) ConnectToBorder(cluster);
         }
     }
 
