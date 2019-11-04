@@ -245,7 +245,57 @@ Transform:
   m_Children:
   - {fileID: 761817773}
   m_Father: {fileID: 0}
-  m_RootOrder: 9
+  m_RootOrder: 10
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &294348247
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 294348249}
+  - component: {fileID: 294348248}
+  m_Layer: 0
+  m_Name: AutomaticPlant
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &294348248
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 294348247}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c8c15a2839cb747809fde8af8dded043, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Map: {fileID: 761817775}
+  MainCamera: {fileID: 1272769634}
+  Plants:
+  - {fileID: 8221092459742582421, guid: 70867c1bfd86b4713b0a744b75c367d6, type: 3}
+  - {fileID: 625552810609512805, guid: cba2a479af4104aeea7f0a74e3b2484e, type: 3}
+  - {fileID: 8091923761175868314, guid: 5fa7ca8dfdafd4fd68b74c9db243cc1a, type: 3}
+  PlantNumber: 15
+--- !u!4 &294348249
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 294348247}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 2.6996846, y: -0.5255226, z: -41.71647}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &630462421
 GameObject:
@@ -725,7 +775,7 @@ Transform:
   m_LocalScale: {x: 17, y: 17, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1150327633
 GameObject:
@@ -805,7 +855,7 @@ Transform:
   m_LocalScale: {x: 60, y: 60, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1153658208
 GameObject:
@@ -915,6 +965,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Map: {fileID: 761817775}
   MainCamera: {fileID: 1272769634}
+  BlueFish: {fileID: 3635552826223899010, guid: 45b31ee969a004033b009d49a92717d5,
+    type: 3}
+  SpawnTime: 3
 --- !u!4 &1166933785
 Transform:
   m_ObjectHideFlags: 0
@@ -940,6 +993,7 @@ GameObject:
   - component: {fileID: 1272769635}
   - component: {fileID: 1272769634}
   - component: {fileID: 1272769633}
+  - component: {fileID: 1272769636}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -1012,6 +1066,21 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1272769636
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1272769632}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: decea2074fef942878f1d9374c242e4e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  AEnemy: {fileID: 1166933784}
+  ACave: {fileID: 967462316}
+  APlant: {fileID: 294348248}
 --- !u!1 &1278424928
 GameObject:
   m_ObjectHideFlags: 0

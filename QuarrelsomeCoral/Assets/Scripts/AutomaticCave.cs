@@ -151,8 +151,6 @@ public class AutomaticCave : MonoBehaviour
 
     private void Start()
     {
-        doSim(numR);
-        MakeCaves();
 
     }
 
@@ -180,6 +178,11 @@ public class AutomaticCave : MonoBehaviour
         //}
 
         MoveCamera();
+    }
+
+    public void ConstructCave() {
+        doSim(numR);
+        MakeCaves();
     }
 
     void ToggleCamera() {
