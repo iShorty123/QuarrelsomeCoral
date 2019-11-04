@@ -26,9 +26,8 @@ public class MainController : MonoBehaviour
 
         RCave.ConstructCave();
         RPlant.AddPlants();
-        REnemy.StartEnemySpawn();
-
         PositionSubmarine();
+        REnemy.StartEnemySpawn();
     }
 
     // Update is called once per frame

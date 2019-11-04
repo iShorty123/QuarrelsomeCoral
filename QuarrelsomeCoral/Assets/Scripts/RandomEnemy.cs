@@ -46,11 +46,12 @@ public class RandomEnemy : MonoBehaviour
     public void SpawnEnemy()
     {
         Vector3 position = getRandomScreenPosition();
-        Vector3Int mapPosition = new Vector3Int(Mathf.RoundToInt(position.x + Map.cellBounds.xMin), Mathf.RoundToInt(position.y + Map.cellBounds.yMin), 0);
+        Vector3Int mapPosition = new Vector3Int(Mathf.RoundToInt(position.x), Mathf.RoundToInt(position.y), 0);
 
         while (Map.GetTile(mapPosition) != null) {
+            //Map.SetColor(mapPosition, Color.red);
             position = getRandomScreenPosition();
-            mapPosition = new Vector3Int(Mathf.RoundToInt(position.x + Map.cellBounds.xMin), Mathf.RoundToInt(position.y + Map.cellBounds.yMin), 0);
+            mapPosition = new Vector3Int(Mathf.RoundToInt(position.x), Mathf.RoundToInt(position.y), 0);
         }
 
         GameObject enemy = Instantiate(BlueFish);
