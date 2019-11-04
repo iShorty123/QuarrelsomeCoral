@@ -49,7 +49,7 @@ public class MainController : MonoBehaviour
         print(Map.cellBounds.yMin);
         foreach (Vector3Int pos in Map.cellBounds.allPositionsWithin) {
 
-            if (pos.y < Map.cellBounds.yMin + 6 || pos.y > Map.cellBounds.yMax - 6 || pos.x < Map.cellBounds.xMin + 8 || pos.x > Map.cellBounds.xMax - 8) continue;
+            if (pos.y < Map.cellBounds.yMin + 7 || pos.y > Map.cellBounds.yMax - 7 || pos.x < Map.cellBounds.xMin + 9 || pos.x > Map.cellBounds.xMax - 9) continue;
 
             if (Map.GetTile(pos) == null)
             {

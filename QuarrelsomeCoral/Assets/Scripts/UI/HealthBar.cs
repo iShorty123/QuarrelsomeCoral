@@ -13,6 +13,9 @@ public class HealthBar : MonoBehaviour
 
     private void Start()
     {
+        m_HealthBarBackground = GameObject.Find("HealthBarBackground").GetComponent<Image>();
+        m_HealthBarForeground = GameObject.Find("HealthBarForeground").GetComponent<Image>();
+
         m_ForegroundRectTransform = m_HealthBarForeground.GetComponent<RectTransform>();
         m_ForegroundWidth = m_ForegroundRectTransform.sizeDelta.x;
     }

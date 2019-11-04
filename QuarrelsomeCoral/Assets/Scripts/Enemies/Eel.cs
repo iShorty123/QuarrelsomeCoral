@@ -6,9 +6,7 @@ using UnityEngine;
 public class Eel : BaseEnemy
 {
 
-    public float m_SubmarineContactPushBackForce;
-    public float m_LungeSpeed;
-
+    private float m_SubmarineContactPushBackForce;
     private float m_TimeSinceReadyToLunge;
     private bool m_ReadyToLunge;
     private float m_RestTimeAfterLunge;
@@ -82,6 +80,8 @@ public class Eel : BaseEnemy
         m_RestTimeAfterLunge += 1; //if 
 
         //Reflection Method:
+
+        Debug.Log("hit");
 
         m_ReflectionDirection = Vector3.Reflect(m_DirectionToSubmarine, _impactSpot.normal);
         m_SubmarineDirectionAtImpact = m_DirectionToSubmarine;
