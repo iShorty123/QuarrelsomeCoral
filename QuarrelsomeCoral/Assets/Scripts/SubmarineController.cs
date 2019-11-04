@@ -71,7 +71,7 @@ public class SubmarineController : MonoBehaviour
         IBaseEnemy enemy = collision.collider.GetComponent<IBaseEnemy>();
         if (enemy != null)
         {
-            enemy.HitSubmarine();
+            enemy.HitSubmarine(collision.GetContact(0));
         }
     }
 

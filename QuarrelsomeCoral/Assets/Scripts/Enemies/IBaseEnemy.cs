@@ -10,7 +10,5 @@ public interface IBaseEnemy
 
     void TakeDamage();
 
-    void HitSubmarine();
-
-
+    void HitSubmarine(ContactPoint2D _impactSpot);
 }

@@ -14,7 +14,7 @@ public class SpitterFish : BaseEnemy
         throw new System.NotImplementedException();
     }
 
-    public override void HitSubmarine()
+    public override void HitSubmarine(ContactPoint2D _impactSpot)
     {
         throw new System.NotImplementedException();
     }
