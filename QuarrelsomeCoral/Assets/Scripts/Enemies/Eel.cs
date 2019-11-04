@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -12,8 +13,10 @@ public class Eel : BaseEnemy
     private bool m_ReadyToLunge;
     private float m_RestTimeAfterLunge;
     private float m_TimeWhenStunned;
+    private float m_TimeWhenStunnedByShield;
     private Vector3 m_ReflectionDirection;
     private Vector3 m_SubmarineDirectionAtImpact;
+
 
     // Start is called before the first frame update
     new void Start()
@@ -23,10 +26,11 @@ public class Eel : BaseEnemy
         m_SubmarineContactPushBackForce = 400;
         m_Health = m_MaxHealth = 75;
         m_AttackDamage = 5; 
-        m_AttackSpeed = 0.25f;
+        m_AttackSpeed = 1f;
         m_MoveSpeed = 6f;
         m_AttackRange = 20;
         m_ProjectileSpeed = 1500;
+        
         m_IsBoss = false;
 
         m_DistanceToSubmarine = 500; //For the first frame after creation, assume out of range
@@ -37,11 +41,11 @@ public class Eel : BaseEnemy
     new void Update()
     {
         base.Update();
-        if (!CurrentlyLunging()) //&& !CurrentlyedStunned()) //Only change direction we look in if not lunging
+        if (!CurrentlyLunging()) //&& !CurrentlyStunned()) //Only change direction we look in if not lunging
         {
             LookAtSubmarine();
         }
-        if (CurrentlyedStunned()) //If currently stunned, look towards the reflection angle
+        if (CurrentlyStunned()) //If currently stunned, look towards the reflection angle
         {
             LookTowardsReflectionAngle();
         }
@@ -50,30 +54,8 @@ public class Eel : BaseEnemy
     private void FixedUpdate()
     {
         m_Rigidbody.angularVelocity = 0; //No spinning allowed
+        Move();
 
-        if (CurrentlyLunging() || CurrentlyedStunned())  { return; } //Don't change movement when lunging or stunned from successful attack
-
-        //If inside pursuit range but outside of range and not preparing to lunge
-        if (m_DistanceToSubmarine < m_MaxPursuitDistance && m_DistanceToSubmarine > m_AttackRange && !m_ReadyToLunge) 
-        {
-            //Move towards the submarine
-            m_Rigidbody.velocity = m_DirectionToSubmarine * m_MoveSpeed;
-        }
-        else if (m_DistanceToSubmarine <= m_AttackRange && !m_ReadyToLunge) //If inside attack range and not preparing to attack
-        {           
-            //Prepare to lunge
-            m_ReadyToLunge = true;
-            m_TimeSinceReadyToLunge = Time.realtimeSinceStartup;
-            m_Rigidbody.drag = 2;
-            //m_Rigidbody.velocity = Vector3.zero; //Stop moving to inform user of impending attack
-        }
-        if (m_ReadyToLunge && Time.realtimeSinceStartup - m_TimeSinceReadyToLunge > 1.5) //If been ready to lunge for 1 second
-        {
-            m_Rigidbody.drag = 1;
-            m_Rigidbody.AddForce(m_DirectionToSubmarine * m_ProjectileSpeed);
-            m_RestTimeAfterLunge = Time.realtimeSinceStartup;
-            m_ReadyToLunge = false;
-        }
     }
 
     private bool CurrentlyLunging()
@@ -82,9 +64,15 @@ public class Eel : BaseEnemy
         else { return true; }
     }
 
-    private bool CurrentlyedStunned()
+    private bool CurrentlyStunned()
     {
         if (Time.realtimeSinceStartup - m_TimeWhenStunned > 1.5) { return false; }
+        else { return true; }
+    }
+
+    private bool CurrentlyShieldStunned()
+    {
+        if (Time.realtimeSinceStartup - m_TimeWhenStunnedByShield > 1.5) { return false; }
         else { return true; }
     }
 
@@ -107,6 +95,7 @@ public class Eel : BaseEnemy
         //m_Rigidbody.velocity = Vector3.zero;
         //m_Rigidbody.AddForce(-m_DirectionToSubmarine * m_SubmarineContactPushBackForce);
 
+        Attack();
     }
 
     private void LookTowardsReflectionAngle()
@@ -121,16 +110,68 @@ public class Eel : BaseEnemy
 
     public override void Attack()
     {
-        throw new System.NotImplementedException();
+        if (Time.realtimeSinceStartup - m_AttackCoolDownTime > m_AttackSpeed)
+        {
+            m_AttackCoolDownTime = Time.realtimeSinceStartup;
+            //Let the sub handle how it takes this damage
+            SubmarineManager.GetInstance().m_Submarine.TakeDamage(m_AttackDamage); 
+        }
+        
     }
 
     public override void Move()
     {
-        throw new System.NotImplementedException();
+        if (CurrentlyLunging() || CurrentlyStunned() || CurrentlyShieldStunned()) { return; } //Don't change movement when lunging or stunned from successful attack
+
+        //If inside pursuit range but outside of range and not preparing to lunge
+        if (m_DistanceToSubmarine < m_MaxPursuitDistance && m_DistanceToSubmarine > m_AttackRange && !m_ReadyToLunge)
+        {
+            //Move towards the submarine
+            m_Rigidbody.velocity = m_DirectionToSubmarine * m_MoveSpeed;
+        }
+        else if (m_DistanceToSubmarine <= m_AttackRange && !m_ReadyToLunge) //If inside attack range and not preparing to attack
+        {
+            //Prepare to lunge
+            m_ReadyToLunge = true;
+            m_TimeSinceReadyToLunge = Time.realtimeSinceStartup;
+            m_Rigidbody.drag = 2; //Come to a stop
+        }
+        if (m_ReadyToLunge && Time.realtimeSinceStartup - m_TimeSinceReadyToLunge > 1.5) //If been ready to lunge for 1 second
+        {
+            m_Rigidbody.drag = 1;
+            m_Rigidbody.AddForce(m_DirectionToSubmarine * m_ProjectileSpeed);
+            m_RestTimeAfterLunge = Time.realtimeSinceStartup;
+            m_ReadyToLunge = false;
+        }
     }
 
-    public override void TakeDamage()
+
+
+    public override void TakeDamage(int _damage)
     {
-        throw new System.NotImplementedException();
+        m_TimeWhenStunned = Time.realtimeSinceStartup; //Put into the stun state upon taking damage
+        m_Health -= _damage;
+        if (m_Health <= 0)
+        {
+            Destroy(gameObject);
+        }
+    }
+
+    public override void HitShield(ContactPoint2D _impactSpot)
+    {
+        //Reflection Method:
+        Debug.Log("Hit Shield");
+        //m_ReflectionDirection = Vector3.Reflect(m_DirectionToSubmarine, _impactSpot.normal);
+        //m_SubmarineDirectionAtImpact = m_DirectionToSubmarine;
+        //m_TimeWhenStunned = Time.realtimeSinceStartup;
+        //m_Rigidbody.velocity = Vector3.zero;
+        //m_Rigidbody.AddForce(m_ReflectionDirection * m_SubmarineContactPushBackForce);
+
+        //Push Back Method:
+
+        m_TimeWhenStunnedByShield = Time.realtimeSinceStartup;
+        //m_Rigidbody.velocity = Vector3.zero;
+        m_Rigidbody.AddForce(-m_DirectionToSubmarine * m_ShieldPushBackForce);
+        
     }
 }

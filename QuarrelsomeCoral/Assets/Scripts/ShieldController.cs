@@ -39,4 +39,16 @@ public class ShieldController : MonoBehaviour
         //transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
 
     }
+
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        //If enemy made contact with the shield
+        IBaseEnemy enemy = collision.collider.GetComponent<IBaseEnemy>();
+        if (enemy != null)
+        {
+            enemy.HitShield(collision.GetContact(0));
+        }
+    }
+
 }

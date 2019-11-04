@@ -2,20 +2,24 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class BaseEnemy : MonoBehaviour, IBaseEnemy
+public abstract class BaseEnemy : MonoBehaviour, IBaseEnemy, ITakeDamage
 {
     private float m_LookAtSpeed;
 
     protected int m_Health;
     protected int m_MaxHealth;
     protected int m_AttackDamage;
+    /// <summary>How long you have to wait before you can attack again</summary>
     protected float m_AttackSpeed;
     protected int m_AttackRange;
     protected float m_MoveSpeed;
     protected int m_ProjectileSpeed; 
     protected bool m_IsBoss;
     protected int m_MaxPursuitDistance;
-    protected float m_ShieldPushBackDistance;
+    protected float m_ShieldPushBackForce;
+
+    /// <summary>How long it has been since your last attack</summary>
+    protected float m_AttackCoolDownTime;
 
     protected Rigidbody2D m_SubmarineRigidbody;
     protected Rigidbody2D m_Rigidbody;
@@ -24,16 +28,19 @@ public abstract class BaseEnemy : MonoBehaviour, IBaseEnemy
 
     public abstract void HitSubmarine(ContactPoint2D _impactSpot);
 
+    public abstract void HitShield(ContactPoint2D _impactSpot);
+
     public abstract void Attack();
 
     public abstract void Move();
 
-    public abstract void TakeDamage();
+    public abstract void TakeDamage(int _damage);
 
     // Start is called before the first frame update
     protected virtual void Start()
     {
-        m_ShieldPushBackDistance = 2;
+        m_AttackCoolDownTime = 0;
+        m_ShieldPushBackForce = 200;
         m_LookAtSpeed = 4;
         m_MaxPursuitDistance = 500;
         m_SubmarineRigidbody = SubmarineManager.GetInstance().m_Submarine.m_RigidBody;
@@ -57,5 +64,5 @@ public abstract class BaseEnemy : MonoBehaviour, IBaseEnemy
 
     }
 
-    
+
 }

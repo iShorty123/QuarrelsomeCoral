@@ -19,7 +19,12 @@ public class SpitterFish : BaseEnemy
         throw new System.NotImplementedException();
     }
 
-    public override void TakeDamage()
+    public override void HitShield(ContactPoint2D _impactSpot)
+    {
+
+    }
+
+    public override void TakeDamage(int _damage)
     {
         throw new System.NotImplementedException();
     }

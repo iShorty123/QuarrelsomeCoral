@@ -2,14 +2,19 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SubmarineController : MonoBehaviour
+public class SubmarineController : MonoBehaviour, ITakeDamage
 {
     public Rigidbody2D m_RigidBody;
     public float m_Speed;
+    public int m_Health;
+    public int m_MaxHealth;
 
     private bool m_HasPilot;
     private string m_HorizontalControls;
     private string m_VerticalControls;
+    
+    
+
 
     private float m_MaxSpeed;
 
@@ -17,6 +22,7 @@ public class SubmarineController : MonoBehaviour
     void Start()
     {
         m_MaxSpeed = 5;
+        m_MaxHealth = m_Health = 100;
     }
 
     // Update is called once per frame
@@ -75,6 +81,12 @@ public class SubmarineController : MonoBehaviour
         }
     }
 
-
-
+    public void TakeDamage(int _damage)
+    {
+        m_Health -= _damage;
+        if (m_Health <= 0)
+        {
+            Debug.Log("DEAD");
+        }
+    }
 }
