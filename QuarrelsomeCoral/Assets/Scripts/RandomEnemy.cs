@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
-public class AutomaticEnemy : MonoBehaviour
+public class RandomEnemy : MonoBehaviour
 {
-    public Tilemap Map = null;
-    public Camera MainCamera = null;
+    Tilemap Map = null;
+    Camera MainCamera = null;
 
     public GameObject BlueFish = null;
 
@@ -22,6 +22,12 @@ public class AutomaticEnemy : MonoBehaviour
     void Update()
     {
 
+    }
+
+    public void Setup(Tilemap map, Camera mainCamera)
+    {
+        Map = map;
+        MainCamera = mainCamera;
     }
 
     public void StartEnemySpawn() {

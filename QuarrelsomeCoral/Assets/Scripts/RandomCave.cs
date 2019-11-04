@@ -11,11 +11,11 @@ using System.Linq;
 //When in near camera, use arrows to move around
 
 
-public class AutomaticCave : MonoBehaviour
+public class RandomCave : MonoBehaviour
 {
 
-    public Camera FarCamera = null;
-    public Camera MainCamera = null;
+    Camera FarCamera = null;
+    Camera MainCamera = null;
     public Transform BgImage = null;
     public Transform MidImage = null;
 
@@ -45,16 +45,24 @@ public class AutomaticCave : MonoBehaviour
 
     private int[,] terrainMap;
     public Vector3Int tmpSize;
-    public Tilemap topMap;
-    public RuleTile topTile;
+    Tilemap topMap;
+    RuleTile topTile;
 
     int width;
     int height;
 
     private List<CaveCluster> visitedClusters;
 
-    public AutomaticCave() {
+    public RandomCave() {
         clusters = new List<CaveCluster>();
+    }
+
+    public void Setup(Tilemap map, Camera mainCamera, Camera farCamera, RuleTile tile)
+    {
+        topMap = map;
+        MainCamera = mainCamera;
+        FarCamera = farCamera;
+        topTile = tile;
     }
 
     public void doSim(int nu)

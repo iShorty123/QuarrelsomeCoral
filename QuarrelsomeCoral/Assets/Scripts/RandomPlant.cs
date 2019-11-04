@@ -3,15 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
-public class AutomaticPlant : MonoBehaviour
+public class RandomPlant : MonoBehaviour
 {
 
-    public Tilemap Map = null;
-    public Camera MainCamera = null;
+    Tilemap Map = null;
+    Camera MainCamera = null;
 
     public GameObject[] Plants = new GameObject[3];
 
-    public int PlantNumber = 15;
+    public int RandomNumber = 15;
 
     // Start is called before the first frame update
     void Start()
@@ -23,6 +23,11 @@ public class AutomaticPlant : MonoBehaviour
     void Update()
     {
         
+    }
+
+    public void Setup(Tilemap map, Camera mainCamera) {
+        Map = map;
+        MainCamera = mainCamera;
     }
 
     public void AddPlants() {
