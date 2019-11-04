@@ -13,6 +13,7 @@ public class SubmarineManager : MonoBehaviour
     public ShieldManager m_Shield;
     public GameObject m_MapStation;
     public GameObject m_ArmoryStation;
+    public GameObject TopAndBottomAmmo;
 
     public const string PILOT_STATION = "PilotStation";
     public const string TOP_WEAPON_STATION = "TopWeaponStation";
@@ -28,7 +29,8 @@ public class SubmarineManager : MonoBehaviour
 
     private void Start()
     {
-
+        m_TopWeaponStation.SetWeaponSpecificVariables(TopAndBottomAmmo, 0, -1, .5f, 1.2f);
+        m_BottomWeaponStation.SetWeaponSpecificVariables(TopAndBottomAmmo, 180, 1, .5f, 1.2f);
     }
 
     public static SubmarineManager GetInstance()
