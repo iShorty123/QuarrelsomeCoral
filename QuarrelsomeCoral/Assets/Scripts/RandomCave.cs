@@ -170,10 +170,10 @@ public class RandomCave : MonoBehaviour
         //    clearMap(true);
         //}
 
-        //if (Input.GetKeyDown("c"))
-        //{
-        //    ToggleCamera();
-        //}
+        if (Input.GetKeyDown("p"))
+        {
+            ToggleCamera();
+        }
 
         //if (Input.GetKeyDown("r"))
         //{
