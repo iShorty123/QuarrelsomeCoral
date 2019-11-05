@@ -12,9 +12,6 @@ public class SubmarineController : MonoBehaviour, ITakeDamage
     private bool m_HasPilot;
     private string m_HorizontalControls;
     private string m_VerticalControls;
-    
-    
-
 
     private float m_MaxSpeed;
 

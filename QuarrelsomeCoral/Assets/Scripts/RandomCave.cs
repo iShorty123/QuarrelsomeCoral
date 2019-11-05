@@ -165,27 +165,12 @@ public class RandomCave : MonoBehaviour
 
     void Update()
     {
-        //if (Input.GetMouseButtonDown(1))
-        //{
-        //    clearMap(true);
-        //}
 
         if (Input.GetKeyDown("p"))
         {
             ToggleCamera();
         }
 
-        //if (Input.GetKeyDown("r"))
-        //{
-        //    MakeCaves();
-        //}
-
-        //if (Input.GetKeyDown("b"))
-        //{
-        //    BuildCaves();
-        //}
-
-        MoveCamera();
     }
 
     public void ConstructCave() {
@@ -209,45 +194,6 @@ public class RandomCave : MonoBehaviour
         MidImage.gameObject.GetComponent<SpriteRenderer>().enabled ^= true;
 
         currCamera = !currCamera;
-    }
-
-    void MoveCamera() {
-
-        if (MainCamera.enabled == false) return;
-
-        Vector2 camPos = MainCamera.transform.position;
-        float maxX = width / 2 - 10;
-        float minX = -maxX;
-        float maxY = height / 2 - 6;
-        float minY = -maxY;
-
-        //if (camPos.x > maxX || camPos.x < minX || camPos.y > maxY || camPos.y < minY) return;
-
-        //if (Input.GetKey(KeyCode.RightArrow) && !(camPos.x > maxX))
-        //{
-        //    MainCamera.transform.Translate(new Vector3(speed * Time.deltaTime, 0, 0));
-        //    MidImage.transform.Translate(new Vector3(speed/4 * Time.deltaTime, 0, 0));
-        //    BgImage.transform.Translate(new Vector3(speed/2 * Time.deltaTime, 0, 0));
-        //}
-        //if (Input.GetKey(KeyCode.LeftArrow) && !(camPos.x < minX))
-        //{
-        //    MainCamera.transform.Translate(new Vector3(-speed * Time.deltaTime, 0, 0));
-        //    MidImage.transform.Translate(new Vector3(-speed/4 * Time.deltaTime, 0, 0));
-        //    BgImage.transform.Translate(new Vector3(-speed/2 * Time.deltaTime, 0, 0));
-        //}
-        //if (Input.GetKey(KeyCode.DownArrow) && !(camPos.y < minY))
-        //{
-        //    MainCamera.transform.Translate(new Vector3(0, -speed * Time.deltaTime, 0));
-        //    MidImage.transform.Translate(new Vector3(0, -speed/4 * Time.deltaTime, 0));
-        //    BgImage.transform.Translate(new Vector3(0, -speed/2 * Time.deltaTime, 0));
-        //}
-        //if (Input.GetKey(KeyCode.UpArrow) && !(camPos.y > maxY))
-        //{
-        //    MainCamera.transform.Translate(new Vector3(0, speed * Time.deltaTime, 0));
-        //    MidImage.transform.Translate(new Vector3(0, speed/4 * Time.deltaTime, 0));
-        //    BgImage.transform.Translate(new Vector3(0, speed/2 * Time.deltaTime, 0));
-        //}
-
     }
 
     public void clearMap(bool complete)
