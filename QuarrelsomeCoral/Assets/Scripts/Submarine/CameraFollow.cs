@@ -4,9 +4,6 @@ using UnityEngine;
 
 public class CameraFollow : MonoBehaviour
 {
-    public Transform BgImage = null;
-    public Transform MidImage = null;
-
     private GameObject m_Submarine;
     // Start is called before the first frame update
     void Start()
