@@ -221,32 +221,32 @@ public class RandomCave : MonoBehaviour
         float maxY = height / 2 - 6;
         float minY = -maxY;
 
-        if (camPos.x > maxX || camPos.x < minX || camPos.y > maxY || camPos.y < minY) return;
+        //if (camPos.x > maxX || camPos.x < minX || camPos.y > maxY || camPos.y < minY) return;
 
-        if (Input.GetKey(KeyCode.RightArrow) && !(camPos.x > maxX))
-        {
-            MainCamera.transform.Translate(new Vector3(speed * Time.deltaTime, 0, 0));
-            MidImage.transform.Translate(new Vector3(speed/4 * Time.deltaTime, 0, 0));
-            BgImage.transform.Translate(new Vector3(speed/2 * Time.deltaTime, 0, 0));
-        }
-        if (Input.GetKey(KeyCode.LeftArrow) && !(camPos.x < minX))
-        {
-            MainCamera.transform.Translate(new Vector3(-speed * Time.deltaTime, 0, 0));
-            MidImage.transform.Translate(new Vector3(-speed/4 * Time.deltaTime, 0, 0));
-            BgImage.transform.Translate(new Vector3(-speed/2 * Time.deltaTime, 0, 0));
-        }
-        if (Input.GetKey(KeyCode.DownArrow) && !(camPos.y < minY))
-        {
-            MainCamera.transform.Translate(new Vector3(0, -speed * Time.deltaTime, 0));
-            MidImage.transform.Translate(new Vector3(0, -speed/4 * Time.deltaTime, 0));
-            BgImage.transform.Translate(new Vector3(0, -speed/2 * Time.deltaTime, 0));
-        }
-        if (Input.GetKey(KeyCode.UpArrow) && !(camPos.y > maxY))
-        {
-            MainCamera.transform.Translate(new Vector3(0, speed * Time.deltaTime, 0));
-            MidImage.transform.Translate(new Vector3(0, speed/4 * Time.deltaTime, 0));
-            BgImage.transform.Translate(new Vector3(0, speed/2 * Time.deltaTime, 0));
-        }
+        //if (Input.GetKey(KeyCode.RightArrow) && !(camPos.x > maxX))
+        //{
+        //    MainCamera.transform.Translate(new Vector3(speed * Time.deltaTime, 0, 0));
+        //    MidImage.transform.Translate(new Vector3(speed/4 * Time.deltaTime, 0, 0));
+        //    BgImage.transform.Translate(new Vector3(speed/2 * Time.deltaTime, 0, 0));
+        //}
+        //if (Input.GetKey(KeyCode.LeftArrow) && !(camPos.x < minX))
+        //{
+        //    MainCamera.transform.Translate(new Vector3(-speed * Time.deltaTime, 0, 0));
+        //    MidImage.transform.Translate(new Vector3(-speed/4 * Time.deltaTime, 0, 0));
+        //    BgImage.transform.Translate(new Vector3(-speed/2 * Time.deltaTime, 0, 0));
+        //}
+        //if (Input.GetKey(KeyCode.DownArrow) && !(camPos.y < minY))
+        //{
+        //    MainCamera.transform.Translate(new Vector3(0, -speed * Time.deltaTime, 0));
+        //    MidImage.transform.Translate(new Vector3(0, -speed/4 * Time.deltaTime, 0));
+        //    BgImage.transform.Translate(new Vector3(0, -speed/2 * Time.deltaTime, 0));
+        //}
+        //if (Input.GetKey(KeyCode.UpArrow) && !(camPos.y > maxY))
+        //{
+        //    MainCamera.transform.Translate(new Vector3(0, speed * Time.deltaTime, 0));
+        //    MidImage.transform.Translate(new Vector3(0, speed/4 * Time.deltaTime, 0));
+        //    BgImage.transform.Translate(new Vector3(0, speed/2 * Time.deltaTime, 0));
+        //}
 
     }
 
