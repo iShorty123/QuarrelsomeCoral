@@ -39,7 +39,7 @@ public class RandomCave : MonoBehaviour
     [Range(1, 8)]
     public int deathLimit;
 
-    [Range(1, 10)]
+    [Range(1, 12)]
     public int numR;
     private int count = 0;
 
@@ -92,7 +92,6 @@ public class RandomCave : MonoBehaviour
             }
         }
 
-
     }
 
     public void initPos()
@@ -101,7 +100,8 @@ public class RandomCave : MonoBehaviour
         {
             for (int y = 0; y < height; y++)
             {
-                terrainMap[x, y] = Random.Range(1, 101) < iniChance ? 1 : 0;
+                if (y > height - 10 || x < 20 || x > width - 20) terrainMap[x, y] = 0;
+                else terrainMap[x, y] = Random.Range(1, 101) < iniChance ? 1 : 0;
             }
         }
     }
@@ -258,8 +258,10 @@ public class RandomCave : MonoBehaviour
             }
         }
 
-        //if cluster is too small, just delete it
-        if (cluster.GetClusterSize() < minSize)
+        if (cluster.TouchesBorder() && cluster.GetClusterSize() < 100) {
+            cluster.DeleteCluster(topMap);
+        }
+        else if (cluster.GetClusterSize() < minSize)
         {
             cluster.DeleteCluster(topMap);
         }
@@ -269,7 +271,6 @@ public class RandomCave : MonoBehaviour
             clusters.Add(cluster);
         }
 
-        //if (cluster.TouchesBorder()) cluster.ColorCluster(topMap, Color.red);
     }
 
     void MakeCaves()
@@ -288,27 +289,33 @@ public class RandomCave : MonoBehaviour
         print("Clusters 1: " + clusters.Count());
 
         for (int i = 0; i < clusters.Count; i++){
-            if (!clusters[i].ShouldBeRemoved()) BuildCavesR(clusters[i]);
+           //if (!clusters[i].ShouldBeRemoved()) 
+                BuildCavesR(clusters[i], clusters[(i + 1) % clusters.Count]);
         }
+
+        //for (int i = 0; i < clusters.Count; i++)
+        //{
+        //    if (!clusters[i].TouchesBorder() && !clusters[i].ShouldBeRemoved()) ConnectToBorder(clusters[i]);
+        //}
 
         foreach (CaveCluster cluster in clusters.ToList())
         {
             if (cluster.ShouldBeRemoved()) clusters.Remove(cluster);
         }
 
+
         print("Clusters 2: " + clusters.Count());
   
 
     }
 
-    void BuildCavesR(CaveCluster cluster)
+    void BuildCavesR(CaveCluster cluster, CaveCluster neighb)
     {
         if (cluster.TouchesBorder()) {
             borderTile = cluster;
         } else {
-            CaveCluster closest = GetClosestClusterTo(cluster);
-            ConnectClusters(cluster, closest);
-            if (!cluster.TouchesBorder()) ConnectToBorder(cluster);
+            //CaveCluster closest = GetClosestClusterTo(cluster);
+            ConnectClusters(cluster, neighb);
         }
     }
 
@@ -351,7 +358,7 @@ public class RandomCave : MonoBehaviour
 
         foreach (CaveCluster cluster in clusters)
         {
-            if (cluster.ShouldBeRemoved()) continue;
+            if (cluster.ShouldBeRemoved() || !cluster.IsConnected(cluster)) continue;
             float dist = Vector2Int.Distance(fromHere.GetCenter(), cluster.GetCenter());
             if (dist != 0f && dist <= smallestDist)
             {

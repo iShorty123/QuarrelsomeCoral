@@ -753,13 +753,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   BgImage: {fileID: 1150327635}
   MidImage: {fileID: 1063581924}
-  minSize: 20
+  minSize: 100
   speed: 5
-  iniChance: 22
+  iniChance: 25
   birthLimit: 3
   deathLimit: 2
-  numR: 10
-  tmpSize: {x: 160, y: 90, z: 0}
+  numR: 12
+  tmpSize: {x: 160, y: 100, z: 0}
 --- !u!4 &967462317
 Transform:
   m_ObjectHideFlags: 0
@@ -1098,6 +1098,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d01786c0678c0df48b142c7f2946963d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  BgImage: {fileID: 1150327635}
+  MidImage: {fileID: 1063581924}
 --- !u!1 &1472716670
 GameObject:
   m_ObjectHideFlags: 0

@@ -10,6 +10,9 @@ public class CaveCluster : MonoBehaviour
     private Vector2Int center;
     private List<Vector2Int> tiles;
     private bool shouldBeRemoved = false;
+    private bool canBeClosest = true;
+
+    private List<CaveCluster> connectedClusters;
 
     public CaveCluster()
     {
@@ -60,6 +63,16 @@ public class CaveCluster : MonoBehaviour
     public bool ShouldBeRemoved()
     {
         return shouldBeRemoved;
+    }
+
+    public void addToConnected(bool f)
+    {
+        canBeClosest = f;
+    }
+
+    public bool IsConnected(CaveCluster cluster)
+    {
+        return canBeClosest;
     }
 
     public List<Vector2Int> GetTiles() {
@@ -130,24 +143,36 @@ public class CaveCluster : MonoBehaviour
         if (dirX != 0) dirX /= Mathf.Abs(dirX);
         if (dirY != 0) dirY /= Mathf.Abs(dirY);
 
-        while (curr.x != pos2.x){
-            curr.x += dirX;
-            onMe.SetTile(new Vector3Int(curr.x - onMe.cellBounds.xMax, curr.y - onMe.cellBounds.yMax, 0), withMe);
-            onMe.SetTile(new Vector3Int(curr.x - onMe.cellBounds.xMax, curr.y - onMe.cellBounds.yMax + 1, 0), withMe);
-            onMe.SetTile(new Vector3Int(curr.x - onMe.cellBounds.xMax, curr.y - onMe.cellBounds.yMax - 1, 0), withMe);
-            AddTile(curr);
-            AddTile(new Vector2Int(curr.x, curr.y + 1));
-            AddTile(new Vector2Int(curr.x, curr.y - 1));
+        while (curr != pos2)
+        {
+            if (curr.x != pos2.x && curr.y != pos2.y) {
+                curr.x += dirX;
+                curr.y += dirY;
+            }
+            else if (curr.x != pos2.x) curr.x += dirX;
+            else if (curr.y != pos2.y) curr.y += dirY;
+
+            addTile(onMe, withMe, curr);
+            addTile(onMe, withMe, new Vector2Int(curr.x, curr.y + 1));
+            addTile(onMe, withMe, new Vector2Int(curr.x, curr.y - 1));
+            addTile(onMe, withMe, new Vector2Int(curr.x + 1, curr.y));
+            addTile(onMe, withMe, new Vector2Int(curr.x - 1, curr.y));
+            addTile(onMe, withMe, new Vector2Int(curr.x, curr.y + 2));
+            addTile(onMe, withMe, new Vector2Int(curr.x, curr.y - 2));
+            addTile(onMe, withMe, new Vector2Int(curr.x + 2, curr.y));
+            addTile(onMe, withMe, new Vector2Int(curr.x - 2, curr.y));
+
         }
-        while (curr.y != pos2.y){
-            curr.y += dirY;
-            onMe.SetTile(new Vector3Int(curr.x - onMe.cellBounds.xMax, curr.y - onMe.cellBounds.yMax , 0), withMe);
-            onMe.SetTile(new Vector3Int(curr.x - onMe.cellBounds.xMax + 1, curr.y - onMe.cellBounds.yMax, 0), withMe);
-            onMe.SetTile(new Vector3Int(curr.x - onMe.cellBounds.xMax - 1, curr.y - onMe.cellBounds.yMax, 0), withMe);
-            AddTile(curr);
-            AddTile(new Vector2Int(curr.x + 1, curr.y ));
-            AddTile(new Vector2Int(curr.x - 1, curr.y));
-        }
+
+            
+    }
+
+    void addTile(Tilemap map, RuleTile tile, Vector2Int v)
+    {
+        Vector3Int location = new Vector3Int(v.x - map.cellBounds.xMax, v.y - map.cellBounds.yMax, 0);
+        map.SetTile(location, tile);
+        AddTile(v);
+        //map.SetColor(location, Color.green);
     }
 
     public void ColorCluster(Tilemap map, Color color) {
@@ -162,9 +187,9 @@ public class CaveCluster : MonoBehaviour
     public bool CloseToBorder(int w, int h) {
 
         if (Vector2.Distance(center, new Vector2(center.x, 0)) < 20) return true;
-        if (Vector2.Distance(center, new Vector2(center.x, h)) < 20) return true;
-        if (Vector2.Distance(center, new Vector2(0, center.y)) < 20) return true;
-        if (Vector2.Distance(center, new Vector2(w, center.y)) < 20) return true;
+        //if (Vector2.Distance(center, new Vector2(center.x, h)) < 20) return true;
+        //if (Vector2.Distance(center, new Vector2(0, center.y)) < 20) return true;
+        //if (Vector2.Distance(center, new Vector2(w, center.y)) < 20) return true;
         return false;
     }
 

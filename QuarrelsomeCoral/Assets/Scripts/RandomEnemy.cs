@@ -31,7 +31,7 @@ public class RandomEnemy : MonoBehaviour
     }
 
     public void StartEnemySpawn() {
-        StartCoroutine(EnemySpawner());
+        //StartCoroutine(EnemySpawner());
     }
 
     IEnumerator EnemySpawner()
