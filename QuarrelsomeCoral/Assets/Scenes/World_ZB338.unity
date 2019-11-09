@@ -595,6 +595,58 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 865872023}
   m_CullTransparentMesh: 0
+--- !u!1 &878716085
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 878716086}
+  - component: {fileID: 878716087}
+  m_Layer: 0
+  m_Name: Caves
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &878716086
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 878716085}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &878716087
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 878716085}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fd5710a3916a145e3922b637991db0dd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  BgImage: {fileID: 1150327635}
+  MidImage: {fileID: 1063581924}
+  minSize: 100
+  speed: 5
+  iniChance: 25
+  birthLimit: 3
+  deathLimit: 2
+  numR: 12
+  tmpSize: {x: 0, y: 0, z: 0}
 --- !u!1 &891223157
 GameObject:
   m_ObjectHideFlags: 0
@@ -760,7 +812,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &967462316
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -781,7 +833,7 @@ MonoBehaviour:
   birthLimit: 3
   deathLimit: 2
   numR: 12
-  tmpSize: {x: 160, y: 100, z: 0}
+  tmpSize: {x: 160, y: 120, z: 0}
 --- !u!4 &967462317
 Transform:
   m_ObjectHideFlags: 0
@@ -789,12 +841,12 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 967462315}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1063581922
 GameObject:
@@ -1100,8 +1152,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   REnemy: {fileID: 1166933784}
-  RCave: {fileID: 967462316}
   RPlant: {fileID: 294348248}
+  Caves: {fileID: 878716087}
   Tile: {fileID: 11400000, guid: 3601fcb32eb778d4dbbfa84a43d01d27, type: 2}
   Map: {fileID: 761817775}
   SubmarinePrefab: {fileID: 8005165452106124358, guid: 3ad64f3c6d0648848a4abd6df7b2db16,

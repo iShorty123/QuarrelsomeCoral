@@ -8,6 +8,7 @@ public class RandomPlant : MonoBehaviour
 
     Tilemap Map = null;
     Camera MainCamera = null;
+    Vector3 Position;
 
     public GameObject[] Plants = new GameObject[3];
 
@@ -25,9 +26,10 @@ public class RandomPlant : MonoBehaviour
         
     }
 
-    public void Setup(Tilemap map, Camera mainCamera) {
+    public void Setup(Tilemap map, Camera mainCamera, Vector3 position) {
         Map = map;
         MainCamera = mainCamera;
+        Position = position;
     }
 
     public void AddPlants() {
@@ -36,6 +38,8 @@ public class RandomPlant : MonoBehaviour
             if (Random.Range(0, 3) == 1) SpawnPlant(pos);
             if (Random.Range(0, 6) == 1) SpawnPlant(pos);
         }
+
+        this.gameObject.transform.position = Position;
     }
 
     void SpawnPlant(Vector3Int mapPosition) {

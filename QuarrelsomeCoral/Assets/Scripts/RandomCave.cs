@@ -24,7 +24,7 @@ public class RandomCave : MonoBehaviour
     //cave creation support
     private List<CaveCluster> clusters;
     private bool[,] claimed; //whether a tile has been claimed by a cluster already
-    public int minSize = 5; //cluster smallest allowed size
+    public int minSize = 100; //cluster smallest allowed size
 
     Vector2Int[] adj = new[] { new Vector2Int(-1, 1), new Vector2Int(0,1), new Vector2Int(1,1), new Vector2Int(-1,0), new Vector2Int(1,0), new Vector2Int(-1,-1),
         new Vector2Int(0,-1), new Vector2Int(1,-1)};
@@ -51,21 +51,51 @@ public class RandomCave : MonoBehaviour
     int width;
     int height;
 
+    Vector3Int origin;
+
     private List<CaveCluster> visitedClusters;
 
     public RandomCave() {
         clusters = new List<CaveCluster>();
     }
 
-    public void Setup(Tilemap map, Camera mainCamera, Camera farCamera, RuleTile tile)
+    public void Init(int iniC, int birthL, int deathL, int nR, Vector3Int tmp, Transform bgImage, Transform midImage, Vector3Int pos)
     {
-        topMap = map;
+        iniChance = iniC;
+        birthLimit = birthL;
+        deathLimit = deathL;
+        numR = nR;
+        tmpSize = tmp;
+
+        BgImage = bgImage;
+        MidImage = midImage;
+
+        origin = pos;
+
+        clusters = new List<CaveCluster>();
+    }
+
+    public void Setup(GameObject mapGrid, Camera mainCamera, Camera farCamera, RuleTile tile)
+    {
+        GameObject tileMap = new GameObject();
+        topMap = tileMap.AddComponent<Tilemap>();
+        tileMap.AddComponent<TilemapRenderer>();
+        tileMap.AddComponent<TilemapCollider2D>();
+        //tileMap.AddComponent<Rigidbody2D>();
+        tileMap.name = "Tilemap";
+        tileMap.transform.parent = mapGrid.transform;
+        tileMap.transform.position = origin;
+
         MainCamera = mainCamera;
         FarCamera = farCamera;
         topTile = tile;
     }
 
-    public void doSim(int nu)
+    public Tilemap GetMap() {
+        return topMap;
+    }
+
+    IEnumerator doSim(int nu)
     {
         clearMap(false);
         width = tmpSize.x;
@@ -81,6 +111,7 @@ public class RandomCave : MonoBehaviour
         for (int i = 0; i < nu; i++)
         {
             terrainMap = genTilePos(terrainMap);
+            yield return null;
         }
 
         for (int x = 0; x < width; x++)
@@ -92,6 +123,7 @@ public class RandomCave : MonoBehaviour
             }
         }
 
+        MakeCaves();
     }
 
     public void initPos()
@@ -173,9 +205,9 @@ public class RandomCave : MonoBehaviour
 
     }
 
-    public void ConstructCave() {
-        doSim(numR);
-        MakeCaves();
+    public void ConstructCave() { 
+        StartCoroutine(doSim(numR));
+        //MakeCaves();
     }
 
     void ToggleCamera() {
@@ -205,7 +237,7 @@ public class RandomCave : MonoBehaviour
         }
     }
 
-    void MakeClusters()
+    IEnumerator MakeClusters()
     {
         claimed = new bool[width, height];
 
@@ -216,7 +248,13 @@ public class RandomCave : MonoBehaviour
                     MakeClusterDFS(new Vector2Int(i, j));
                 }
             }
+            yield return null;
         }
+
+        borderTile = clusters[0];
+
+        //2. for each cluster, if not connected to border, connect to closest cluster
+        StartCoroutine(BuildCaves());
     }
 
     void MakeClusterDFS(Vector2Int start) {
@@ -273,39 +311,31 @@ public class RandomCave : MonoBehaviour
 
     }
 
-    void MakeCaves()
+    void MakeCaves() 
     {
+        print("HELLOOOOOO333");
         //1. find clusters & eliminate small ones
-        MakeClusters();
+        //MakeClusters(); //TODO add coroutine
+        StartCoroutine(MakeClusters());
 
-        borderTile = clusters[0];
+        //borderTile = clusters[0];
 
         //2. for each cluster, if not connected to border, connect to closest cluster
-        BuildCaves();
+        //BuildCaves(); //TODO add coroutine
     }
 
-    void BuildCaves() {
-
-        print("Clusters 1: " + clusters.Count());
+    IEnumerator BuildCaves() {
 
         for (int i = 0; i < clusters.Count; i++){
            //if (!clusters[i].ShouldBeRemoved()) 
-                BuildCavesR(clusters[i], clusters[(i + 1) % clusters.Count]);
+            BuildCavesR(clusters[i], clusters[(i + 1) % clusters.Count]);
+            yield return null;
         }
-
-        //for (int i = 0; i < clusters.Count; i++)
-        //{
-        //    if (!clusters[i].TouchesBorder() && !clusters[i].ShouldBeRemoved()) ConnectToBorder(clusters[i]);
-        //}
 
         foreach (CaveCluster cluster in clusters.ToList())
         {
             if (cluster.ShouldBeRemoved()) clusters.Remove(cluster);
         }
-
-
-        print("Clusters 2: " + clusters.Count());
-  
 
     }
 
@@ -318,19 +348,6 @@ public class RandomCave : MonoBehaviour
             ConnectClusters(cluster, neighb);
         }
     }
-
-    void ConnectToBorder(CaveCluster c)
-    {
-
-        //create tiles in between and add to a
-        c.CreateBridge(borderTile, topMap, topTile);
-
-        //recalculate values (like cluster's center)
-        c.Setup();
-
-        c.MarkTouchesBorder();
-    }
-
 
     void ConnectClusters(CaveCluster a, CaveCluster b)
     {
