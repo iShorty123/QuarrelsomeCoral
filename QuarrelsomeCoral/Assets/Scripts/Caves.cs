@@ -29,6 +29,8 @@ public class Caves : MonoBehaviour
     private int borderLeft = -80;
     private int borderRight = 80;
 
+    public int diff = 1;
+
     RuleTile Tile;
     GameObject MapGrid;
     Camera FarCamera = null;
@@ -92,8 +94,8 @@ public class Caves : MonoBehaviour
         RandomCave caveScript = cave.AddComponent<RandomCave>();
 
         //expand border
-        if (dir == "right") borderRight += tmpSize.x * 2 / 3;
-        else borderLeft -= tmpSize.x * 2 / 3;
+        if (dir == "right") borderRight += tmpSize.x - diff;
+        else borderLeft -= tmpSize.x + diff;
 
         caveScript.Init(iniChance, birthLimit, deathLimit, numR, tmpSize, BgImage, MidImage, pos);
         cave.SetActive(true);
@@ -119,14 +121,14 @@ public class Caves : MonoBehaviour
     }
 
     public void AddCaveToLeft(){
-        Vector3Int position = new Vector3Int(borderLeft - tmpSize.x / 3, 0, 0);
+        Vector3Int position = new Vector3Int(borderLeft - tmpSize.x / 2 + diff, 0, 0);
         AddCaveAt(position, "left");
         print("Left*: " + borderLeft);
         print("Right: " + borderRight);
     }
 
     public void AddCaveToRight(){
-        Vector3Int position = new Vector3Int(borderRight + tmpSize.x / 3, 0, 0);
+        Vector3Int position = new Vector3Int(borderRight + tmpSize.x / 2 - diff, 0, 0);
         AddCaveAt(position, "right");
         print("Left: " + borderLeft);
         print("Right*: " + borderRight);

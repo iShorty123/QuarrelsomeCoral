@@ -34,13 +34,13 @@ public class MainController : MonoBehaviour
     {
         //if submarine is close to the left or right border of Caves, add a cave at that side.
 
-        if ((Submarine.transform.position.x - Caves.GetLeftBorder()) < 70)
+        if ((Submarine.transform.position.x - Caves.GetLeftBorder()) < 75)
         {
             Caves.AddCaveToLeft();
             //SetupLastCave();
         }
 
-        if ((Caves.GetRightBorder() - Submarine.transform.position.x) < 70) 
+        if ((Caves.GetRightBorder() - Submarine.transform.position.x) < 75) 
         {
             Caves.AddCaveToRight();
             //SetupLastCave();

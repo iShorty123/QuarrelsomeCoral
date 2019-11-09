@@ -121,6 +121,7 @@ public class RandomCave : MonoBehaviour
                 if (terrainMap[x, y] == 1)
                     topMap.SetTile(new Vector3Int(x - width / 2, y - height / 2, 0), topTile);
             }
+            if (x % 10 == 0)yield return null;
         }
 
         MakeCaves();
@@ -132,7 +133,7 @@ public class RandomCave : MonoBehaviour
         {
             for (int y = 0; y < height; y++)
             {
-                if (y > height - 10 || x < 20 || x > width - 20) terrainMap[x, y] = 0;
+                if (y > height - 10 || x < 8 || x > width - 8) terrainMap[x, y] = 0;
                 else terrainMap[x, y] = Random.Range(1, 101) < iniChance ? 1 : 0;
             }
         }
