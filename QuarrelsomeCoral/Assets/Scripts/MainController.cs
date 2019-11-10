@@ -8,6 +8,7 @@ public class MainController : MonoBehaviour
 	public RandomEnemy REnemy = null;
     public RandomPlant RPlant = null;
     public Caves Caves = null;
+    public Plants Plants = null;
     private Transform Submarine = null;
 
     public RuleTile Tile;
@@ -25,8 +26,6 @@ public class MainController : MonoBehaviour
 
         //create caves
         Caves.Setup(MainCamera, FarCamera, Tile, MapGrid);
-
-        //SetupLastCave();
     }
 
     // Update is called once per frame
@@ -46,6 +45,28 @@ public class MainController : MonoBehaviour
             //SetupLastCave();
         }
 
+        RandomCave lastCave = Caves.GetLastCave();
+        if (lastCave.IsDone()) {
+ 
+            Tilemap map = lastCave.GetMap();
+            //print(map.transform.position);
+            //add random plants
+            GameObject Plant = new GameObject();
+            Plant.SetActive(false);
+            RandomPlant plantScript = Plant.AddComponent<RandomPlant>();
+            plantScript.Setup(map, MainCamera, map.transform.position + new Vector3(1, 1, 0), Plants.GetPlantTypes());
+            plantScript.AddPlants();
+            Plant.SetActive(true);
+            Plant.transform.parent = Plants.gameObject.transform;
+            Plant.name = "Plant";
+
+            //TODO spawn plants in right position
+
+            //start random enemy spawn
+            //REnemy.Setup(map, MainCamera);
+            //REnemy.StartEnemySpawn();
+        }
+
     }
 
     void SetupLastCave() {
@@ -54,12 +75,12 @@ public class MainController : MonoBehaviour
         Tilemap map = lastCave.GetMap();
 
         //add random plants
-        RPlant.Setup(map, MainCamera, lastCave.transform.position + new Vector3(1 ,1 , 0));
+        RPlant.Setup(map, MainCamera, lastCave.transform.position + new Vector3(1 ,1 , 0), Plants.GetPlantTypes());
         RPlant.AddPlants();
 
         //start random enemy spawn
-        REnemy.Setup(map, MainCamera);
-        REnemy.StartEnemySpawn();
+        //REnemy.Setup(map, MainCamera);
+        //REnemy.StartEnemySpawn();
     }
 
     void PositionSubmarine() {

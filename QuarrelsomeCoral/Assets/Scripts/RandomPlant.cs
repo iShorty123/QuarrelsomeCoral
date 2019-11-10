@@ -10,7 +10,7 @@ public class RandomPlant : MonoBehaviour
     Camera MainCamera = null;
     Vector3 Position;
 
-    public GameObject[] Plants = new GameObject[3];
+    GameObject[] Plants = new GameObject[3];
 
     public int RandomNumber = 15;
 
@@ -26,10 +26,11 @@ public class RandomPlant : MonoBehaviour
         
     }
 
-    public void Setup(Tilemap map, Camera mainCamera, Vector3 position) {
+    public void Setup(Tilemap map, Camera mainCamera, Vector3 position, GameObject[] plants) {
         Map = map;
         MainCamera = mainCamera;
         Position = position;
+        Plants = plants;
     }
 
     public void AddPlants() {

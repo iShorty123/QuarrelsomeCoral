@@ -53,6 +53,8 @@ public class RandomCave : MonoBehaviour
 
     Vector3Int origin;
 
+    bool isDone = false;
+
     private List<CaveCluster> visitedClusters;
 
     public RandomCave() {
@@ -93,6 +95,12 @@ public class RandomCave : MonoBehaviour
 
     public Tilemap GetMap() {
         return topMap;
+    }
+
+    public bool IsDone() {
+        bool ret = isDone;
+        isDone = false;
+        return ret;
     }
 
     IEnumerator doSim(int nu)
@@ -314,7 +322,6 @@ public class RandomCave : MonoBehaviour
 
     void MakeCaves() 
     {
-        print("HELLOOOOOO333");
         //1. find clusters & eliminate small ones
         //MakeClusters(); //TODO add coroutine
         StartCoroutine(MakeClusters());
@@ -338,6 +345,7 @@ public class RandomCave : MonoBehaviour
             if (cluster.ShouldBeRemoved()) clusters.Remove(cluster);
         }
 
+        isDone = true;
     }
 
     void BuildCavesR(CaveCluster cluster, CaveCluster neighb)
