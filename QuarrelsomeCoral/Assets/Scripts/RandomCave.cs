@@ -24,7 +24,7 @@ public class RandomCave : MonoBehaviour
     //cave creation support
     private List<CaveCluster> clusters;
     private bool[,] claimed; //whether a tile has been claimed by a cluster already
-    public int minSize = 100; //cluster smallest allowed size
+    int minSize = 100; //cluster smallest allowed size
 
     Vector2Int[] adj = new[] { new Vector2Int(-1, 1), new Vector2Int(0,1), new Vector2Int(1,1), new Vector2Int(-1,0), new Vector2Int(1,0), new Vector2Int(-1,-1),
         new Vector2Int(0,-1), new Vector2Int(1,-1)};
@@ -41,7 +41,6 @@ public class RandomCave : MonoBehaviour
 
     [Range(1, 12)]
     public int numR;
-    private int count = 0;
 
     private int[,] terrainMap;
     public Vector3Int tmpSize;
@@ -61,7 +60,7 @@ public class RandomCave : MonoBehaviour
         clusters = new List<CaveCluster>();
     }
 
-    public void Init(int iniC, int birthL, int deathL, int nR, Vector3Int tmp, Transform bgImage, Transform midImage, Vector3Int pos)
+    public void Init(int iniC, int birthL, int deathL, int nR, Vector3Int tmp, Transform bgImage, Transform midImage, Vector3Int pos, int minS)
     {
         iniChance = iniC;
         birthLimit = birthL;
@@ -73,6 +72,8 @@ public class RandomCave : MonoBehaviour
         MidImage = midImage;
 
         origin = pos;
+
+        minSize = minS;
 
         clusters = new List<CaveCluster>();
     }
@@ -141,7 +142,7 @@ public class RandomCave : MonoBehaviour
         {
             for (int y = 0; y < height; y++)
             {
-                if (y > height - 10 || x < 8 || x > width - 8) terrainMap[x, y] = 0;
+                if (y > height - 10 || x < 3 || x > width - 3) terrainMap[x, y] = 0;
                 else terrainMap[x, y] = Random.Range(1, 101) < iniChance ? 1 : 0;
             }
         }

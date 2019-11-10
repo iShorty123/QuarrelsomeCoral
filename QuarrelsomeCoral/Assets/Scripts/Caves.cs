@@ -51,7 +51,7 @@ public class Caves : MonoBehaviour
         GameObject cave = new GameObject();
         cave.SetActive(false);
         RandomCave caveScript = cave.AddComponent<RandomCave>();
-        caveScript.Init(iniChance, birthLimit, deathLimit, numR, tmpSize, BgImage, MidImage, new Vector3Int(0, 0, 0));
+        caveScript.Init(iniChance, birthLimit, deathLimit, numR, tmpSize, BgImage, MidImage, new Vector3Int(0, 0, 0), minSize);
         cave.SetActive(true);
 
         caves.Add(caveScript);
@@ -97,7 +97,7 @@ public class Caves : MonoBehaviour
         if (dir == "right") borderRight += tmpSize.x - diff;
         else borderLeft -= tmpSize.x + diff;
 
-        caveScript.Init(iniChance, birthLimit, deathLimit, numR, tmpSize, BgImage, MidImage, pos);
+        caveScript.Init(iniChance, birthLimit, deathLimit, numR, tmpSize, BgImage, MidImage, pos, minSize);
         cave.SetActive(true);
 
         caves.Add(caveScript);
