@@ -54,23 +54,15 @@ public class RandomPlant : MonoBehaviour
         int rand = Random.Range(0, 2);
 
         if (checkIfEmpty("T", mapPosition) && rand == 0) {
-            //Map.SetColor(mapPosition, Color.green);
             newPosition.x -= Random.Range(0.2f, 0.8f);
             newPosition.y += 0.2f;
         }
         else if (checkIfEmpty("B", mapPosition) && rand == 1)
         {
-            //Map.SetColor(mapPosition, Color.blue);
             newPosition.x -= Random.Range(0.2f, 0.8f);
             newPosition.y -= 1.2f;
             shouldRotate = true;
         }
-        //else if (checkIfEmpty("L", mapPosition) && rand == 2) {
-        //    Map.SetColor(mapPosition, Color.yellow);
-        //}
-        //else if (checkIfEmpty("R", mapPosition) && rand == 3) {
-        //    Map.SetColor(mapPosition, Color.red);
-        //}
 
         if (newPosition == mapPosition || newPosition.y < Map.cellBounds.yMin) return;
 

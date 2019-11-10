@@ -123,14 +123,10 @@ public class Caves : MonoBehaviour
     public void AddCaveToLeft(){
         Vector3Int position = new Vector3Int(borderLeft - tmpSize.x / 2 + diff, 0, 0);
         AddCaveAt(position, "left");
-        print("Left*: " + borderLeft);
-        print("Right: " + borderRight);
     }
 
     public void AddCaveToRight(){
         Vector3Int position = new Vector3Int(borderRight + tmpSize.x / 2 - diff, 0, 0);
         AddCaveAt(position, "right");
-        print("Left: " + borderLeft);
-        print("Right*: " + borderRight);
     }
 }
