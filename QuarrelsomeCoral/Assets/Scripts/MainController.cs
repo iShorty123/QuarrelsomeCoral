@@ -32,22 +32,18 @@ public class MainController : MonoBehaviour
     void Update()
     {
         //if submarine is close to the left or right border of Caves, add a cave at that side.
+        if ((Submarine.transform.position.x - Caves.GetLeftBorder()) < 75) Caves.AddCaveToLeft();
+        if ((Caves.GetRightBorder() - Submarine.transform.position.x) < 75) Caves.AddCaveToRight();
 
-        if ((Submarine.transform.position.x - Caves.GetLeftBorder()) < 75)
-        {
-            Caves.AddCaveToLeft();
-            //SetupLastCave();
-        }
+        SetupLastCave();
+    }
 
-        if ((Caves.GetRightBorder() - Submarine.transform.position.x) < 75) 
-        {
-            Caves.AddCaveToRight();
-            //SetupLastCave();
-        }
+    void SetupLastCave() {
 
         RandomCave lastCave = Caves.GetLastCave();
-        if (lastCave.IsDone()) {
- 
+        if (lastCave.IsDone())
+        {
+
             Tilemap map = lastCave.GetMap();
             //print(map.transform.position);
             //add random plants
@@ -60,27 +56,10 @@ public class MainController : MonoBehaviour
             Plant.transform.parent = Plants.gameObject.transform;
             Plant.name = "Plant";
 
-            //TODO spawn plants in right position
-
             //start random enemy spawn
             //REnemy.Setup(map, MainCamera);
             //REnemy.StartEnemySpawn();
         }
-
-    }
-
-    void SetupLastCave() {
-
-        RandomCave lastCave = Caves.GetLastCave();
-        Tilemap map = lastCave.GetMap();
-
-        //add random plants
-        RPlant.Setup(map, MainCamera, lastCave.transform.position + new Vector3(1 ,1 , 0), Plants.GetPlantTypes());
-        RPlant.AddPlants();
-
-        //start random enemy spawn
-        //REnemy.Setup(map, MainCamera);
-        //REnemy.StartEnemySpawn();
     }
 
     void PositionSubmarine() {

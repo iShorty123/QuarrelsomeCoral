@@ -30,6 +30,29 @@ public class CameraFollow : MonoBehaviour
         transform.position = new Vector3(m_Submarine.transform.position.x, m_Submarine.transform.position.y, -10);
         MidImage.transform.Translate(velocity / (2 * div) * Time.deltaTime);
         BgImage.transform.Translate(velocity / div * Time.deltaTime);
+
+        SpriteRenderer bgRenderer = BgImage.GetComponent<SpriteRenderer>();
+        float rightBorder = bgRenderer.bounds.max.x;
+        float leftBorder = bgRenderer.bounds.min.x;
+
+        if ((m_Submarine.transform.position.x - leftBorder) < 75 || (rightBorder - m_Submarine.transform.position.x) < 75)
+        {
+            Vector2 size = bgRenderer.size;
+            size.x += (float)6.48; //12.96
+            bgRenderer.size = size;
+        }
+
+        SpriteRenderer midRenderer = MidImage.GetComponent<SpriteRenderer>();
+        rightBorder = midRenderer.bounds.max.x;
+        leftBorder = midRenderer.bounds.min.x;
+
+        if ((m_Submarine.transform.position.x - leftBorder) < 75 || (rightBorder - m_Submarine.transform.position.x) < 75)
+        {
+            Vector2 size = midRenderer.size;
+            size.x += 12;
+            midRenderer.size = size;
+        }
     }
 
 }
+
