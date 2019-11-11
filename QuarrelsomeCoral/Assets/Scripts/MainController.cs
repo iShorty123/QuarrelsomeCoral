@@ -26,6 +26,10 @@ public class MainController : MonoBehaviour
 
         //create caves
         Caves.Setup(MainCamera, FarCamera, Tile, MapGrid);
+
+        //start random enemy spawn
+        REnemy.Setup(MapGrid, MainCamera);
+        REnemy.StartEnemySpawn();
     }
 
     // Update is called once per frame
@@ -55,10 +59,6 @@ public class MainController : MonoBehaviour
             Plant.SetActive(true);
             Plant.transform.parent = Plants.gameObject.transform;
             Plant.name = "Plant";
-
-            //start random enemy spawn
-            //REnemy.Setup(map, MainCamera);
-            //REnemy.StartEnemySpawn();
         }
     }
 

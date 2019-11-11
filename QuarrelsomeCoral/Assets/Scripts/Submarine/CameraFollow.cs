@@ -7,6 +7,7 @@ public class CameraFollow : MonoBehaviour
     public Transform BgImage = null;
     public Transform MidImage = null;
     public Transform Sky = null;
+    public Collider2D SkyCollider = null;
 
     private string m_HorizontalControls;
     private string m_VerticalControls;
@@ -36,26 +37,31 @@ public class CameraFollow : MonoBehaviour
         float rightBorder = bgRenderer.bounds.max.x;
         float leftBorder = bgRenderer.bounds.min.x;
 
-        if ((m_Submarine.transform.position.x - leftBorder) < 75 || (rightBorder - m_Submarine.transform.position.x) < 75)
-        {
-            Vector2 size = bgRenderer.size;
-            size.x += (float)6.48; //12.96
-            bgRenderer.size = size;
-        }
-
         SpriteRenderer midRenderer = MidImage.GetComponent<SpriteRenderer>();
         rightBorder = midRenderer.bounds.max.x;
         leftBorder = midRenderer.bounds.min.x;
 
         if ((m_Submarine.transform.position.x - leftBorder) < 75 || (rightBorder - m_Submarine.transform.position.x) < 75)
         {
+            //double mid image width
             Vector2 size = midRenderer.size;
             size.x += 12;
             midRenderer.size = size;
 
-            Vector3 skySize = Sky.transform.localScale;
-            skySize.x += 0.3f;
-            Sky.transform.localScale = skySize;
+            //double bg image width
+            size = bgRenderer.size;
+            size.x += (float)6.48; //12.96
+            bgRenderer.size = size;
+
+            //double sky image width
+            size = Sky.transform.localScale;
+            size.x += 0.3f;
+            Sky.transform.localScale = size;
+
+            //double sky collider image width
+            size = SkyCollider.transform.localScale;
+            size.x += 10f;
+            SkyCollider.transform.localScale = size;
         }
     }
 

@@ -5,12 +5,12 @@ using UnityEngine.Tilemaps;
 
 public class RandomEnemy : MonoBehaviour
 {
-    Tilemap Map = null;
+    GameObject MapGrid = null;
     Camera MainCamera = null;
 
     public GameObject BlueFish = null;
 
-    public int SpawnTime = 3;
+    public int SpawnTime = 1;
 
     // Start is called before the first frame update
     void Start()
@@ -24,14 +24,14 @@ public class RandomEnemy : MonoBehaviour
 
     }
 
-    public void Setup(Tilemap map, Camera mainCamera)
+    public void Setup(GameObject mapGrid, Camera mainCamera)
     {
-        Map = map;
+        MapGrid = mapGrid;
         MainCamera = mainCamera;
     }
 
     public void StartEnemySpawn() {
-        //StartCoroutine(EnemySpawner());
+        StartCoroutine(EnemySpawner());
     }
 
     IEnumerator EnemySpawner()
@@ -48,8 +48,19 @@ public class RandomEnemy : MonoBehaviour
         Vector3 position = getRandomScreenPosition();
         Vector3Int mapPosition = new Vector3Int(Mathf.RoundToInt(position.x), Mathf.RoundToInt(position.y), 0);
 
-        while (Map.GetTile(mapPosition) != null) {
-            //Map.SetColor(mapPosition, Color.red);
+        Tilemap map = null;
+        Vector3 maxDist = new Vector3(float.MaxValue, float.MaxValue, 0);
+
+        foreach (Transform mapObj in MapGrid.transform) {
+
+            Tilemap m = mapObj.gameObject.GetComponent<Tilemap>();
+            if (Vector3.Distance(m.transform.position, position) < Vector3.Distance(maxDist, position)) {
+                maxDist = m.transform.position;
+                map = m;
+            }
+        }
+
+        while (map.GetTile(mapPosition) != null) {
             position = getRandomScreenPosition();
             mapPosition = new Vector3Int(Mathf.RoundToInt(position.x), Mathf.RoundToInt(position.y), 0);
         }
@@ -63,13 +74,24 @@ public class RandomEnemy : MonoBehaviour
 
         float halfHeight = MainCamera.orthographicSize;
         float halfWidth = MainCamera.aspect * halfHeight;
+        Vector3 camPosition = MainCamera.transform.position;
 
-        float y = Random.Range(-halfHeight, halfHeight);
-        float x = Random.Range(-halfWidth, halfWidth);
+        //small square
+        float minX = halfWidth * 2;
+        float minY = halfHeight * 2;
 
-        Vector2 CameraPos = new Vector2(MainCamera.transform.position.x, MainCamera.transform.position.y);
-        Vector3 screenPosition = new Vector3(CameraPos.x + x, CameraPos.y + y, -4);
+        //large square
+        float maxX = halfWidth * 3;
+        float maxY = halfHeight * 3;
 
+        float xLeft = camPosition.x - Random.Range(minX, maxX);
+        float xRight = camPosition.x + Random.Range(minX, maxX);
+        float x = Random.Range(-1f, 1f) < 0 ? xRight : xLeft;
+
+        float y = camPosition.y - Random.Range(minY, maxY);
+        if (y > 92) y = 87;
+
+        Vector3 screenPosition = new Vector3(x, y, -4);
         return screenPosition;
     }
 }
