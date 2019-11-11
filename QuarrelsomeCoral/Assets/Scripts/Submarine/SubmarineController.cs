@@ -14,6 +14,7 @@ public class SubmarineController : MonoBehaviour, ITakeDamage
     private string m_VerticalControls;
 
     private float m_MaxSpeed;
+    private float m_MaxY = 92f;
 
     // Start is called before the first frame update
     void Start()
@@ -38,6 +39,13 @@ public class SubmarineController : MonoBehaviour, ITakeDamage
 
     private void MoveSubmarine()
     {
+
+        if (m_RigidBody.transform.position.y > m_MaxY) {
+            Vector3 vel = m_RigidBody.velocity;
+            vel.y = 0;
+            m_RigidBody.velocity = vel;
+        }
+
         float moveHorizontally = Input.GetAxis(m_HorizontalControls);
         float moveVertically = Input.GetAxis(m_VerticalControls);
         //Move submarine via MovePosition(world position translation)
@@ -55,7 +63,7 @@ public class SubmarineController : MonoBehaviour, ITakeDamage
         {
             m_RigidBody.AddForce(new Vector2(0, (moveVertically * m_Speed)));            
         }
-        else if (moveVertically > 0 && m_RigidBody.velocity.y < m_MaxSpeed) //If want to go up and can go up
+        else if (moveVertically > 0 && m_RigidBody.velocity.y < m_MaxSpeed && m_RigidBody.transform.position.y <= m_MaxY) //If want to go up and can go up
         {
             m_RigidBody.AddForce(new Vector2(0, (moveVertically * m_Speed)));
         }

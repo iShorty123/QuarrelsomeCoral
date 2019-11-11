@@ -47,23 +47,7 @@ public class Caves : MonoBehaviour
 
         caves = new List<RandomCave>();
 
-        //create first cave
-        GameObject cave = new GameObject();
-        cave.SetActive(false);
-        RandomCave caveScript = cave.AddComponent<RandomCave>();
-        caveScript.Init(iniChance, birthLimit, deathLimit, numR, tmpSize, BgImage, MidImage, new Vector3Int(0, 0, 0), minSize);
-        cave.SetActive(true);
-
-        caves.Add(caveScript);
-        cave.transform.parent = this.transform;
-        cave.name = "RandomCave";
-
-        //setup and create cave
-        caveScript.SetAsFirstCave();
-        caveScript.Setup(mapGrid, MainCamera, FarCamera, Tile);
-        caveScript.ConstructCave();
-
-        lastCave = caveScript;
+        AddFirstCave();
     }
 
     // Start is called before the first frame update
@@ -86,10 +70,31 @@ public class Caves : MonoBehaviour
         return lastCave;
     }
 
-    void AddCaveAt(Vector3Int pos, string dir) {
-
+    void AddFirstCave() {
 
         //create first cave
+        GameObject cave = new GameObject();
+        cave.SetActive(false);
+        RandomCave caveScript = cave.AddComponent<RandomCave>();
+        caveScript.Init(iniChance, birthLimit, deathLimit, numR, tmpSize, BgImage, MidImage, new Vector3Int(0, 0, 0), minSize);
+        cave.SetActive(true);
+
+        caves.Add(caveScript);
+        cave.transform.parent = this.transform;
+        cave.name = "RandomCave";
+
+        //setup and create cave
+        caveScript.SetAsFirstCave();
+        caveScript.Setup(MapGrid, MainCamera, FarCamera, Tile);
+        caveScript.ConstructCave();
+
+        lastCave = caveScript;
+
+    }
+
+    void AddCaveAt(Vector3Int pos, string dir) {
+
+        //create cave
         GameObject cave = new GameObject();
         cave.SetActive(false);
         RandomCave caveScript = cave.AddComponent<RandomCave>();

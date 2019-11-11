@@ -6,6 +6,7 @@ public class CameraFollow : MonoBehaviour
 {
     public Transform BgImage = null;
     public Transform MidImage = null;
+    public Transform Sky = null;
 
     private string m_HorizontalControls;
     private string m_VerticalControls;
@@ -51,6 +52,10 @@ public class CameraFollow : MonoBehaviour
             Vector2 size = midRenderer.size;
             size.x += 12;
             midRenderer.size = size;
+
+            Vector3 skySize = Sky.transform.localScale;
+            skySize.x += 0.3f;
+            Sky.transform.localScale = skySize;
         }
     }
 
