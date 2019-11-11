@@ -59,6 +59,7 @@ public class Caves : MonoBehaviour
         cave.name = "RandomCave";
 
         //setup and create cave
+        caveScript.SetAsFirstCave();
         caveScript.Setup(mapGrid, MainCamera, FarCamera, Tile);
         caveScript.ConstructCave();
 
@@ -89,7 +90,7 @@ public class Caves : MonoBehaviour
 
 
         //create first cave
-        GameObject cave = caves[0].gameObject;//new GameObject();
+        GameObject cave = new GameObject();
         cave.SetActive(false);
         RandomCave caveScript = cave.AddComponent<RandomCave>();
 

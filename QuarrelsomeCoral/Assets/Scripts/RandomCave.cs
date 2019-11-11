@@ -53,6 +53,7 @@ public class RandomCave : MonoBehaviour
     Vector3Int origin;
 
     bool isDone = false;
+    bool isFirstCave = false;
 
     private List<CaveCluster> visitedClusters;
 
@@ -104,6 +105,10 @@ public class RandomCave : MonoBehaviour
         return ret;
     }
 
+    public void SetAsFirstCave() {
+        isFirstCave = true;
+    }
+
     IEnumerator doSim(int nu)
     {
         clearMap(false);
@@ -120,7 +125,7 @@ public class RandomCave : MonoBehaviour
         for (int i = 0; i < nu; i++)
         {
             terrainMap = genTilePos(terrainMap);
-            yield return null;
+            if (!isFirstCave) yield return null;
         }
 
         for (int x = 0; x < width; x++)
@@ -130,7 +135,7 @@ public class RandomCave : MonoBehaviour
                 if (terrainMap[x, y] == 1)
                     topMap.SetTile(new Vector3Int(x - width / 2, y - height / 2, 0), topTile);
             }
-            if (x % 10 == 0)yield return null;
+            if (x % 10 == 0 && !isFirstCave) yield return null;
         }
 
         MakeCaves();
@@ -258,7 +263,7 @@ public class RandomCave : MonoBehaviour
                     MakeClusterDFS(new Vector2Int(i, j));
                 }
             }
-            yield return null;
+            if (!isFirstCave) yield return null;
         }
 
         borderTile = clusters[0];
@@ -338,7 +343,7 @@ public class RandomCave : MonoBehaviour
         for (int i = 0; i < clusters.Count; i++){
            //if (!clusters[i].ShouldBeRemoved()) 
             BuildCavesR(clusters[i], clusters[(i + 1) % clusters.Count]);
-            yield return null;
+            if (!isFirstCave) yield return null;
         }
 
         foreach (CaveCluster cluster in clusters.ToList())
