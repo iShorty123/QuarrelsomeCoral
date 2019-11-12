@@ -36,8 +36,8 @@ public class MainController : MonoBehaviour
     void Update()
     {
         //if submarine is close to the left or right border of Caves, add a cave at that side.
-        if ((Submarine.transform.position.x - Caves.GetLeftBorder()) < 75) Caves.AddCaveToLeft();
-        if ((Caves.GetRightBorder() - Submarine.transform.position.x) < 75) Caves.AddCaveToRight();
+        if ((Submarine.transform.position.x - Caves.GetLeftBorder()) < 140) Caves.AddCaveToLeft(); //here
+        if ((Caves.GetRightBorder() - Submarine.transform.position.x) < 140) Caves.AddCaveToRight(); //here
 
         SetupLastCave();
     }
@@ -64,7 +64,7 @@ public class MainController : MonoBehaviour
 
     void PositionSubmarine() {
 
-        Vector3 position = new Vector3(0, 92, 0);
+        Vector3 position = new Vector3(80, 92, 0);
 
         GameObject submarine = Instantiate(SubmarinePrefab);
         submarine.transform.position = position;

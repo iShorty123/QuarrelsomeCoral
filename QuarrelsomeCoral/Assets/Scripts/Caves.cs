@@ -48,6 +48,7 @@ public class Caves : MonoBehaviour
         caves = new List<RandomCave>();
 
         AddFirstCave();
+        AddCaveToRight(true);
     }
 
     // Start is called before the first frame update
@@ -92,7 +93,7 @@ public class Caves : MonoBehaviour
 
     }
 
-    void AddCaveAt(Vector3Int pos, string dir) {
+    void AddCaveAt(Vector3Int pos, string dir, bool isFirst) {
 
         //create cave
         GameObject cave = new GameObject();
@@ -111,6 +112,7 @@ public class Caves : MonoBehaviour
         cave.name = "RandomCave";
 
         //setup and create cave
+        if (isFirst) caveScript.SetAsFirstCave();
         caveScript.Setup(MapGrid, MainCamera, FarCamera, Tile);
         caveScript.ConstructCave();
 
@@ -126,13 +128,15 @@ public class Caves : MonoBehaviour
         return borderRight;
     }
 
-    public void AddCaveToLeft(){
+    public void AddCaveToLeft(bool isFirst = false)
+    {
         Vector3Int position = new Vector3Int(borderLeft - tmpSize.x / 2 + diff, 0, 0);
-        AddCaveAt(position, "left");
+        AddCaveAt(position, "left", isFirst);
     }
 
-    public void AddCaveToRight(){
+    public void AddCaveToRight(bool isFirst = false)
+    {
         Vector3Int position = new Vector3Int(borderRight + tmpSize.x / 2 - diff, 0, 0);
-        AddCaveAt(position, "right");
+        AddCaveAt(position, "right", isFirst);
     }
 }

@@ -55,6 +55,9 @@ public class RandomCave : MonoBehaviour
     bool isDone = false;
     bool isFirstCave = false;
 
+    //WaitForSeconds waitFor = new WaitForSeconds(.07f);
+    int waitFor = 0;
+
     private List<CaveCluster> visitedClusters;
 
     public RandomCave() {
@@ -125,7 +128,7 @@ public class RandomCave : MonoBehaviour
         for (int i = 0; i < nu; i++)
         {
             terrainMap = genTilePos(terrainMap);
-            if (!isFirstCave) yield return null;
+            if (!isFirstCave) yield return waitFor;
         }
 
         for (int x = 0; x < width; x++)
@@ -135,7 +138,7 @@ public class RandomCave : MonoBehaviour
                 if (terrainMap[x, y] == 1)
                     topMap.SetTile(new Vector3Int(x - width / 2, y - height / 2, 0), topTile);
             }
-            if (x % 10 == 0 && !isFirstCave) yield return null;
+            if (x % 10 == 0 && !isFirstCave) yield return waitFor;
         }
 
         MakeCaves();
@@ -263,7 +266,7 @@ public class RandomCave : MonoBehaviour
                     MakeClusterDFS(new Vector2Int(i, j));
                 }
             }
-            if (!isFirstCave) yield return null;
+            if (!isFirstCave) yield return waitFor;
         }
 
         borderTile = clusters[0];
@@ -290,8 +293,7 @@ public class RandomCave : MonoBehaviour
             int x = curr.x;
             int y = curr.y;
             claimed[x, y] = true;
-            //topMap.SetColor(new Vector3Int(x-width/2, y-height/2, 0), Color.red);
-            if(x==9 && y==0) topMap.SetColor(new Vector3Int(x - width / 2, y - height / 2, 0), Color.red);
+            //if(x==9 && y==0) topMap.SetColor(new Vector3Int(x - width / 2, y - height / 2, 0), Color.red);
 
             for (int i = 0; i < 8; i++) {
                 Vector2Int ad = new Vector2Int(x + adj[i].x, y + adj[i].y);
@@ -300,12 +302,10 @@ public class RandomCave : MonoBehaviour
                 //if out of bounds, then say cluster touches border and skip this one
                 if (locPos.x < topMap.cellBounds.xMin || locPos.x >= topMap.cellBounds.xMax || locPos.y < topMap.cellBounds.yMin || locPos.y >= topMap.cellBounds.yMax) {
                     cluster.MarkTouchesBorder();
-
                 }
                 else if (!claimed[ad.x, ad.y] && topMap.HasTile(locPos)) //terrainMap[ad.x, ad.y] == 1
                 {
                     claimed[ad.x, ad.y] = true;
-                    //topMap.SetColor(new Vector3Int(ad.x- width / 2, ad.y-height/2, 0), Color.red);
                     st.Push(ad);
                 }
             }
@@ -343,13 +343,13 @@ public class RandomCave : MonoBehaviour
         for (int i = 0; i < clusters.Count; i++){
            //if (!clusters[i].ShouldBeRemoved()) 
             BuildCavesR(clusters[i], clusters[(i + 1) % clusters.Count]);
-            if (!isFirstCave) yield return null;
+            if (!isFirstCave) yield return waitFor;
         }
 
-        foreach (CaveCluster cluster in clusters.ToList())
-        {
-            if (cluster.ShouldBeRemoved()) clusters.Remove(cluster);
-        }
+        //foreach (CaveCluster cluster in clusters.ToList())
+        //{
+        //    if (cluster.ShouldBeRemoved()) clusters.Remove(cluster);
+        //}
 
         isDone = true;
     }
@@ -371,35 +371,35 @@ public class RandomCave : MonoBehaviour
         a.CreateBridge(b, topMap, topTile);
 
         //merge b into a
-        a.AddTiles(b.GetTiles());
+        //a.AddTiles(b.GetTiles());
 
         //remove b from cluster list
         // clusters.Remove(b);
-        b.setShouldBeRemoved(true);
+        //b.setShouldBeRemoved(true);
 
         //recalculate values (like cluster's center)
         a.Setup();
 
-        if (b.TouchesBorder()) a.MarkTouchesBorder();
+        //if (b.TouchesBorder()) a.MarkTouchesBorder();
     }
 
-    CaveCluster GetClosestClusterTo(CaveCluster fromHere)
-    {
-        float smallestDist = Vector2Int.Distance(fromHere.GetCenter(), clusters[0].GetCenter());
-        CaveCluster closestCluster = clusters[0];
+    //CaveCluster GetClosestClusterTo(CaveCluster fromHere)
+    //{
+    //    float smallestDist = Vector2Int.Distance(fromHere.GetCenter(), clusters[0].GetCenter());
+    //    CaveCluster closestCluster = clusters[0];
 
-        foreach (CaveCluster cluster in clusters)
-        {
-            if (cluster.ShouldBeRemoved() || !cluster.IsConnected(cluster)) continue;
-            float dist = Vector2Int.Distance(fromHere.GetCenter(), cluster.GetCenter());
-            if (dist != 0f && dist <= smallestDist)
-            {
-                smallestDist = dist;
-                closestCluster = cluster;
-            }
-        }
-        return closestCluster;
-    }
+    //    foreach (CaveCluster cluster in clusters)
+    //    {
+    //        if (cluster.ShouldBeRemoved() || !cluster.IsConnected(cluster)) continue;
+    //        float dist = Vector2Int.Distance(fromHere.GetCenter(), cluster.GetCenter());
+    //        if (dist != 0f && dist <= smallestDist)
+    //        {
+    //            smallestDist = dist;
+    //            closestCluster = cluster;
+    //        }
+    //    }
+    //    return closestCluster;
+    //}
 
 
 }
