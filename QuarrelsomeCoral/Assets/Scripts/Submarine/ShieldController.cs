@@ -4,39 +4,62 @@ using UnityEngine;
 
 public class ShieldController : MonoBehaviour
 {
-    public float m_MoveAmount; //Can change to private once we know these are the values we want
+    public float m_AlphaValue; //Can change to private once we know these are the values we want
 
-    private Vector3 m_NewPosition;  
+    private Vector3 m_NewPosition;
     private float m_MovementInput;
-
-
-    // Start is called before the first frame update
-    void Start()
-    {       
-        m_MoveAmount = int.Parse(gameObject.name); //Use name to determine starting location
-    }
+    private Vector3 m_LookDirection;
 
     // Update is called once per frame
     void Update()
     {
         //If player controlled, then move around the submarine
         if (SubmarineManager.GetInstance().m_Shield.m_PlayerControlled)
-        {
+        {            
             m_MovementInput = Input.GetAxisRaw(SubmarineManager.GetInstance().m_Shield.m_PlayerControlScheme);
-            //Need to test the logic behind this when using a controller - it may make more sense to have the y-axis come into place when using the controller
-            //moving the shield to where ever the thumb stick is on the controller
-            //TODO: Reset alpha some how? As in theory, overflow could eventually occur here
-            m_MoveAmount += -1 * m_MovementInput; //Multiply by -1 to make left CCW and right CW            
-            m_NewPosition = new Vector3(SubmarineManager.GetInstance().m_Shield.m_XAxisRadius * Mathf.Cos(m_MoveAmount * SubmarineManager.GetInstance().m_Shield.m_Speed),
-                SubmarineManager.GetInstance().m_Shield.m_YAxisRadius * Mathf.Sin(m_MoveAmount * SubmarineManager.GetInstance().m_Shield.m_Speed), 1);
+            if (transform.localPosition.x < SubmarineManager.GetInstance().m_Shield.m_LeftCircleLookAtPosition.localPosition.x) //Left semi circle
+            {
+                m_LookDirection = SubmarineManager.GetInstance().m_Shield.m_LeftCircleLookAtPosition.position - transform.position;
 
-            transform.localPosition = m_NewPosition;
+                m_AlphaValue += -2 * m_MovementInput; //Multiply by -1 to make left CCW and right CW   
+
+                m_NewPosition = new Vector3(SubmarineManager.GetInstance().m_Shield.m_LeftCircleLookAtPosition.localPosition.x + SubmarineManager.GetInstance().m_Shield.m_XAxisRadius * Mathf.Cos(m_AlphaValue * ShieldManager.m_END_SPEED),
+                SubmarineManager.GetInstance().m_Shield.m_YAxisRadius * Mathf.Sin(m_AlphaValue * ShieldManager.m_END_SPEED), 1);
+
+                transform.localPosition = m_NewPosition;
+            }
+            else if (transform.localPosition.x > SubmarineManager.GetInstance().m_Shield.m_RightCircleLookAtPosition.localPosition.x) //right semi circle
+            {
+                m_LookDirection = SubmarineManager.GetInstance().m_Shield.m_RightCircleLookAtPosition.position - transform.position;
+
+                m_AlphaValue += -2 * m_MovementInput; //Multiply by -1 to make left CCW and right CW   
+
+                m_NewPosition = new Vector3(SubmarineManager.GetInstance().m_Shield.m_RightCircleLookAtPosition.localPosition.x 
+                    + SubmarineManager.GetInstance().m_Shield.m_XAxisRadius * Mathf.Cos(m_AlphaValue * ShieldManager.m_END_SPEED),
+                      SubmarineManager.GetInstance().m_Shield.m_YAxisRadius * Mathf.Sin(m_AlphaValue * ShieldManager.m_END_SPEED), 1);
+                
+
+                transform.localPosition = m_NewPosition;
+            }
+            else //Straightaways
+            {              
+                if (transform.localPosition.y < 0)
+                {
+                    m_MovementInput = -m_MovementInput;
+                    m_AlphaValue = -Mathf.Abs(m_AlphaValue % (int)(Mathf.PI / ShieldManager.m_END_SPEED));
+                }
+                else { m_AlphaValue = Mathf.Abs(m_AlphaValue % (int)(Mathf.PI / ShieldManager.m_END_SPEED)); }
+
+                transform.localPosition = new Vector3(transform.localPosition.x + m_MovementInput * SubmarineManager.GetInstance().m_Shield.m_STRAIGHT_AWAY_SPEED,
+                    transform.localPosition.y,
+                    transform.localPosition.z);
+            }
+
+
+            //Code to have this object always face the center of the Submarine
+            var angle = Mathf.Atan2(m_LookDirection.y, m_LookDirection.x) * Mathf.Rad2Deg;
+            transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
         }
-
-        //Code to have this object always face the center of the Submarine
-        //var dir = transform.parent.position - transform.position;
-        //var angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
-        //transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
 
     }
 
@@ -49,6 +72,12 @@ public class ShieldController : MonoBehaviour
         {
             enemy.HitShield(collision.GetContact(0));
         }
+
+        if (collision.collider.name == "Tilemap")
+        {
+            SubmarineManager.GetInstance().m_Shield.ShieldCollidiedWithTerrain(transform.position);
+        }
+
     }
 
 }

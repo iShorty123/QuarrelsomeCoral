@@ -17,7 +17,7 @@ public class CharacterMovement : MonoBehaviour
     private bool m_InStation;
     private bool m_AtTopOfLadder = true;
     private bool m_AtBottomOfLadder;
-    private const float DISTANCE_ALLOWED_BETWEEN_WALL_AND_PLAYER = 0.25f;
+    private const float DISTANCE_ALLOWED_BETWEEN_WALL_AND_PLAYER = 0.35f;
     private Animator m_Animator;
 
 

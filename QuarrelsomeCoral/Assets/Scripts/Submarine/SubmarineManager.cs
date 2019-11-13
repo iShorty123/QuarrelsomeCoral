@@ -7,6 +7,7 @@ public class SubmarineManager : MonoBehaviour
     private static SubmarineManager m_Instance;
 
     public SubmarineController m_Submarine;
+    public int m_SubmarineTerrianBounceBackForce { get; private set; }
 
     public GunController m_TopWeaponStation;
     public GunController m_BottomWeaponStation;
@@ -29,6 +30,7 @@ public class SubmarineManager : MonoBehaviour
 
     private void Start()
     {
+        m_SubmarineTerrianBounceBackForce = 1000;
         m_TopWeaponStation.SetWeaponSpecificVariables(TopAndBottomAmmo, 0, -1, .5f, 1.2f);
         m_BottomWeaponStation.SetWeaponSpecificVariables(TopAndBottomAmmo, 180, 1, .5f, 1.2f);
     }

@@ -11,7 +11,6 @@ public class Eel : BaseEnemy
     private bool m_ReadyToLunge;
     private float m_RestTimeAfterLunge;
     private float m_TimeWhenStunned;
-    private float m_TimeWhenStunnedByShield;
     private Vector3 m_ReflectionDirection;
     private Vector3 m_SubmarineDirectionAtImpact;
 
@@ -157,21 +156,5 @@ public class Eel : BaseEnemy
         }
     }
 
-    public override void HitShield(ContactPoint2D _impactSpot)
-    {
-        //Reflection Method:
-        Debug.Log("Hit Shield");
-        //m_ReflectionDirection = Vector3.Reflect(m_DirectionToSubmarine, _impactSpot.normal);
-        //m_SubmarineDirectionAtImpact = m_DirectionToSubmarine;
-        //m_TimeWhenStunned = Time.realtimeSinceStartup;
-        //m_Rigidbody.velocity = Vector3.zero;
-        //m_Rigidbody.AddForce(m_ReflectionDirection * m_SubmarineContactPushBackForce);
 
-        //Push Back Method:
-
-        m_TimeWhenStunnedByShield = Time.realtimeSinceStartup;
-        //m_Rigidbody.velocity = Vector3.zero;
-        m_Rigidbody.AddForce(-m_DirectionToSubmarine * m_ShieldPushBackForce);
-        
-    }
 }

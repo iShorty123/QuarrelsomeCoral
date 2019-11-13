@@ -8,7 +8,7 @@ public class SubmarineController : MonoBehaviour, ITakeDamage
     public float m_Speed;
     public int m_Health;
     public int m_MaxHealth;
-
+    private bool m_HitTerrainFlag;
     private bool m_HasPilot;
     private string m_HorizontalControls;
     private string m_VerticalControls;
@@ -20,6 +20,7 @@ public class SubmarineController : MonoBehaviour, ITakeDamage
     void Start()
     {
         m_MaxSpeed = 5;
+        m_HitTerrainFlag = false;
         m_MaxHealth = m_Health = 100;
     }
 
@@ -70,8 +71,6 @@ public class SubmarineController : MonoBehaviour, ITakeDamage
         m_VerticalControls = _verticalControls;
     }
 
-
-
     public void TakeDamage(int _damage)
     {
         m_Health -= _damage;
@@ -80,4 +79,33 @@ public class SubmarineController : MonoBehaviour, ITakeDamage
             Debug.Log("DEAD");
         }
     }
+
+    public IEnumerator CollidedWithTerrainCooldown()
+    {
+        yield return new WaitForFixedUpdate();
+        m_HitTerrainFlag = false;
+    }
+
+    public void CollidedWithTerrain(ContactPoint2D _impactPoint)
+    {
+        if (m_HitTerrainFlag) { return; } //Prevent multiple shield collisions
+        m_HitTerrainFlag = true;
+
+        //Start collision cooldown
+        StartCoroutine(CollidedWithTerrainCooldown());
+
+        //Zero out velocity before we push back - Do on shield due to weird behavior if not, but here seems ok not to do that
+        //m_RigidBody.velocity = Vector2.zero;
+
+        //Get direction we should push in (approximately away from wall)
+        Vector2 direction = -(_impactPoint.point - new Vector2(m_RigidBody.position.x, m_RigidBody.position.y)).normalized;
+
+        //Push back sub
+        SubmarineManager.GetInstance().m_Submarine.m_RigidBody.AddForce(direction * SubmarineManager.GetInstance().m_SubmarineTerrianBounceBackForce);
+
+        //Deal small damage to the Sub
+        TakeDamage(1);
+    }
+
 }
+

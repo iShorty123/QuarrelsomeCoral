@@ -17,6 +17,8 @@ public abstract class BaseEnemy : MonoBehaviour, IBaseEnemy, ITakeDamage
     protected bool m_IsBoss;
     protected int m_MaxPursuitDistance;
     protected float m_ShieldPushBackForce;
+    protected bool m_HitShieldFlag;
+    protected float m_TimeWhenStunnedByShield;
 
     /// <summary>How long it has been since your last attack</summary>
     protected float m_AttackCoolDownTime;
@@ -28,7 +30,28 @@ public abstract class BaseEnemy : MonoBehaviour, IBaseEnemy, ITakeDamage
 
     public abstract void HitSubmarine(ContactPoint2D _impactSpot);
 
-    public abstract void HitShield(ContactPoint2D _impactSpot);
+    public virtual void HitShield(ContactPoint2D _impactSpot)
+    {
+        if (m_HitShieldFlag)
+        {
+            return;
+        }
+        m_HitShieldFlag = true;
+        StartCoroutine(ShieldCooldown());
+
+        //Reflection Method:
+        //m_ReflectionDirection = Vector3.Reflect(m_DirectionToSubmarine, _impactSpot.normal);
+        //m_SubmarineDirectionAtImpact = m_DirectionToSubmarine;
+        //m_TimeWhenStunned = Time.realtimeSinceStartup;
+        //m_Rigidbody.velocity = Vector3.zero;
+        //m_Rigidbody.AddForce(m_ReflectionDirection * m_SubmarineContactPushBackForce);
+
+        //Push Back Method:
+        m_TimeWhenStunnedByShield = Time.realtimeSinceStartup;
+        //m_Rigidbody.velocity = Vector3.zero;
+        m_Rigidbody.AddForce(-m_DirectionToSubmarine * m_ShieldPushBackForce);
+
+    }
 
     public abstract void Attack();
 
@@ -64,5 +87,11 @@ public abstract class BaseEnemy : MonoBehaviour, IBaseEnemy, ITakeDamage
 
     }
 
-
+    protected IEnumerator ShieldCooldown()
+    {
+        //This wait is long enough the majority of the time to prevent multiple shield collisions occurring from 1 hit
+        //Every now and then an extra collision will get processed, but that's ok
+        yield return new WaitForFixedUpdate();
+        m_HitShieldFlag = false;
+    }
 }

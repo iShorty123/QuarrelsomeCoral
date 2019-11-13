@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 
 public class SubmarineCollisionController : MonoBehaviour
 {
@@ -10,9 +11,13 @@ public class SubmarineCollisionController : MonoBehaviour
         {
             enemy.HitSubmarine(collision.GetContact(0));
         }
+        else if (collision.collider.name == "Tilemap")
+        {
+            SubmarineManager.GetInstance().m_Submarine.CollidedWithTerrain(collision.GetContact(0));
+        }
         else
         {
-            Debug.Log(collision.collider.name);
+            Debug.Log("Collided with: " + collision.collider.name);
         }
     }
 
