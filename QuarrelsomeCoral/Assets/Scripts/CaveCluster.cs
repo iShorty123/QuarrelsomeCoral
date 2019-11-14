@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
-public class CaveCluster : MonoBehaviour
+public class CaveCluster //: MonoBehaviour
 {
 
     private bool touchesBorder = false;
@@ -20,17 +20,17 @@ public class CaveCluster : MonoBehaviour
         center = new Vector2Int(0, 0);
     }
 
-    // Start is called before the first frame update
-    void Start()
-    {
+    //// Start is called before the first frame update
+    //void Start()
+    //{
 
-    }
+    //}
 
-    // Update is called once per frame
-    void Update()
-    {
+    //// Update is called once per frame
+    //void Update()
+    //{
         
-    }
+    //}
 
     public void Setup()
     {
