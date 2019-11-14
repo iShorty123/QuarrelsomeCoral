@@ -63,6 +63,12 @@ public class CameraFollow : MonoBehaviour
             size.x += 10f;
             SkyCollider.transform.localScale = size;
         }
+
+        if (transform.position.y < -50)
+        {
+            transform.position = new Vector3(transform.position.x, -50, transform.position.z);
+        }
+
     }
 
 }

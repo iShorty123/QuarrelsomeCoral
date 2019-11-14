@@ -11,14 +11,18 @@ public class ShieldManager : MonoBehaviour
     public float m_XAxisRadius { get; private set; } //X Radius of the circles at the end of the sub we use as a reference to rotate the shield nicely
     public float m_YAxisRadius { get; private set; } //Y Radius of the circles at the end of the sub we use as a reference to rotate the shield nicely
     public const float m_END_SPEED = .011f; //The speed at which the shield travels when it is curved
-    public float m_STRAIGHT_AWAY_SPEED = .17f; //As far as the eye can tell, matches the speed of the end speed (when curved)
+    public float m_STRAIGHT_AWAY_SPEED = .17f; //As far as the eye can tell, matches the speed of the end speed (when curved) - NOT TRUE but good enough for now
     public Transform m_RightCircleLookAtPosition { get; private set; } //The middle of the circle we use on the right for looking at when rotating around it
     public Transform m_LeftCircleLookAtPosition { get; private set; } //The middle of the circle we use on the left for looking at when rotating around it
 
     private bool m_HitTerrainFlag;
-
+    GameObject _23;
+    GameObject _10;
     private void Start()
     {
+        _23 = GameObject.Find("23");
+        _10 = GameObject.Find("10");
+
         m_RightCircleLookAtPosition = GameObject.Find("RightCircleShieldLookAtPosition").transform;
         m_LeftCircleLookAtPosition = GameObject.Find("LeftCircleShieldLookAtPosition").transform;
         ShieldController[] m_ShieldPieces = FindObjectsOfType(typeof(ShieldController)) as ShieldController[];
@@ -92,4 +96,5 @@ public class ShieldManager : MonoBehaviour
         //Push back sub
         SubmarineManager.GetInstance().m_Submarine.m_RigidBody.AddForce(direction * SubmarineManager.GetInstance().m_SubmarineTerrianBounceBackForce);
     }
+
 }

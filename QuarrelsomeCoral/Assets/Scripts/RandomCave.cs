@@ -88,6 +88,8 @@ public class RandomCave : MonoBehaviour
         topMap = tileMap.AddComponent<Tilemap>();
         tileMap.AddComponent<TilemapRenderer>();
         tileMap.AddComponent<TilemapCollider2D>();
+        tileMap.AddComponent<Rigidbody2D>();
+        tileMap.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Static;
         //tileMap.AddComponent<Rigidbody2D>();
         tileMap.name = "Tilemap";
         tileMap.transform.parent = mapGrid.transform;

@@ -12,7 +12,7 @@ public class SubmarineManager : MonoBehaviour
     public GunController m_TopWeaponStation;
     public GunController m_BottomWeaponStation;
     public ShieldManager m_Shield;
-    public GameObject m_MapStation;
+    public MiniMap m_MiniMap;
     public GameObject m_ArmoryStation;
     public GameObject TopAndBottomAmmo;
 

@@ -245,6 +245,7 @@ public class CharacterMovement : MonoBehaviour
     private void DetermineStationEnter(string _stationName)
     {
         m_CanMove = false;
+        m_Animator.SetBool("Move", false);
         switch (_stationName)
         {
             case SubmarineManager.PILOT_STATION:
@@ -260,6 +261,7 @@ public class CharacterMovement : MonoBehaviour
                 SubmarineManager.GetInstance().m_Shield.SetControls(true, m_Horizontal);
                 break;
             case SubmarineManager.MAP_STATION:
+                SubmarineManager.GetInstance().m_MiniMap.SetControls(true, m_Horizontal, m_Vertical, m_Action2);
                 break;
             case SubmarineManager.ARMORY_STATION:
                 break;
@@ -286,6 +288,7 @@ public class CharacterMovement : MonoBehaviour
                 SubmarineManager.GetInstance().m_Shield.SetControls(false, string.Empty);
                 break;
             case SubmarineManager.MAP_STATION:
+                SubmarineManager.GetInstance().m_MiniMap.SetControls(false, string.Empty, string.Empty, string.Empty);
                 break;
             case SubmarineManager.ARMORY_STATION:
                 break;
