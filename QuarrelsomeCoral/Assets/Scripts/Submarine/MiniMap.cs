@@ -15,6 +15,12 @@ public class MiniMap : MonoBehaviour
     private Rect m_FullMapRect = new Rect(.05f, .05f, .9f, .9f);
     private float m_MapSpeed;
     private Vector3 m_Offset;
+
+    private float m_FullMapMinimumY;
+    private float m_MiniMapMinimumY;
+    private float m_FullMapMaximumY;
+    private float m_MiniMapMaximumY;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -24,9 +30,10 @@ public class MiniMap : MonoBehaviour
         m_MapSpeed = 5;
         TurnOffMiniMap();
 
-
-        FullAdjustment = -10.5F;
-        MiniAdjustment = -40;
+        m_FullMapMinimumY = -10.5F;
+        m_FullMapMaximumY = 60;
+        m_MiniMapMinimumY = -40;      
+        m_MiniMapMaximumY = 89.5f;
     }
 
     // Update is called once per frame
@@ -101,36 +108,44 @@ public class MiniMap : MonoBehaviour
 
     }
 
-    public float FullAdjustment;
-    public float MiniAdjustment;
-
     private void SetPosition()
     {
         //Set camera position to sub location
         m_MiniMapCamera.transform.position = new Vector3(SubmarineManager.GetInstance().m_Submarine.transform.position.x, SubmarineManager.GetInstance().m_Submarine.transform.position.y, -10)
             + m_Offset;
 
-        ////Clamp camera position to bottom of the world (bottom is currently hard coded for both map versions)
+        //Clamp camera position to bottom of the world (bottom is currently hard coded for both map versions)
         if (m_CurrentlyFullScreen)
         {
-            Debug.Log("Offset Pre: " + m_Offset);
-            Debug.Log("Camera Pre: " + m_MiniMapCamera.transform.position.y);
-            
-            float offsetY = Mathf.Clamp(m_Offset.y, FullAdjustment - m_MiniMapCamera.transform.position.y, 100 - m_MiniMapCamera.transform.position.y);
-            if (offsetY > 0 && m_Offset.y <= 0) { offsetY = 0; }
-            m_Offset.y = offsetY;
-            
-            m_MiniMapCamera.transform.position = new Vector3(m_MiniMapCamera.transform.position.x, Mathf.Clamp(m_MiniMapCamera.transform.position.y, FullAdjustment, 92), -10)
+            //if offset + pos is below minimum, set to offset accordingly
+            if (m_Offset.y + Mathf.Clamp(m_MiniMapCamera.transform.position.y, m_FullMapMinimumY, m_FullMapMaximumY) < m_FullMapMinimumY)
+            {
+                m_Offset.y = m_FullMapMinimumY - Mathf.Clamp(m_MiniMapCamera.transform.position.y, m_FullMapMinimumY, m_FullMapMaximumY);
+            }
+            //if off + pos is above maximum, set offset accordingly
+            if (m_Offset.y + Mathf.Clamp(m_MiniMapCamera.transform.position.y, m_FullMapMinimumY, m_FullMapMaximumY) > m_FullMapMaximumY)
+            {
+                m_Offset.y = m_FullMapMaximumY - Mathf.Clamp(m_MiniMapCamera.transform.position.y, m_FullMapMinimumY, m_FullMapMaximumY);
+            }
+            //Set new position based on any clamping that needed to occur
+            m_MiniMapCamera.transform.position = new Vector3(m_MiniMapCamera.transform.position.x, Mathf.Clamp(m_MiniMapCamera.transform.position.y, m_FullMapMinimumY, m_FullMapMaximumY), -10)
                 + m_Offset;
-
-            Debug.Log("Offset Post: " + m_Offset);
-
         }
         else if (!m_CurrentlyFullScreen)
         {
-            //m_Offset = new Vector3(m_Offset.x, Mathf.Clamp(m_Offset.y, MiniAdjustment - m_MiniMapCamera.transform.position.y, 100 - m_MiniMapCamera.transform.position.y), m_Offset.z);
-            m_MiniMapCamera.transform.position = new Vector3(m_MiniMapCamera.transform.position.x, Mathf.Clamp(m_MiniMapCamera.transform.position.y, MiniAdjustment, 92), -10);
-                //+ m_Offset;
+            //if offset + pos is below minimum, set to offset accordingly
+            if (m_Offset.y + Mathf.Clamp(m_MiniMapCamera.transform.position.y, m_MiniMapMinimumY, m_MiniMapMaximumY) < m_MiniMapMinimumY)
+            {
+                m_Offset.y = m_MiniMapMinimumY - Mathf.Clamp(m_MiniMapCamera.transform.position.y, m_MiniMapMinimumY, m_MiniMapMaximumY);
+            }
+            //if off + pos is above maximum, set offset accordingly
+            if (m_Offset.y + Mathf.Clamp(m_MiniMapCamera.transform.position.y, m_MiniMapMinimumY, m_MiniMapMaximumY) > m_MiniMapMaximumY)
+            {
+                m_Offset.y = m_MiniMapMaximumY - Mathf.Clamp(m_MiniMapCamera.transform.position.y, m_MiniMapMinimumY, m_MiniMapMaximumY);
+            }
+            //Set new position based on any clamping that needed to occur
+            m_MiniMapCamera.transform.position = new Vector3(m_MiniMapCamera.transform.position.x, Mathf.Clamp(m_MiniMapCamera.transform.position.y, m_MiniMapMinimumY, m_MiniMapMaximumY), -10)
+                + m_Offset;
         }
 
         //Keep border aligned
