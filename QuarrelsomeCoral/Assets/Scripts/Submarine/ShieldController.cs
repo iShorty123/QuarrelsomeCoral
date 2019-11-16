@@ -17,6 +17,7 @@ public class ShieldController : MonoBehaviour
         if (SubmarineManager.GetInstance().m_Shield.m_PlayerControlled)
         {            
             m_MovementInput = Input.GetAxisRaw(SubmarineManager.GetInstance().m_Shield.m_PlayerControlScheme);
+
             if (transform.localPosition.x < SubmarineManager.GetInstance().m_Shield.m_LeftCircleLookAtPosition.localPosition.x) //Left semi circle
             {
                 m_LookDirection = SubmarineManager.GetInstance().m_Shield.m_LeftCircleLookAtPosition.position - transform.position;
@@ -30,6 +31,8 @@ public class ShieldController : MonoBehaviour
             }
             else if (transform.localPosition.x > SubmarineManager.GetInstance().m_Shield.m_RightCircleLookAtPosition.localPosition.x) //right semi circle
             {
+
+
                 m_LookDirection = SubmarineManager.GetInstance().m_Shield.m_RightCircleLookAtPosition.position - transform.position;
 
                 m_AlphaValue += -2 * m_MovementInput; //Multiply by -1 to make left CCW and right CW   
@@ -37,7 +40,6 @@ public class ShieldController : MonoBehaviour
                 m_NewPosition = new Vector3(SubmarineManager.GetInstance().m_Shield.m_RightCircleLookAtPosition.localPosition.x 
                     + SubmarineManager.GetInstance().m_Shield.m_XAxisRadius * Mathf.Cos(m_AlphaValue * ShieldManager.m_END_SPEED),
                       SubmarineManager.GetInstance().m_Shield.m_YAxisRadius * Mathf.Sin(m_AlphaValue * ShieldManager.m_END_SPEED), 1);
-                
 
                 transform.localPosition = m_NewPosition;
             }
@@ -53,11 +55,11 @@ public class ShieldController : MonoBehaviour
                 transform.localPosition = new Vector3(transform.localPosition.x + m_MovementInput * SubmarineManager.GetInstance().m_Shield.m_STRAIGHT_AWAY_SPEED,
                     transform.localPosition.y,
                     transform.localPosition.z);
+
             }
 
 
-            //Code to have this object always face the center of the Submarine
-            var angle = Mathf.Atan2(m_LookDirection.y, m_LookDirection.x) * Mathf.Rad2Deg;
+            float angle = Mathf.Atan2(m_LookDirection.y, m_LookDirection.x) * Mathf.Rad2Deg;
             transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
         }
 

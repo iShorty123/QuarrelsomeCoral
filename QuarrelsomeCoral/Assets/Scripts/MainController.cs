@@ -67,7 +67,8 @@ public class MainController : MonoBehaviour
         Vector3 position = new Vector3(80, 92, 0);
 
         GameObject submarine = Instantiate(SubmarinePrefab);
-        submarine.transform.position = position;
+        submarine.GetComponent<SubmarineManager>().m_Submarine.m_RigidBody.transform.position = position;
+
         Submarine = submarine.transform.Find("Submarine");
 
     }

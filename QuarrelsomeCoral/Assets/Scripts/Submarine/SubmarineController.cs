@@ -19,6 +19,7 @@ public class SubmarineController : MonoBehaviour, ITakeDamage
     // Start is called before the first frame update
     void Start()
     {
+        //m_FogOfWarPlane = GameObject.Find("FogOfWarPlane").transform;
         m_MaxSpeed = 5;
         m_HitTerrainFlag = false;
         m_MaxHealth = m_Health = 100;
@@ -29,6 +30,7 @@ public class SubmarineController : MonoBehaviour, ITakeDamage
     {
         transform.position = m_RigidBody.position; //Move sub via the SubmarineRigibody object
     }
+
 
     private void FixedUpdate()
     {
