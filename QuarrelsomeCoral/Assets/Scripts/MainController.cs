@@ -18,6 +18,8 @@ public class MainController : MonoBehaviour
     public Camera MainCamera = null;
     public Camera FarCamera = null;
 
+    bool submarinePositioned = false;
+
     // Start is called the first frame update
     void Start()
     {
@@ -68,6 +70,7 @@ public class MainController : MonoBehaviour
 
         GameObject submarine = Instantiate(SubmarinePrefab);
         submarine.GetComponent<SubmarineManager>().m_Submarine.m_RigidBody.transform.position = position;
+        submarine.GetComponent<SubmarineManager>().m_Submarine.transform.position = position;
 
         Submarine = submarine.transform.Find("Submarine");
 

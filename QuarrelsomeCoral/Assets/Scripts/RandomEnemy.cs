@@ -48,21 +48,42 @@ public class RandomEnemy : MonoBehaviour
         Vector3 position = getRandomScreenPosition();
         Vector3Int mapPosition = new Vector3Int(Mathf.RoundToInt(position.x), Mathf.RoundToInt(position.y), 0);
 
-        Tilemap map = null;
-        Vector3 maxDist = new Vector3(float.MaxValue, float.MaxValue, 0);
+        //Tilemap map = null;
+        //Vector3 maxDist = new Vector3(float.MaxValue, float.MaxValue, 0);
 
-        foreach (Transform mapObj in MapGrid.transform) {
+        //foreach (Transform mapObj in MapGrid.transform) {
 
-            Tilemap m = mapObj.gameObject.GetComponent<Tilemap>();
-            if (Vector3.Distance(m.transform.position, position) < Vector3.Distance(maxDist, position)) {
-                maxDist = m.transform.position;
-                map = m;
+        //    Tilemap m = mapObj.gameObject.GetComponent<Tilemap>();
+        //    if (Vector3.Distance(m.transform.position, position) < Vector3.Distance(maxDist, position)) {
+        //        maxDist = m.transform.position;
+        //        map = m;
+        //    }
+        //}
+
+        //map needs to be closest map to the
+        bool enemyOnMap = false;
+        Tilemap[] maps = FindObjectsOfType<Tilemap>();
+
+        foreach (Tilemap map in maps) {
+            if (map.GetTile(mapPosition) != null) {
+                enemyOnMap = true;
+                break;
             }
         }
 
-        while (map.GetTile(mapPosition) != null) {
+        while (enemyOnMap) {
             position = getRandomScreenPosition();
             mapPosition = new Vector3Int(Mathf.RoundToInt(position.x), Mathf.RoundToInt(position.y), 0);
+
+            enemyOnMap = false;
+            foreach (Tilemap map in maps)
+            {
+                if (map.GetTile(mapPosition) != null)
+                {
+                    enemyOnMap = true;
+                    break;
+                }
+            }
         }
 
         GameObject enemy = Instantiate(BlueFish);

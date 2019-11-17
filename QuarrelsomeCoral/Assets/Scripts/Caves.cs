@@ -49,6 +49,8 @@ public class Caves : MonoBehaviour
 
         AddFirstCave();
         AddCaveToRight(true);
+        print("adrianaL: " + borderLeft);
+        print("adrianaR: " + borderRight);
     }
 
     // Start is called before the first frame update
