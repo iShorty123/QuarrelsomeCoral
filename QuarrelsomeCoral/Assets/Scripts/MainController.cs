@@ -41,27 +41,41 @@ public class MainController : MonoBehaviour
         if ((Submarine.transform.position.x - Caves.GetLeftBorder()) < 140) Caves.AddCaveToLeft(); //here
         if ((Caves.GetRightBorder() - Submarine.transform.position.x) < 140) Caves.AddCaveToRight(); //here
 
+        SetupTwoFirstCaves();
+
         SetupLastCave();
+    }
+
+    void SetupTwoFirstCaves()
+    {
+        if (!Caves.GetFirstCave().IsDone()) return;
+
+        List<RandomCave> caves = Caves.GetCaves();
+
+        foreach (RandomCave cave in caves)
+        {
+            SetupCave(cave);
+            cave.IsDone();
+        }
     }
 
     void SetupLastCave() {
 
         RandomCave lastCave = Caves.GetLastCave();
-        if (lastCave.IsDone())
-        {
+        if (lastCave.IsDone()) SetupCave(lastCave);
+       
+    }
 
-            Tilemap map = lastCave.GetMap();
-            //print(map.transform.position);
-            //add random plants
-            GameObject Plant = new GameObject();
-            Plant.SetActive(false);
-            RandomPlant plantScript = Plant.AddComponent<RandomPlant>();
-            plantScript.Setup(map, MainCamera, map.transform.position + new Vector3(1, 1, 0), Plants.GetPlantTypes());
-            plantScript.AddPlants();
-            Plant.SetActive(true);
-            Plant.transform.parent = Plants.gameObject.transform;
-            Plant.name = "Plant";
-        }
+    void SetupCave(RandomCave cave) {
+        Tilemap map = cave.GetMap();
+        GameObject Plant = new GameObject();
+        Plant.SetActive(false);
+        RandomPlant plantScript = Plant.AddComponent<RandomPlant>();
+        plantScript.Setup(map, MainCamera, map.transform.position + new Vector3(1, 1, 0), Plants.GetPlantTypes());
+        plantScript.AddPlants();
+        Plant.SetActive(true);
+        Plant.name = "Plant" + Plants.transform.childCount.ToString();
+        Plant.transform.parent = Plants.gameObject.transform;
     }
 
     void PositionSubmarine() {

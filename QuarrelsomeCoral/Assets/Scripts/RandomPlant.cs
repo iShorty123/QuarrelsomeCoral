@@ -14,6 +14,8 @@ public class RandomPlant : MonoBehaviour
 
     public int RandomNumber = 15;
 
+    GameObject[,] PlantObjects;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -31,21 +33,25 @@ public class RandomPlant : MonoBehaviour
         MainCamera = mainCamera;
         Position = position;
         Plants = plants;
+
+        PlantObjects = new GameObject[map.size.x,map.size.y]; //make sure these are the right values
     }
 
     public void AddPlants() {
         foreach (var pos in Map.cellBounds.allPositionsWithin) {
-            SpawnPlant(pos);
-            if (Random.Range(0, 3) == 1) SpawnPlant(pos);
-            if (Random.Range(0, 6) == 1) SpawnPlant(pos);
+            PlantObjects[pos.x + Map.size.x / 2, pos.y + Map.size.y / 2] = SpawnPlant(pos);
         }
 
         this.gameObject.transform.position = Position;
     }
 
-    void SpawnPlant(Vector3Int mapPosition) {
+    public GameObject[,] GetPlants() {
+        return PlantObjects;
+    }
 
-        if (Map.GetTile(mapPosition) == null) return;
+    GameObject SpawnPlant(Vector3Int mapPosition) {
+
+        if (Map.GetTile(mapPosition) == null) return null;
 
         bool shouldRotate = false;
 
@@ -64,7 +70,7 @@ public class RandomPlant : MonoBehaviour
             shouldRotate = true;
         }
 
-        if (newPosition == mapPosition || newPosition.y < Map.cellBounds.yMin) return;
+        if (newPosition == mapPosition || newPosition.y < Map.cellBounds.yMin) return null;
 
         newPosition.z = -4;
         GameObject plant = Instantiate(Plants[Random.Range(0, 3)]);
@@ -72,6 +78,7 @@ public class RandomPlant : MonoBehaviour
         if (shouldRotate) plant.transform.localRotation *= Quaternion.Euler(0, 0, 180);
         plant.transform.parent = this.transform;
 
+        return plant;
     }
 
 

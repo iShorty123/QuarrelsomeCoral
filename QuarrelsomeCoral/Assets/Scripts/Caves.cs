@@ -49,8 +49,6 @@ public class Caves : MonoBehaviour
 
         AddFirstCave();
         AddCaveToRight(true);
-        print("adrianaL: " + borderLeft);
-        print("adrianaR: " + borderRight);
     }
 
     // Start is called before the first frame update
@@ -73,6 +71,11 @@ public class Caves : MonoBehaviour
         return lastCave;
     }
 
+    public RandomCave GetFirstCave()
+    {
+        return caves[0];
+    }
+
     void AddFirstCave() {
 
         //create first cave
@@ -83,8 +86,8 @@ public class Caves : MonoBehaviour
         cave.SetActive(true);
 
         caves.Add(caveScript);
+        cave.name = "RandomCave" + transform.childCount.ToString();
         cave.transform.parent = this.transform;
-        cave.name = "RandomCave";
 
         //setup and create cave
         caveScript.SetAsFirstCave();
@@ -110,8 +113,8 @@ public class Caves : MonoBehaviour
         cave.SetActive(true);
 
         caves.Add(caveScript);
+        cave.name = "RandomCave" + transform.childCount.ToString();
         cave.transform.parent = this.transform;
-        cave.name = "RandomCave";
 
         //setup and create cave
         if (isFirst) caveScript.SetAsFirstCave();

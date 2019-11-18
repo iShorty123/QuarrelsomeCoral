@@ -90,8 +90,7 @@ public class RandomCave : MonoBehaviour
         tileMap.AddComponent<TilemapCollider2D>();
         tileMap.AddComponent<Rigidbody2D>();
         tileMap.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Static;
-        //tileMap.AddComponent<Rigidbody2D>();
-        tileMap.name = "Tilemap";
+        tileMap.name = "Tilemap" + mapGrid.transform.childCount.ToString();
         tileMap.transform.parent = mapGrid.transform;
         tileMap.transform.position = origin;
 
@@ -295,7 +294,6 @@ public class RandomCave : MonoBehaviour
             int x = curr.x;
             int y = curr.y;
             claimed[x, y] = true;
-            //if(x==9 && y==0) topMap.SetColor(new Vector3Int(x - width / 2, y - height / 2, 0), Color.red);
 
             for (int i = 0; i < 8; i++) {
                 Vector2Int ad = new Vector2Int(x + adj[i].x, y + adj[i].y);
