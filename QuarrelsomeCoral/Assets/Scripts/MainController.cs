@@ -6,7 +6,7 @@ using UnityEngine.Tilemaps;
 public class MainController : MonoBehaviour
 {
 	public RandomEnemy REnemy = null;
-    public RandomPlant RPlant = null;
+    public Bosses RBoss = null;
     public Caves Caves = null;
     public Plants Plants = null;
     private Transform Submarine = null;
@@ -32,6 +32,10 @@ public class MainController : MonoBehaviour
         //start random enemy spawn
         REnemy.Setup(MapGrid, MainCamera);
         REnemy.StartEnemySpawn();
+
+        //start boss spawn (random for now)
+        RBoss.Setup(MapGrid, MainCamera);
+        RBoss.StartBossSpawn();
     }
 
     // Update is called once per frame

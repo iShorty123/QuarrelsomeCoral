@@ -1,27 +1,28 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Tilemaps;
 
-public class RandomEnemy : MonoBehaviour
+public class Bosses : MonoBehaviour
 {
+
+    public GameObject BossPrefab = null;
+
     GameObject MapGrid = null;
     Camera MainCamera = null;
 
-    public GameObject BlueFish = null;
+    public int SpawnTime = 15;
 
-    public int SpawnTime = 1;
 
     // Start is called before the first frame update
     void Start()
     {
-
+        
     }
 
     // Update is called once per frame
     void Update()
     {
-
+        
     }
 
     public void Setup(GameObject mapGrid, Camera mainCamera)
@@ -30,64 +31,42 @@ public class RandomEnemy : MonoBehaviour
         MainCamera = mainCamera;
     }
 
-    public void StartEnemySpawn() {
-        StartCoroutine(EnemySpawner());
+    public void StartBossSpawn() {
+        StartCoroutine(BossSpawner());
     }
 
-    IEnumerator EnemySpawner()
+    IEnumerator BossSpawner()
     {
         while (true)
         {
-            SpawnEnemy();
             yield return new WaitForSeconds(SpawnTime);
+            SpawnBoss();
         }
     }
 
-    public void SpawnEnemy()
+    public void SpawnBoss()
     {
         Vector3 position = getRandomScreenPosition();
         Vector3Int mapPosition = Vector3Int.RoundToInt(position);
 
-        //map needs to be closest map to the
-        bool enemyOnMap = false;
-        Tilemap[] maps = FindObjectsOfType<Tilemap>();
-
-        foreach (Tilemap map in maps) {
-            if (map.GetTile(mapPosition) != null) {
-                enemyOnMap = true;
-                break;
-            }
-        }
-
-        while (enemyOnMap) {
-            position = getRandomScreenPosition();
-            mapPosition = Vector3Int.RoundToInt(position);
-
-            enemyOnMap = false;
-            foreach (Tilemap map in maps)
-            {
-                if (map.GetTile(mapPosition) != null)
-                {
-                    enemyOnMap = true;
-                    break;
-                }
-            }
-        }
-
-        GameObject enemy = Instantiate(BlueFish);
-        enemy.transform.position = position;
-        enemy.transform.parent = this.transform;
+        GameObject boss = Instantiate(BossPrefab);
+        BossBehaviour bossScript = boss.AddComponent<BossBehaviour>();
+        bossScript.Setup(MapGrid);
+        boss.transform.position = position;
+        boss.transform.localScale = new Vector3(boss.transform.localScale.x * 3, boss.transform.localScale.y * 3, 1);
+        boss.transform.parent = this.transform;
     }
 
-    Vector3 getRandomScreenPosition() {
+    Vector3 getRandomScreenPosition()
+    {
 
         float halfHeight = MainCamera.orthographicSize;
         float halfWidth = MainCamera.aspect * halfHeight;
         Vector3 camPosition = MainCamera.transform.position;
 
-        //small square
-        float minX = halfWidth * 2;
-        float minY = halfHeight * 2;
+        //small square -> aprox size of the submarine
+        float minX = 10;
+        float minY = 5;
 
         //large square
         float maxX = halfWidth * 3;
@@ -103,4 +82,5 @@ public class RandomEnemy : MonoBehaviour
         Vector3 screenPosition = new Vector3(x, y, -4);
         return screenPosition;
     }
+
 }
