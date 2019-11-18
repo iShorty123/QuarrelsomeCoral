@@ -249,13 +249,13 @@ public class CharacterMovement : MonoBehaviour
         switch (_stationName)
         {
             case SubmarineManager.PILOT_STATION:
-                SubmarineManager.GetInstance().m_Submarine.SetControls(true, m_Horizontal, m_Vertical);
+                SubmarineManager.GetInstance().m_Submarine.SetControls(true, m_Horizontal, m_Vertical, m_Action2);
                 break;
             case SubmarineManager.TOP_WEAPON_STATION:
-                SubmarineManager.GetInstance().m_TopWeaponStation.SetControls(true, m_Horizontal, m_Action2, -92, 92);
+                SubmarineManager.GetInstance().m_TopWeaponStation.SetControls(true, m_Horizontal, m_Action2, -90, 90);
                 break;
             case SubmarineManager.BOTTOM_WEAPON_STATION:
-                SubmarineManager.GetInstance().m_BottomWeaponStation.SetControls(true, m_Horizontal, m_Action2, 88, 270);
+                SubmarineManager.GetInstance().m_BottomWeaponStation.SetControls(true, m_Horizontal, m_Action2, 90, 270);
                 break;
             case SubmarineManager.SHIELD_STATION:
                 SubmarineManager.GetInstance().m_Shield.SetControls(true, m_Horizontal);
@@ -276,7 +276,7 @@ public class CharacterMovement : MonoBehaviour
         switch (_stationName)
         {
             case SubmarineManager.PILOT_STATION:
-                SubmarineManager.GetInstance().m_Submarine.SetControls(false, string.Empty, string.Empty);
+                SubmarineManager.GetInstance().m_Submarine.SetControls(false, string.Empty, string.Empty, string.Empty);
                 break;
             case SubmarineManager.TOP_WEAPON_STATION:
                 SubmarineManager.GetInstance().m_TopWeaponStation.SetControls(false, string.Empty, string.Empty, 0, 0);

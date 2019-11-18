@@ -94,4 +94,12 @@ public abstract class BaseEnemy : MonoBehaviour, IBaseEnemy, ITakeDamage
         yield return new WaitForFixedUpdate();
         m_HitShieldFlag = false;
     }
+
+    protected void OnDestroy()
+    {
+        if (SubmarineManager.GetInstance())
+        {
+            SubmarineManager.GetInstance().m_Score += 50;
+        }
+    }
 }

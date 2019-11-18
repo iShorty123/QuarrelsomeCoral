@@ -12,14 +12,21 @@ public class SubmarineController : MonoBehaviour, ITakeDamage
     private bool m_HasPilot;
     private string m_HorizontalControls;
     private string m_VerticalControls;
+    private string m_FireButton;
+    private GameObject m_PilotWeapon;
 
     private float m_MaxSpeed;
     private float m_MaxY = 92f;
 
+    private GameObject m_Ammo;
+    private float m_TurretLength;
+    private float m_TimeAtLastShot;
+    private float m_FireRate;
+
     // Start is called before the first frame update
     void Start()
     {
-        //m_FogOfWarPlane = GameObject.Find("FogOfWarPlane").transform;
+        m_PilotWeapon = GameObject.Find("PilotWeapon");
         m_MaxSpeed = 5;
         m_HitTerrainFlag = false;
         m_MaxHealth = m_Health = 100;
@@ -37,6 +44,16 @@ public class SubmarineController : MonoBehaviour, ITakeDamage
         if (m_HasPilot)
         {
             MoveSubmarine();
+
+            if (CanFire())
+            {
+                if (Input.GetButton(m_FireButton))
+                {
+                    Instantiate(m_Ammo, m_PilotWeapon.transform.position + m_PilotWeapon.transform.up * m_TurretLength, Quaternion.identity, m_PilotWeapon.transform);
+                    m_TimeAtLastShot = Time.realtimeSinceStartup;
+                }
+            }
+
         }
     }
 
@@ -66,11 +83,31 @@ public class SubmarineController : MonoBehaviour, ITakeDamage
         }
     }
 
-    public void SetControls(bool _hasPilot, string _horizontalControls, string _verticalControls)
+    private bool CanFire()
+    {
+        if (Time.realtimeSinceStartup - m_TimeAtLastShot > m_FireRate)
+        {
+            return true;
+        }
+        return false;
+    }
+
+
+
+
+    public void SetControls(bool _hasPilot, string _horizontalControls, string _verticalControls, string _fireButton)
     {
         m_HasPilot = _hasPilot;
         m_HorizontalControls = _horizontalControls;
         m_VerticalControls = _verticalControls;
+        m_FireButton = _fireButton;
+    }
+
+    public void SetWeaponSpecificVariables(GameObject _ammoToUse, float _fireRate, float _turretLength)
+    {
+        m_Ammo = _ammoToUse;
+        m_FireRate = _fireRate;
+        m_TurretLength = _turretLength;
     }
 
     public void TakeDamage(int _damage)
@@ -108,6 +145,7 @@ public class SubmarineController : MonoBehaviour, ITakeDamage
         //Deal small damage to the Sub
         TakeDamage(1);
     }
+
 
 }
 
