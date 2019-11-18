@@ -80,8 +80,6 @@ public class Eel : BaseEnemy
 
         //Reflection Method:
 
-        Debug.Log("hit");
-
         m_ReflectionDirection = Vector3.Reflect(m_DirectionToSubmarine, _impactSpot.normal);
         m_SubmarineDirectionAtImpact = m_DirectionToSubmarine;
         m_TimeWhenStunned = Time.realtimeSinceStartup;

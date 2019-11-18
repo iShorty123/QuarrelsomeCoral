@@ -7,6 +7,8 @@ TagManager:
   - Station
   - Ladder
   - FogOfWar
+  - Enemy
+  - Score
   layers:
   - Default
   - TransparentFX

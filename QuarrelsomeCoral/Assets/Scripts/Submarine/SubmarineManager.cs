@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class SubmarineManager : MonoBehaviour
 {
@@ -11,10 +12,12 @@ public class SubmarineManager : MonoBehaviour
 
     public GunController m_TopWeaponStation;
     public GunController m_BottomWeaponStation;
+    public SubmarineController m_PilotStation;
     public ShieldManager m_Shield;
     public MiniMap m_MiniMap;
     public GameObject m_ArmoryStation;
-    public GameObject TopAndBottomAmmo;
+    public GameObject m_TopAndBottomAmmo;
+    public GameObject m_HomingAmmo;
 
     public const string PILOT_STATION = "PilotStation";
     public const string TOP_WEAPON_STATION = "TopWeaponStation";
@@ -22,6 +25,9 @@ public class SubmarineManager : MonoBehaviour
     public const string SHIELD_STATION = "ShieldStation";
     public const string MAP_STATION = "MapStation";
     public const string ARMORY_STATION = "ArmoryStation";
+
+    private Text m_ScoreText;
+    public int m_Score;
 
     private void Awake()
     {
@@ -31,8 +37,16 @@ public class SubmarineManager : MonoBehaviour
     private void Start()
     {
         m_SubmarineTerrianBounceBackForce = 1000;
-        m_TopWeaponStation.SetWeaponSpecificVariables(TopAndBottomAmmo, 0, -1, .5f, 1.2f);
-        m_BottomWeaponStation.SetWeaponSpecificVariables(TopAndBottomAmmo, 180, 1, .5f, 1.2f);
+        m_TopWeaponStation.SetWeaponSpecificVariables(m_TopAndBottomAmmo, 0, -1, .5f, 1.2f);
+        m_BottomWeaponStation.SetWeaponSpecificVariables(m_TopAndBottomAmmo, 180, 1, .5f, 1.2f);
+        m_PilotStation.SetWeaponSpecificVariables(m_HomingAmmo, 1.5f, 1.2f);
+
+        m_ScoreText = GameObject.FindGameObjectWithTag("Score").GetComponent<Text>();
+    }
+
+    private void Update()
+    {
+        m_ScoreText.text = "Score: " + m_Score;
     }
 
     public static SubmarineManager GetInstance()
@@ -43,7 +57,7 @@ public class SubmarineManager : MonoBehaviour
         }
         else
         {
-            Debug.LogError("Submarine Manager is not initialized.");
+            //Debug.LogError("Submarine Manager is not initialized.");
         }
         return null;
     }
