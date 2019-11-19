@@ -55,6 +55,8 @@ public class ShieldManager : MonoBehaviour
         m_PlayerControlled = true;
         m_PlayerControlScheme = "Horizontal_P1"; //Set to Player 1 control scheme for initialization
         yield return new WaitForEndOfFrame();
+        yield return new WaitForEndOfFrame();
+        yield return new WaitForEndOfFrame();
         m_PlayerControlled = false;
         m_PlayerControlScheme = string.Empty; //Set to Player 1 control scheme for initialization
         yield break;
