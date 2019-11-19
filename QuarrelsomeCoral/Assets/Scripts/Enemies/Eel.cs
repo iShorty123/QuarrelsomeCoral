@@ -28,7 +28,16 @@ public class Eel : BaseEnemy
         m_AttackRange = 20;
         m_ProjectileSpeed = 1500;
         
-        m_IsBoss = false;
+        if (m_IsBoss)
+        {
+            m_Rigidbody.mass = 2;
+            m_Health = m_MaxHealth = m_Health * 5;
+            m_AttackDamage = m_AttackDamage * 2;
+            m_MoveSpeed = m_MoveSpeed * 3;
+            m_SubmarineContactPushBackForce = m_SubmarineContactPushBackForce * 2;
+            m_ProjectileSpeed = m_ProjectileSpeed * 2;
+
+        }
 
         m_DistanceToSubmarine = 500; //For the first frame after creation, assume out of range
 
@@ -79,7 +88,6 @@ public class Eel : BaseEnemy
         m_RestTimeAfterLunge += 1; //if 
 
         //Reflection Method:
-
         m_ReflectionDirection = Vector3.Reflect(m_DirectionToSubmarine, _impactSpot.normal);
         m_SubmarineDirectionAtImpact = m_DirectionToSubmarine;
         m_TimeWhenStunned = Time.realtimeSinceStartup;
@@ -146,7 +154,7 @@ public class Eel : BaseEnemy
 
     public override void TakeDamage(int _damage)
     {
-        m_TimeWhenStunned = Time.realtimeSinceStartup; //Put into the stun state upon taking damage
+        //m_TimeWhenStunned = Time.realtimeSinceStartup; //Put into the stun state upon taking damage
         m_Health -= _damage;
         if (m_Health <= 0)
         {
@@ -154,5 +162,10 @@ public class Eel : BaseEnemy
         }
     }
 
+
+    protected override void TransformIntoBoss()
+    {
+        m_IsBoss = true;
+    }
 
 }

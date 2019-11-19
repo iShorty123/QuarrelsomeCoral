@@ -246,8 +246,15 @@ public class CharacterMovement : MonoBehaviour
     {
         m_CanMove = false;
         m_Animator.SetBool("Move", false);
-        switch (_stationName)
+
+
+        if (m_Player == 3)
         {
+            Debug.Log(_stationName);
+        }
+
+        switch (_stationName)
+        {           
             case SubmarineManager.PILOT_STATION:
                 SubmarineManager.GetInstance().m_Submarine.SetControls(true, m_Horizontal, m_Vertical, m_Action2);
                 break;

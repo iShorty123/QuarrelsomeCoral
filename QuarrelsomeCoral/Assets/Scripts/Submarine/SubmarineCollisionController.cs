@@ -21,5 +21,9 @@ public class SubmarineCollisionController : MonoBehaviour
         }
     }
 
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        //Debug.Log("Hello: " + collision.name);
+    }
 
 }

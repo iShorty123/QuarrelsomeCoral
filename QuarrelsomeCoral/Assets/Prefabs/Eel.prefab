@@ -81,7 +81,7 @@ SpriteRenderer:
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
-  m_MaskInteraction: 0
+  m_MaskInteraction: 1
   m_SpriteSortPoint: 0
 --- !u!50 &8319210288028765718
 Rigidbody2D:
@@ -142,3 +142,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 281c18981ff56df429d8da4ad435df86, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_TransformIntoBoss:
+    m_PersistentCalls:
+      m_Calls: []
