@@ -1,10 +1,17 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
+using UnityEngine.Tilemaps;
 
 public abstract class BaseEnemy : MonoBehaviour, IBaseEnemy, ITakeDamage
 {
     private float m_LookAtSpeed;
+    private GameObject MapGrid = null;
+    private Vector2Int[] adj = new[] { new Vector2Int(-1, 1), new Vector2Int(0,1), new Vector2Int(1,1), new Vector2Int(-1,0), new Vector2Int(1,0), new Vector2Int(-1,-1),
+        new Vector2Int(0,-1), new Vector2Int(1,-1), new Vector2Int(-1, 2), new Vector2Int(0,2), new Vector2Int(1,2), new Vector2Int(-2,0), new Vector2Int(2,0),
+        new Vector2Int(-1,-2), new Vector2Int(0,-2), new Vector2Int(1,-2), new Vector2Int(0,3), new Vector2Int(0,-3), new Vector2Int(-3,0), new Vector2Int(3,0),
+        new Vector2Int(-2,-1), new Vector2Int(-2,1), new Vector2Int(2,-1), new Vector2Int(2,1)};
 
     protected int m_Health;
     protected int m_MaxHealth;
@@ -27,6 +34,11 @@ public abstract class BaseEnemy : MonoBehaviour, IBaseEnemy, ITakeDamage
     protected Rigidbody2D m_Rigidbody;
     protected float m_DistanceToSubmarine;
     protected Vector3 m_DirectionToSubmarine;
+
+
+
+
+    public UnityEvent m_TransformIntoBoss = new UnityEvent();
 
     public abstract void HitSubmarine(ContactPoint2D _impactSpot);
 
@@ -68,6 +80,16 @@ public abstract class BaseEnemy : MonoBehaviour, IBaseEnemy, ITakeDamage
         m_MaxPursuitDistance = 500;
         m_SubmarineRigidbody = SubmarineManager.GetInstance().m_Submarine.m_RigidBody;
         m_Rigidbody = GetComponent<Rigidbody2D>();
+
+        
+    }
+
+    protected abstract void TransformIntoBoss();
+
+    public void Setup(GameObject mapGrid)
+    {
+        m_TransformIntoBoss.AddListener(TransformIntoBoss);
+        MapGrid = mapGrid;
     }
 
     // Update is called once per frame
@@ -99,7 +121,50 @@ public abstract class BaseEnemy : MonoBehaviour, IBaseEnemy, ITakeDamage
     {
         if (SubmarineManager.GetInstance())
         {
-            SubmarineManager.GetInstance().m_Score += 50;
+            if (!m_IsBoss)
+            {
+                SubmarineManager.GetInstance().m_Score += 50;
+            }
+            else
+            {
+                SubmarineManager.GetInstance().m_Score += 500;
+            }
         }
     }
+
+
+
+    protected void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (m_IsBoss)
+        {
+            Tilemap map = collision.collider.GetComponent<Tilemap>();
+            //print(map);
+            if (map != null)
+            {
+                Vector3 collisionPoint = new Vector3(collision.GetContact(0).point.x, collision.GetContact(0).point.y, 0);
+                Vector3Int pos = Vector3Int.FloorToInt(collisionPoint - map.transform.position);
+
+                char number = map.name[map.name.Length - 1];
+                GameObject plantObject = GameObject.Find("Plant" + number);
+                RandomPlant plant = plantObject.GetComponent<RandomPlant>();
+                GameObject[,] plantArray = plant.GetPlants();
+
+                //delete hit tile
+                map.SetTile(pos, null);
+                Vector2Int plantPos = new Vector2Int(pos.x + map.size.x / 2, pos.y + map.size.y / 2);
+                if (plantArray[plantPos.x, plantPos.y] != null) Destroy(plantArray[plantPos.x, plantPos.y]);
+
+                //delete surrounding tiles
+                for (int i = 0; i < 24; i++)
+                {
+                    Vector3Int adjPos = new Vector3Int(pos.x + adj[i].x, pos.y + adj[i].y, 0);
+                    map.SetTile(adjPos, null);
+                    plantPos = new Vector2Int(adjPos.x + map.size.x / 2, adjPos.y + map.size.y / 2);
+                    if (plantArray[plantPos.x, plantPos.y] != null) Destroy(plantArray[plantPos.x, plantPos.y]);
+                }
+            }
+        }
+    }
+
 }

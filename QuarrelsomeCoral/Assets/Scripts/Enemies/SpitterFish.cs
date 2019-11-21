@@ -29,7 +29,10 @@ public class SpitterFish : BaseEnemy
         throw new System.NotImplementedException();
     }
 
-
+    protected override void TransformIntoBoss()
+    {
+        throw new System.NotImplementedException();
+    }
 
 
     // Start is called before the first frame update

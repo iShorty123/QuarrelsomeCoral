@@ -9,6 +9,9 @@ public class MainController : MonoBehaviour
     public Bosses RBoss = null;
     public Caves Caves = null;
     public Plants Plants = null;
+
+    public PointsOfInterest PointsOfInterest = null;
+
     private Transform Submarine = null;
 
     public RuleTile Tile;
@@ -19,6 +22,26 @@ public class MainController : MonoBehaviour
     public Camera FarCamera = null;
 
     bool submarinePositioned = false;
+
+    private static MainController m_Instance;
+
+    private void Awake()
+    {
+        m_Instance = this;
+    }
+
+    public static MainController GetInstance()
+    {
+        if (m_Instance != null)
+        {
+            return m_Instance;
+        }
+        else
+        {
+            Debug.LogError("Main Controller is not initialized.");
+        }
+        return null;
+    }
 
     // Start is called the first frame update
     void Start()
@@ -72,6 +95,7 @@ public class MainController : MonoBehaviour
 
     void SetupCave(RandomCave cave) {
         Tilemap map = cave.GetMap();
+
         GameObject Plant = new GameObject();
         Plant.SetActive(false);
         RandomPlant plantScript = Plant.AddComponent<RandomPlant>();
@@ -80,6 +104,18 @@ public class MainController : MonoBehaviour
         Plant.SetActive(true);
         Plant.name = "Plant" + Plants.transform.childCount.ToString();
         Plant.transform.parent = Plants.gameObject.transform;
+
+
+
+        GameObject PointOfInterest = new GameObject();
+        PointOfInterest.SetActive(false);
+        RandomPointOfInterest pointOfInterestScript = PointOfInterest.AddComponent<RandomPointOfInterest>();
+        pointOfInterestScript.Setup(map, MainCamera, map.transform.position + new Vector3(1, 1, 0), PointsOfInterest.GetPointOfInterestTypes());
+        pointOfInterestScript.AddPointsOfInterest();
+        PointOfInterest.SetActive(true);
+        PointOfInterest.name = "PointOfInterest" + PointsOfInterest.transform.childCount.ToString();
+        PointOfInterest.transform.parent = PointsOfInterest.gameObject.transform;
+
     }
 
     void PositionSubmarine() {

@@ -10,13 +10,14 @@ public class Bosses : MonoBehaviour
     GameObject MapGrid = null;
     Camera MainCamera = null;
 
-    public int SpawnTime = 15;
+    //public int SpawnTime = 15;
 
+    public bool m_CanSpawn;
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        m_CanSpawn = false;
     }
 
     // Update is called once per frame
@@ -37,11 +38,13 @@ public class Bosses : MonoBehaviour
 
     IEnumerator BossSpawner()
     {
-        while (true)
+        while (!m_CanSpawn)
         {
-            yield return new WaitForSeconds(SpawnTime);
-            SpawnBoss();
+            yield return new WaitForSeconds(.5f); //Check if we can spawn every half a second                     
         }
+        SpawnBoss();
+        m_CanSpawn = false;
+        StartCoroutine(BossSpawner());
     }
 
     public void SpawnBoss()
@@ -50,8 +53,8 @@ public class Bosses : MonoBehaviour
         Vector3Int mapPosition = Vector3Int.RoundToInt(position);
 
         GameObject boss = Instantiate(BossPrefab);
-        BossBehaviour bossScript = boss.AddComponent<BossBehaviour>();
-        bossScript.Setup(MapGrid);
+        boss.GetComponent<BaseEnemy>().Setup(MapGrid);
+        boss.GetComponent<BaseEnemy>().m_TransformIntoBoss.Invoke();
         boss.transform.position = position;
         boss.transform.localScale = new Vector3(boss.transform.localScale.x * 3, boss.transform.localScale.y * 3, 1);
         boss.transform.parent = this.transform;
