@@ -51,6 +51,8 @@ public class Bullet : MonoBehaviour
             Vector3 collisionPoint = new Vector3(collision.GetContact(0).point.x, collision.GetContact(0).point.y, 0);
             Vector3Int pos = Vector3Int.FloorToInt(collisionPoint - map.transform.position);
 
+            if (collisionPoint.y < -50) return;
+
             char number = map.name[map.name.Length - 1];
             GameObject plantObject = GameObject.Find("Plant" + number);
             RandomPlant plant = plantObject.GetComponent<RandomPlant>();
