@@ -11,4 +11,13 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/RandomWorldGeneration.unity
     guid: 3d66548a3c673654eb2d956cb4e50674
+  - enabled: 1
+    path: Assets/Scenes/MainMenu.unity
+    guid: 6bc9540da571f4e3886ac38842a99ef3
+  - enabled: 1
+    path: Assets/Scenes/Settings.unity
+    guid: 2929bcda5f51f46a58ec4b71349f17fe
+  - enabled: 1
+    path: Assets/Scenes/Tutorial.unity
+    guid: f2d6301c36c03422d99e4da0223df282
   m_configObjects: {}
