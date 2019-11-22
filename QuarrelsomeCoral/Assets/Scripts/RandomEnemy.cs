@@ -10,7 +10,7 @@ public class RandomEnemy : MonoBehaviour
 
     public GameObject BlueFish = null;
 
-    public int SpawnTime = 1;
+    public int SpawnTime = 10;
 
     // Start is called before the first frame update
     void Start()
@@ -73,7 +73,7 @@ public class RandomEnemy : MonoBehaviour
                 }
             }
         }
-
+        print("enemy pos: " + position);
         GameObject enemy = Instantiate(BlueFish);
         enemy.transform.position = position;
         enemy.transform.parent = this.transform;
@@ -84,23 +84,26 @@ public class RandomEnemy : MonoBehaviour
         float halfHeight = MainCamera.orthographicSize;
         float halfWidth = MainCamera.aspect * halfHeight;
         Vector3 camPosition = MainCamera.transform.position;
-
+        print(camPosition);
         //small square
-        float minX = halfWidth * 2;
-        float minY = halfHeight * 2;
-
+        float minX = halfWidth;
+        float minY = halfHeight;
+        print(halfWidth);
+        print(halfHeight);
         //large square
-        float maxX = halfWidth * 3;
-        float maxY = halfHeight * 3;
+        float maxX = halfWidth * 2;
+        float maxY = halfHeight * 2;
 
         float xLeft = camPosition.x - Random.Range(minX, maxX);
         float xRight = camPosition.x + Random.Range(minX, maxX);
         float x = Random.Range(-1f, 1f) < 0 ? xRight : xLeft;
 
-        float y = camPosition.y - Random.Range(minY, maxY);
+        float diff = Random.Range(minY, maxY);
+        float y = camPosition.y - diff;
         if (y > 92) y = 87;
+        if (y < -50) y = camPosition.y + diff;
 
-        Vector3 screenPosition = new Vector3(x, y, -4);
+        Vector3 screenPosition = new Vector3(x, y, 0);
         return screenPosition;
     }
 }

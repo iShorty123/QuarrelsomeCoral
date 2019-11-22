@@ -52,6 +52,11 @@ public class Bosses : MonoBehaviour
         Vector3 position = getRandomScreenPosition();
         Vector3Int mapPosition = Vector3Int.RoundToInt(position);
 
+        while (mapPosition.y < -50) {
+            position = getRandomScreenPosition();
+            mapPosition = Vector3Int.RoundToInt(position);
+        }
+
         GameObject boss = Instantiate(BossPrefab);
         boss.GetComponent<BaseEnemy>().Setup(MapGrid);
         boss.GetComponent<BaseEnemy>().m_TransformIntoBoss.Invoke();
@@ -79,8 +84,10 @@ public class Bosses : MonoBehaviour
         float xRight = camPosition.x + Random.Range(minX, maxX);
         float x = Random.Range(-1f, 1f) < 0 ? xRight : xLeft;
 
-        float y = camPosition.y - Random.Range(minY, maxY);
+        float diff = Random.Range(minY, maxY);
+        float y = camPosition.y - diff;
         if (y > 92) y = 87;
+        if (y < -50) y = camPosition.y + diff;
 
         Vector3 screenPosition = new Vector3(x, y, -4);
         return screenPosition;
