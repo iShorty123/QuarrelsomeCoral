@@ -627,7 +627,7 @@ Canvas:
   m_GameObject: {fileID: 1328477972}
   m_Enabled: 1
   serializedVersion: 3
-  m_RenderMode: 1
+  m_RenderMode: 0
   m_Camera: {fileID: 0}
   m_PlaneDistance: 100
   m_PixelPerfect: 0
@@ -5213,7 +5213,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 9fb7bb5276e97874d9f45f6b89959b0f, type: 3}
+  m_Sprite: {fileID: 21300000, guid: daf7904ecb30d6a40823ce9aa02881a6, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -7109,7 +7109,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 9fb7bb5276e97874d9f45f6b89959b0f, type: 3}
+  m_Sprite: {fileID: 21300000, guid: daf7904ecb30d6a40823ce9aa02881a6, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
