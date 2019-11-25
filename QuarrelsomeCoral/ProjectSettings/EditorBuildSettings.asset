@@ -20,7 +20,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Tutorial.unity
     guid: f2d6301c36c03422d99e4da0223df282
-  - enabled: 1
-    path: Assets/Scenes/Pause.unity
-    guid: 1d8819767f788400d80183e9bc6e94b7
+  - enabled: 0
+    path: 
+    guid: 00000000000000000000000000000000
   m_configObjects: {}

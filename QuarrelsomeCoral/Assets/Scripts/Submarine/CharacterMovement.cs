@@ -168,6 +168,13 @@ public class CharacterMovement : MonoBehaviour
         //Prevent moving through a wall
         if ((moveHorizontally > 0 && !canMoveRight) || (moveHorizontally < 0 && !canMoveLeft)) { moveHorizontally = 0;}
 
+        //Prevent moving too high or too low
+        if (transform.localPosition.y >= 0.1f && moveVertically > 0) { moveVertically = 0; }
+        if (transform.localPosition.y <= -6.07f && moveVertically < 0) { moveVertically = 0; }
+        if (transform.localPosition.y >= 0.1f) { transform.localPosition = new Vector3(transform.localPosition.x, 0.1f, 0); }
+        if (transform.localPosition.y <= -6.07f) { transform.localPosition = new Vector3(transform.localPosition.x, -6.07f, 0); }
+        
+
         if (m_AtTopOfLadder || m_AtBottomOfLadder)
         {
             m_RigidBody.velocity = new Vector2(moveHorizontally * m_Speed, 0);
