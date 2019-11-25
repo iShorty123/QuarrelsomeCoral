@@ -37,8 +37,8 @@ public class SubmarineManager : MonoBehaviour
     private void Start()
     {
         m_SubmarineTerrianBounceBackForce = 1000;
-        m_TopWeaponStation.SetWeaponSpecificVariables(m_TopAndBottomAmmo, 0, -1, .5f, 1.2f);
-        m_BottomWeaponStation.SetWeaponSpecificVariables(m_TopAndBottomAmmo, 180, 1, .5f, 1.2f);
+        m_TopWeaponStation.SetWeaponSpecificVariables(m_TopAndBottomAmmo, 0, -2.5f, .5f, 1.2f);
+        m_BottomWeaponStation.SetWeaponSpecificVariables(m_TopAndBottomAmmo, 180, 2.5f, .5f, 1.2f);
         m_PilotStation.SetWeaponSpecificVariables(m_HomingAmmo, 1.5f, 1.2f);
 
         m_ScoreText = GameObject.FindGameObjectWithTag("Score").GetComponent<Text>();

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class GunController : MonoBehaviour
 {    
-    private float m_Speed;
+    public float m_Speed { get; private set; }
     private GameObject m_Ammo;
     private float m_TurretLength;
     private float m_RotationAngle;
@@ -28,11 +28,11 @@ public class GunController : MonoBehaviour
         if (m_UserControlled)
         {
             m_RotationAngle += Input.GetAxisRaw(m_RotationControls);
-
             //Lock rotation at -19 < m_RotationAngle < 19
             if (m_RotationAngle > m_MaximumAngle) m_RotationAngle = m_MaximumAngle;
             if (m_RotationAngle < m_MinimumAngle) m_RotationAngle = m_MinimumAngle;
             transform.rotation = Quaternion.AngleAxis(m_RotationAngle * m_Speed, Vector3.forward);
+
 
             if (CanFire())
             {
@@ -67,7 +67,7 @@ public class GunController : MonoBehaviour
     public void SetWeaponSpecificVariables(GameObject _ammoToUse, float _startingRotationAngle, float _rotationSpeed, float _fireRate, float _turretLength)
     {
         m_Ammo = _ammoToUse;
-        m_RotationAngle = _startingRotationAngle;
+        m_RotationAngle = _startingRotationAngle / _rotationSpeed;
         m_Speed = _rotationSpeed;
         m_FireRate = _fireRate;
         m_TurretLength = _turretLength;

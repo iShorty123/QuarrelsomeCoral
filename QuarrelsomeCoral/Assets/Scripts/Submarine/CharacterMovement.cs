@@ -259,10 +259,12 @@ public class CharacterMovement : MonoBehaviour
                 SubmarineManager.GetInstance().m_Submarine.SetControls(true, m_Horizontal, m_Vertical, m_Action2);
                 break;
             case SubmarineManager.TOP_WEAPON_STATION:
-                SubmarineManager.GetInstance().m_TopWeaponStation.SetControls(true, m_Horizontal, m_Action2, -90, 90);
+                SubmarineManager.GetInstance().m_TopWeaponStation.SetControls(true, m_Horizontal, m_Action2, 
+                    -90 / -SubmarineManager.GetInstance().m_TopWeaponStation.m_Speed, 90 / -SubmarineManager.GetInstance().m_TopWeaponStation.m_Speed);
                 break;
             case SubmarineManager.BOTTOM_WEAPON_STATION:
-                SubmarineManager.GetInstance().m_BottomWeaponStation.SetControls(true, m_Horizontal, m_Action2, 90, 270);
+                SubmarineManager.GetInstance().m_BottomWeaponStation.SetControls(true, m_Horizontal, m_Action2, 
+                    90 / SubmarineManager.GetInstance().m_BottomWeaponStation.m_Speed, 270 / SubmarineManager.GetInstance().m_BottomWeaponStation.m_Speed);
                 break;
             case SubmarineManager.SHIELD_STATION:
                 SubmarineManager.GetInstance().m_Shield.SetControls(true, m_Horizontal);

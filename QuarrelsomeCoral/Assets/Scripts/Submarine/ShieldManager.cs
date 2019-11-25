@@ -6,46 +6,39 @@ public class ShieldManager : MonoBehaviour
 {
 
     public bool m_PlayerControlled { get; private set; }
-    public string m_PlayerControlScheme { get; private set; }
-    
+    public string m_PlayerControlScheme { get; private set; }   
     public float m_XAxisRadius { get; private set; } //X Radius of the circles at the end of the sub we use as a reference to rotate the shield nicely
     public float m_YAxisRadius { get; private set; } //Y Radius of the circles at the end of the sub we use as a reference to rotate the shield nicely
-    public const float m_END_SPEED = .011f; //The speed at which the shield travels when it is curved
-    public float m_STRAIGHT_AWAY_SPEED = .17f; //As far as the eye can tell, matches the speed of the end speed (when curved) - NOT TRUE but good enough for now
-    public Transform m_RightCircleLookAtPosition { get; private set; } //The middle of the circle we use on the right for looking at when rotating around it
-    public Transform m_LeftCircleLookAtPosition { get; private set; } //The middle of the circle we use on the left for looking at when rotating around it
+    public float m_Speed { get; private set; } //Shield speed
 
     private bool m_HitTerrainFlag;
-    GameObject _23;
-    GameObject _10;
+
     private void Start()
     {
-        _23 = GameObject.Find("23");
-        _10 = GameObject.Find("10");
-
-        m_RightCircleLookAtPosition = GameObject.Find("RightCircleShieldLookAtPosition").transform;
-        m_LeftCircleLookAtPosition = GameObject.Find("LeftCircleShieldLookAtPosition").transform;
         ShieldController[] m_ShieldPieces = FindObjectsOfType(typeof(ShieldController)) as ShieldController[];
-        int startingAlpha = -148; //Allows semi circle on end of sub to be covered completely
+        int startingAlpha = -38; //Allows semi circle on end of sub to be covered completely -147
         int shieldPiecesCount = 0;
         foreach (ShieldController shieldPiece in m_ShieldPieces)
         {
-            shieldPiece.m_AlphaValue = startingAlpha += 6;
+            shieldPiece.m_AlphaValue = startingAlpha += 1;
             //Update collision box to prevent anything getting in between the shield and the sub for the end shield pieces
             if (shieldPiecesCount == 0)
             {
-                shieldPiece.GetComponent<BoxCollider2D>().size = new Vector2(2.5f, .2f);
-                shieldPiece.GetComponent<BoxCollider2D>().offset = new Vector2(1.25f, 0);
+                shieldPiece.GetComponent<CapsuleCollider2D>().size = new Vector2(3.15f, .5f);
+                shieldPiece.GetComponent<CapsuleCollider2D>().offset = new Vector2(1.5f, 0);
+                shieldPiece.GetComponent<CapsuleCollider2D>().direction = CapsuleDirection2D.Horizontal;
             }
             else if (shieldPiecesCount == m_ShieldPieces.Length-1)
             {
-                shieldPiece.GetComponent<BoxCollider2D>().size = new Vector2(2.5f, .2f);
-                shieldPiece.GetComponent<BoxCollider2D>().offset = new Vector2(1.25f, 0);
+                shieldPiece.GetComponent<CapsuleCollider2D>().size = new Vector2(3.15f, .5f);
+                shieldPiece.GetComponent<CapsuleCollider2D>().offset = new Vector2(1.5f, 0);
+                shieldPiece.GetComponent<CapsuleCollider2D>().direction = CapsuleDirection2D.Horizontal;
             }
             shieldPiecesCount++;
         }
-        m_XAxisRadius = 8;
-        m_YAxisRadius = 8;
+        m_XAxisRadius = 30;
+        m_YAxisRadius = 11;
+        m_Speed = 25;
         m_HitTerrainFlag = false;
         StartCoroutine(InitializeShield());
     }
