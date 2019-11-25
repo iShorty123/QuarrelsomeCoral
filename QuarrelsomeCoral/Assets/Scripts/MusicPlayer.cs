@@ -6,6 +6,9 @@ public class MusicPlayer : MonoBehaviour
 {
     private AudioSource _audioSource;
 
+    public AudioClip pratakasLoop = null;
+    public AudioClip fantasyLoop = null;
+
     private static MusicPlayer instance = null;
 
     public static MusicPlayer Instance
@@ -41,5 +44,11 @@ public class MusicPlayer : MonoBehaviour
 
     public void UpdateVolume(float vol) {
         _audioSource.volume = vol;
+    }
+
+    public void ChangeSong(string name) {
+        if (name == "Fantasy") _audioSource.clip = fantasyLoop;
+        if (name == "Pratakas") _audioSource.clip = pratakasLoop;
+        _audioSource.Play();
     }
 }

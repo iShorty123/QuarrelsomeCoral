@@ -1542,3 +1542,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a3f94aeff795840dab1bed0ad5197533, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  pratakasLoop: {fileID: 8300000, guid: 30d48de502d414674857f41434772c8e, type: 3}
+  fantasyLoop: {fileID: 8300000, guid: 34bf97305fe274929b3263e6b4060c22, type: 3}
