@@ -5,10 +5,27 @@ using UnityEngine;
 public class MusicPlayer : MonoBehaviour
 {
     private AudioSource _audioSource;
-    private void Awake()
+
+    private static MusicPlayer instance = null;
+
+    public static MusicPlayer Instance
     {
-        DontDestroyOnLoad(transform.gameObject);
+        get { return instance; }
+    }
+
+    void Awake()
+    {
+        if (instance != null && instance != this) {
+            Destroy(this.gameObject);
+            return;
+        } else {
+            instance = this;
+        }
+
+        DontDestroyOnLoad(this.gameObject);
         _audioSource = GetComponent<AudioSource>();
+
+        PlayMusic();
     }
 
     public void PlayMusic()
@@ -20,5 +37,9 @@ public class MusicPlayer : MonoBehaviour
     public void StopMusic()
     {
         _audioSource.Stop();
+    }
+
+    public void UpdateVolume(float vol) {
+        _audioSource.volume = vol;
     }
 }

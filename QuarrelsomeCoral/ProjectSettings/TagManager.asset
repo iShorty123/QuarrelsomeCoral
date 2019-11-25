@@ -9,6 +9,7 @@ TagManager:
   - FogOfWar
   - Enemy
   - Score
+  - Music
   layers:
   - Default
   - TransparentFX
