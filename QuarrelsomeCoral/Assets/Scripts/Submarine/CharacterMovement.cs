@@ -41,6 +41,7 @@ public class CharacterMovement : MonoBehaviour
         m_ClosestStation = null;
         m_Animator = GetComponent<Animator>();
         m_Animator.SetBool("Move", false);
+        m_Animator.SetBool("Ladder", false);
     }
 
     // Update is called once per frame
@@ -201,6 +202,7 @@ public class CharacterMovement : MonoBehaviour
 
     private void SetWalkingAnimation()
     {
+        m_Animator.enabled = true;
         if (m_RigidBody.velocity.x != 0)
         {
             m_Animator.SetBool("Move", true);
@@ -208,6 +210,18 @@ public class CharacterMovement : MonoBehaviour
         else
         {
             m_Animator.SetBool("Move", false);
+        }
+        if (m_RigidBody.velocity.y != 0 && m_OnLaddder)//if moving on ladder
+        {
+            m_Animator.SetBool("Ladder", true);
+        }
+        else if(!m_AtTopOfLadder && !m_AtBottomOfLadder) //if stationary on ladder - pause
+        {
+            m_Animator.enabled = false;
+        }
+        else //if not moving but not on a ladder
+        {
+            m_Animator.SetBool("Ladder", false);
         }
     }
 
