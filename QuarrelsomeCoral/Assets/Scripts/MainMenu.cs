@@ -47,6 +47,11 @@ public class MainMenu : MonoBehaviour
         SceneManager.LoadScene("Settings");
     }
 
+    public void GotoCreditsScene()
+    {
+        SceneManager.LoadScene("Credits");
+    }
+
     public void GotoQuitScene()
     {
         Application.Quit();
@@ -59,7 +64,7 @@ public class MainMenu : MonoBehaviour
             PauseMenu.SetActive(true);
             PauseButton.SetActive(false);
             Time.timeScale = 0;
-            submarine = GameObject.Find("Submarine");
+            submarine = GameObject.Find("SubmarineManager(Clone)");
             recDisabler(submarine.transform);
         }
 
@@ -76,14 +81,24 @@ public class MainMenu : MonoBehaviour
         }
     }
 
+    void PutThingsBack() {
+        if (PauseMenu != null)
+        {
+            Time.timeScale = 1.0f;
+            submarine.SetActive(false);
+            recEnabler(submarine.transform);
+        }
+    }
+
     public void GotoReloadScene()
     {
-        GotoResumeScene();
+        PutThingsBack();
         GotoPlayScene();
     }
 
     public void GotoMenuScene()
     {
+        PutThingsBack();
         SceneManager.LoadScene("MainMenu");
     }
 
@@ -97,7 +112,9 @@ public class MainMenu : MonoBehaviour
             }
         }
         Renderer r = t.gameObject.GetComponent<Renderer>();
+        Canvas c = t.gameObject.GetComponent<Canvas>();
         if (r != null) r.enabled = false;
+        if (c != null) c.enabled = false;
     }
 
     private void recEnabler(Transform t)
@@ -110,6 +127,8 @@ public class MainMenu : MonoBehaviour
             }
         }
         Renderer r = t.gameObject.GetComponent<Renderer>();
+        Canvas c = t.gameObject.GetComponent<Canvas>();
         if (r != null) r.enabled = true;
+        if (c != null) c.enabled = false;
     }
 }
