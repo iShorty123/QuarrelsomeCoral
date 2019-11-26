@@ -12,6 +12,8 @@ public class MainMenu : MonoBehaviour
     public Canvas Canvas = null;
     GameObject submarine = null;
 
+    bool isPaused = false;
+
     private void Start()
     {
         Canvas.worldCamera = Camera.main;
@@ -45,6 +47,12 @@ public class MainMenu : MonoBehaviour
             bgPosition.z = 100;
             PauseBG.transform.position = bgPosition;
         }
+
+        if (Input.GetButtonUp("Pause"))
+        {
+            if (isPaused) GotoResumeScene();
+            else GotoPauseScene();
+        }
     }
 
     public void GotoPlayScene()
@@ -77,6 +85,7 @@ public class MainMenu : MonoBehaviour
     {
         if (PauseMenu != null) {
 
+            isPaused = true;
             PauseMenu.SetActive(true);
             Time.timeScale = 0;
             submarine = GameObject.Find("SubmarineManager(Clone)");
@@ -89,6 +98,7 @@ public class MainMenu : MonoBehaviour
     {
         if (PauseMenu != null)
         {
+            isPaused = false;
             PauseMenu.SetActive(false);
             Time.timeScale = 1.0f;
             recEnabler(submarine.transform);

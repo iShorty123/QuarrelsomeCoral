@@ -332,17 +332,17 @@ public class CharacterMovement : MonoBehaviour
 
     private void PauseGame()
     {
-        if (m_Player == 1 && !SubmarineManager.GetInstance().m_Died)
-        {
-            if (Input.GetButtonUp(m_PauseButton) && !SubmarineManager.GetInstance().m_MainMenu.PauseMenu.activeSelf)
-            {
-                SubmarineManager.GetInstance().m_MainMenu.GotoPauseScene();
-            }
-            else if (Input.GetButtonUp(m_PauseButton) && SubmarineManager.GetInstance().m_MainMenu.PauseMenu.activeSelf)
-            {
-                SubmarineManager.GetInstance().m_MainMenu.GotoResumeScene();
-            }
-        }
+        //if (m_Player == 1 && !SubmarineManager.GetInstance().m_Died)
+        //{
+            //if (Input.GetButtonUp(m_PauseButton) && !SubmarineManager.GetInstance().m_MainMenu.PauseMenu.activeSelf)
+            //{
+            //    SubmarineManager.GetInstance().m_MainMenu.GotoPauseScene();
+            //}
+            //else if (Input.GetButtonUp(m_PauseButton) && SubmarineManager.GetInstance().m_MainMenu.PauseMenu.activeSelf)
+            //{
+            //    SubmarineManager.GetInstance().m_MainMenu.GotoResumeScene();
+            //}
+        //}
     }
 
 }
