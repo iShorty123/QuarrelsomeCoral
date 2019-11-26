@@ -16,10 +16,12 @@ public class GunController : MonoBehaviour
     private float m_TimeAtLastShot;
     private float m_FireRate;
 
+    public int m_AmmoCount;
+
     // Start is called before the first frame update
     void Start()
     {
-
+        m_AmmoCount = 100;
     }
 
     // Update is called once per frame
@@ -34,12 +36,13 @@ public class GunController : MonoBehaviour
             transform.rotation = Quaternion.AngleAxis(m_RotationAngle * m_Speed, Vector3.forward);
 
 
-            if (CanFire())
+            if (CanFire() && m_AmmoCount > 0)
             {
                 if (Input.GetButton(m_FireButton))
                 {
                     Instantiate(m_Ammo, transform.position + transform.up * m_TurretLength, Quaternion.identity, transform);
                     m_TimeAtLastShot = Time.realtimeSinceStartup;
+                    m_AmmoCount--;
                 }
             }
         }

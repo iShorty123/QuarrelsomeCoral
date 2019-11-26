@@ -15,15 +15,22 @@ public class SubmarineManager : MonoBehaviour
     public SubmarineController m_PilotStation;
     public ShieldManager m_Shield;
     public MiniMap m_MiniMap;
+    public Repair m_RepairStation;
     public GameObject m_ArmoryStation;
     public GameObject m_TopAndBottomAmmo;
     public GameObject m_HomingAmmo;
+
+    public GameOverScript m_GameOverScript;
+    public MainMenu m_MainMenu;
+
+    public bool m_Died;
 
     public const string PILOT_STATION = "PilotStation";
     public const string TOP_WEAPON_STATION = "TopWeaponStation";
     public const string BOTTOM_WEAPON_STATION = "BottomWeaponStation";
     public const string SHIELD_STATION = "ShieldStation";
     public const string MAP_STATION = "MapStation";
+    public const string REPAIR_STATION = "RepairStation";
     public const string ARMORY_STATION = "ArmoryStation";
 
     private Text m_ScoreText;
@@ -42,6 +49,7 @@ public class SubmarineManager : MonoBehaviour
         m_PilotStation.SetWeaponSpecificVariables(m_HomingAmmo, 1.5f, 1.2f);
 
         m_ScoreText = GameObject.FindGameObjectWithTag("Score").GetComponent<Text>();
+        m_Died = false;
     }
 
     private void Update()

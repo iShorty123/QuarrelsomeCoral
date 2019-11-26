@@ -10,7 +10,7 @@ public class RandomPointOfInterest : MonoBehaviour
     Camera MainCamera = null;
     Vector3 Position;
 
-    GameObject[] PointsOfInterest = new GameObject[3];
+    GameObject[] PointsOfInterest = new GameObject[4];
 
     public int RandomNumber = 15;
 
@@ -84,7 +84,7 @@ public class RandomPointOfInterest : MonoBehaviour
         m_Count++;
         if (m_Count % 75 == 0) //Spawns about 4 - 5
         {
-            GameObject pointOfInterest = Instantiate(PointsOfInterest[Random.Range(0, 1)]); //Only have 1 right now
+            GameObject pointOfInterest = Instantiate(PointsOfInterest[Random.Range(0, PointsOfInterest.Length)]); 
             pointOfInterest.transform.position = newPosition;
             if (shouldRotate) pointOfInterest.transform.localRotation *= Quaternion.Euler(0, 0, 180);
             pointOfInterest.transform.parent = this.transform;

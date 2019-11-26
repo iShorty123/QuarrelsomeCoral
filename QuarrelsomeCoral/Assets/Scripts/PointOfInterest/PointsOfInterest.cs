@@ -5,7 +5,7 @@ using UnityEngine;
 public class PointsOfInterest : MonoBehaviour
 {
 
-    public GameObject[] PointsOfInterestTypes = new GameObject[1];
+    public GameObject[] PointsOfInterestTypes = new GameObject[4];
 
     // Start is called before the first frame update
     void Start()

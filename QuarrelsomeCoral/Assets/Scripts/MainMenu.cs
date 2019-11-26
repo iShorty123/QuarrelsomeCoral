@@ -6,16 +6,32 @@ using UnityEngine.SceneManagement;
 public class MainMenu : MonoBehaviour
 {
     public GameObject PauseMenu = null;
-    public GameObject PauseButton = null;
 
     public Camera MainCamera = null;
     public GameObject PauseBG = null;
-
+    public Canvas Canvas = null;
     GameObject submarine = null;
 
     private void Start()
     {
-        if (PauseMenu != null) {
+        Canvas.worldCamera = Camera.main;
+        StartCoroutine(GetInstanceOnceReady());
+
+    }
+
+    private IEnumerator GetInstanceOnceReady()
+    {
+        while (this == null)
+        {
+            yield return new WaitForEndOfFrame();
+        }
+        while (SubmarineManager.GetInstance() == null)
+        {
+            yield return new WaitForEndOfFrame();
+        }
+        SubmarineManager.GetInstance().m_MainMenu = this;
+        if (PauseMenu != null)
+        {
             PauseMenu.SetActive(false);
         }
     }
@@ -62,7 +78,6 @@ public class MainMenu : MonoBehaviour
         if (PauseMenu != null) {
 
             PauseMenu.SetActive(true);
-            PauseButton.SetActive(false);
             Time.timeScale = 0;
             submarine = GameObject.Find("SubmarineManager(Clone)");
             recDisabler(submarine.transform);
@@ -75,7 +90,6 @@ public class MainMenu : MonoBehaviour
         if (PauseMenu != null)
         {
             PauseMenu.SetActive(false);
-            PauseButton.SetActive(true);
             Time.timeScale = 1.0f;
             recEnabler(submarine.transform);
         }
@@ -129,6 +143,6 @@ public class MainMenu : MonoBehaviour
         Renderer r = t.gameObject.GetComponent<Renderer>();
         Canvas c = t.gameObject.GetComponent<Canvas>();
         if (r != null) r.enabled = true;
-        if (c != null) c.enabled = false;
+        if (c != null) c.enabled = true;
     }
 }

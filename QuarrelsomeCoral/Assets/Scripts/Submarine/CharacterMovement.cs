@@ -20,11 +20,11 @@ public class CharacterMovement : MonoBehaviour
     private const float DISTANCE_ALLOWED_BETWEEN_WALL_AND_PLAYER = 0.35f;
     private Animator m_Animator;
 
-
     private string m_Horizontal = "Horizontal_P";
     private string m_Vertical = "Vertical_P";
     private string m_Action1 = "Action1_P";
     private string m_Action2 = "Action2_P";
+    private string m_PauseButton = "Pause";
 
     // Start is called before the first frame update
     void Start()
@@ -48,6 +48,7 @@ public class CharacterMovement : MonoBehaviour
     void Update()
     {
         EnterOrExitStation();
+        PauseGame();
     }
 
     private void FixedUpdate()
@@ -268,12 +269,6 @@ public class CharacterMovement : MonoBehaviour
         m_CanMove = false;
         m_Animator.SetBool("Move", false);
 
-
-        if (m_Player == 3)
-        {
-            Debug.Log(_stationName);
-        }
-
         switch (_stationName)
         {           
             case SubmarineManager.PILOT_STATION:
@@ -292,6 +287,9 @@ public class CharacterMovement : MonoBehaviour
                 break;
             case SubmarineManager.MAP_STATION:
                 SubmarineManager.GetInstance().m_MiniMap.SetControls(true, m_Horizontal, m_Vertical, m_Action2);
+                break;
+            case SubmarineManager.REPAIR_STATION:
+                SubmarineManager.GetInstance().m_RepairStation.SetControls(true, m_Action2);
                 break;
             case SubmarineManager.ARMORY_STATION:
                 break;
@@ -320,6 +318,9 @@ public class CharacterMovement : MonoBehaviour
             case SubmarineManager.MAP_STATION:
                 SubmarineManager.GetInstance().m_MiniMap.SetControls(false, string.Empty, string.Empty, string.Empty);
                 break;
+            case SubmarineManager.REPAIR_STATION:
+                SubmarineManager.GetInstance().m_RepairStation.SetControls(false, string.Empty);
+                break;
             case SubmarineManager.ARMORY_STATION:
                 break;
             default:
@@ -327,6 +328,19 @@ public class CharacterMovement : MonoBehaviour
         }
     }
 
-
+    private void PauseGame()
+    {
+        if (m_Player == 1 && !SubmarineManager.GetInstance().m_Died)
+        {
+            if (Input.GetButtonUp(m_PauseButton) && !SubmarineManager.GetInstance().m_MainMenu.PauseMenu.activeSelf)
+            {
+                SubmarineManager.GetInstance().m_MainMenu.GotoPauseScene();
+            }
+            else if (Input.GetButtonUp(m_PauseButton) && SubmarineManager.GetInstance().m_MainMenu.PauseMenu.activeSelf)
+            {
+                SubmarineManager.GetInstance().m_MainMenu.GotoResumeScene();
+            }
+        }
+    }
 
 }

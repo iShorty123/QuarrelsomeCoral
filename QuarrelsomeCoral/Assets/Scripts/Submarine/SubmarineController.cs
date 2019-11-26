@@ -23,6 +23,8 @@ public class SubmarineController : MonoBehaviour, ITakeDamage
     private float m_TimeAtLastShot;
     private float m_FireRate;
 
+    public int m_AmmoCount;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -45,12 +47,13 @@ public class SubmarineController : MonoBehaviour, ITakeDamage
         {
             MoveSubmarine();
 
-            if (CanFire())
+            if (CanFire() && m_AmmoCount > 0)
             {
                 if (Input.GetButton(m_FireButton))
                 {
                     Instantiate(m_Ammo, m_PilotWeapon.transform.position + m_PilotWeapon.transform.up * m_TurretLength, Quaternion.identity, m_PilotWeapon.transform);
                     m_TimeAtLastShot = Time.realtimeSinceStartup;
+                    m_AmmoCount--;
                 }
             }
 
@@ -115,6 +118,9 @@ public class SubmarineController : MonoBehaviour, ITakeDamage
         m_Health -= _damage;
         if (m_Health <= 0)
         {
+            SubmarineManager.GetInstance().m_GameOverScript.gameObject.SetActive(true);
+            GameOverScript.m_GameOverFlag = true;
+            SubmarineManager.GetInstance().m_Died = true;
             Debug.Log("DEAD");
         }
     }
