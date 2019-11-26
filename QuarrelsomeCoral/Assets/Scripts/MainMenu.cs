@@ -16,27 +16,30 @@ public class MainMenu : MonoBehaviour
 
     private void Start()
     {
-        Canvas.worldCamera = Camera.main;
-        StartCoroutine(GetInstanceOnceReady());
 
-    }
-
-    private IEnumerator GetInstanceOnceReady()
-    {
-        while (this == null)
-        {
-            yield return new WaitForEndOfFrame();
-        }
-        while (SubmarineManager.GetInstance() == null)
-        {
-            yield return new WaitForEndOfFrame();
-        }
-        SubmarineManager.GetInstance().m_MainMenu = this;
         if (PauseMenu != null)
         {
             PauseMenu.SetActive(false);
         }
+
     }
+
+    //private IEnumerator GetInstanceOnceReady()
+    //{
+    //    while (this == null)
+    //    {
+    //        yield return new WaitForEndOfFrame();
+    //    }
+    //    while (SubmarineManager.GetInstance() == null)
+    //    {
+    //        yield return new WaitForEndOfFrame();
+    //    }
+    //    SubmarineManager.GetInstance().m_MainMenu = this;
+    //    if (PauseMenu != null)
+    //    {
+    //        PauseMenu.SetActive(false);
+    //    }
+    //}
 
     private void Update()
     {
@@ -108,6 +111,7 @@ public class MainMenu : MonoBehaviour
     void PutThingsBack() {
         if (PauseMenu != null)
         {
+            isPaused = false;
             Time.timeScale = 1.0f;
             submarine.SetActive(false);
             recEnabler(submarine.transform);
