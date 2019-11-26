@@ -292,6 +292,7 @@ public class CharacterMovement : MonoBehaviour
                 SubmarineManager.GetInstance().m_RepairStation.SetControls(true, m_Action2);
                 break;
             case SubmarineManager.ARMORY_STATION:
+                SubmarineManager.GetInstance().m_ArmoryStation.SetControls(true, m_Action2);
                 break;
             default: 
                 break;
@@ -322,6 +323,7 @@ public class CharacterMovement : MonoBehaviour
                 SubmarineManager.GetInstance().m_RepairStation.SetControls(false, string.Empty);
                 break;
             case SubmarineManager.ARMORY_STATION:
+                SubmarineManager.GetInstance().m_ArmoryStation.SetControls(false, string.Empty);
                 break;
             default:
                 break;

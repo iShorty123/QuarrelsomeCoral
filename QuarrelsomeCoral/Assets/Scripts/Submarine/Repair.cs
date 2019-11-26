@@ -27,7 +27,6 @@ public class Repair : MonoBehaviour
                 m_TimeSinceLastRepair = Time.realtimeSinceStartup;
                 SubmarineManager.GetInstance().m_Submarine.m_Health += 1;
             }
-
         }
     }
 

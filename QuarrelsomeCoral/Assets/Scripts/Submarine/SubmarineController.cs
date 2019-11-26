@@ -32,6 +32,7 @@ public class SubmarineController : MonoBehaviour, ITakeDamage
         m_MaxSpeed = 5;
         m_HitTerrainFlag = false;
         m_MaxHealth = m_Health = 100;
+        m_AmmoCount = 50;
     }
 
     // Update is called once per frame

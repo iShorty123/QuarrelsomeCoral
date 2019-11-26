@@ -16,7 +16,7 @@ public class SubmarineManager : MonoBehaviour
     public ShieldManager m_Shield;
     public MiniMap m_MiniMap;
     public Repair m_RepairStation;
-    public GameObject m_ArmoryStation;
+    public Armory m_ArmoryStation;
     public GameObject m_TopAndBottomAmmo;
     public GameObject m_HomingAmmo;
 
