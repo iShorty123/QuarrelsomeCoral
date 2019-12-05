@@ -45,17 +45,17 @@ public class CameraFollow : MonoBehaviour
         {
             //double mid image width
             Vector2 size = midRenderer.size;
-            size.x += 12;
+            size.x += (float)39.07; //30;
             midRenderer.size = size;
 
             //double bg image width
             size = bgRenderer.size;
-            size.x += (float)6.48; //12.96
+            size.x += (float)39.07; //(float)6.48; //12.96
             bgRenderer.size = size;
 
             //double sky image width
             size = Sky.transform.localScale;
-            size.x += 0.3f;
+            size.x += 1f;
             Sky.transform.localScale = size;
 
             //double sky collider image width
