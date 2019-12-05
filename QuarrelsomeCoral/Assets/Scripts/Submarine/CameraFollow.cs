@@ -6,6 +6,8 @@ public class CameraFollow : MonoBehaviour
 {
     public Transform BgImage = null;
     public Transform MidImage = null;
+    public Transform BgImageTop = null;
+    public Transform MidImageTop = null;
     public Transform Sky = null;
     public Collider2D SkyCollider = null;
 
@@ -34,10 +36,12 @@ public class CameraFollow : MonoBehaviour
         BgImage.transform.Translate(velocity / div * Time.deltaTime);
 
         SpriteRenderer bgRenderer = BgImage.GetComponent<SpriteRenderer>();
+        SpriteRenderer bgTopRenderer = BgImageTop.GetComponent<SpriteRenderer>();
         float rightBorder = bgRenderer.bounds.max.x;
         float leftBorder = bgRenderer.bounds.min.x;
 
         SpriteRenderer midRenderer = MidImage.GetComponent<SpriteRenderer>();
+        SpriteRenderer midTopRenderer = MidImageTop.GetComponent<SpriteRenderer>();
         rightBorder = midRenderer.bounds.max.x;
         leftBorder = midRenderer.bounds.min.x;
 
@@ -48,10 +52,20 @@ public class CameraFollow : MonoBehaviour
             size.x += (float)39.07; //30;
             midRenderer.size = size;
 
+            size = midTopRenderer.size;
+            size.x += (float)39.07; 
+            midTopRenderer.size = size;
+
             //double bg image width
             size = bgRenderer.size;
             size.x += (float)39.07; //(float)6.48; //12.96
             bgRenderer.size = size;
+
+            //double top bg image width
+            size = bgTopRenderer.size;
+            size.x += (float)39.07; 
+            bgTopRenderer.size = size;
+
 
             //double sky image width
             size = Sky.transform.localScale;
