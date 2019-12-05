@@ -5,7 +5,7 @@ using UnityEngine;
 public class Plants : MonoBehaviour
 {
 
-    public GameObject[] PlantTypes = new GameObject[3];
+    public GameObject[] PlantTypes = new GameObject[8];
 
     // Start is called before the first frame update
     void Start()

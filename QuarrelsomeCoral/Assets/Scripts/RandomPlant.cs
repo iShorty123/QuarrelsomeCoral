@@ -10,7 +10,7 @@ public class RandomPlant : MonoBehaviour
     Camera MainCamera = null;
     Vector3 Position;
 
-    GameObject[] Plants = new GameObject[3];
+    GameObject[] Plants = new GameObject[8];
 
     public int RandomNumber = 15;
 
@@ -61,19 +61,19 @@ public class RandomPlant : MonoBehaviour
 
         if (checkIfEmpty("T", mapPosition) && rand == 0) {
             newPosition.x -= Random.Range(0.2f, 0.8f);
-            newPosition.y += 0.2f;
+            newPosition.y += 0.3f;
         }
         else if (checkIfEmpty("B", mapPosition) && rand == 1)
         {
             newPosition.x -= Random.Range(0.2f, 0.8f);
-            newPosition.y -= 1.2f;
+            newPosition.y -= 1.3f;
             shouldRotate = true;
         }
 
         if (newPosition == mapPosition || newPosition.y < Map.cellBounds.yMin) return null;
 
         newPosition.z = -4;
-        GameObject plant = Instantiate(Plants[Random.Range(0, 3)]);
+        GameObject plant = Instantiate(Plants[Random.Range(0, Plants.Length)]);
         plant.transform.position = newPosition;
         if (shouldRotate) plant.transform.localRotation *= Quaternion.Euler(0, 0, 180);
         plant.transform.parent = this.transform;
