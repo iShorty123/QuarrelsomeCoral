@@ -103,8 +103,8 @@ public abstract class BaseEnemy : MonoBehaviour, IBaseEnemy, ITakeDamage
     protected void LookAtSubmarine()
     {
         float angle = Mathf.Atan2(m_DirectionToSubmarine.y, m_DirectionToSubmarine.x) * Mathf.Rad2Deg;
-        transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.AngleAxis(angle - 90, Vector3.forward), Time.deltaTime * m_LookAtSpeed); 
-        // -90 is specific to the Eel right now
+        transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.AngleAxis(angle + 90, Vector3.forward), Time.deltaTime * m_LookAtSpeed); 
+        // +90 is specific to the Eel right now
         //if others need different adjustment then we'll take this function out of the base class and place into IBaseEnemy
 
     }
