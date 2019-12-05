@@ -14,6 +14,7 @@ public class Eel : BaseEnemy
     private Vector3 m_ReflectionDirection;
     private Vector3 m_SubmarineDirectionAtImpact;
     private Animator m_Animator;
+    private bool m_CanLunge;
 
     // Start is called before the first frame update
     new void Start()
@@ -22,7 +23,7 @@ public class Eel : BaseEnemy
         m_ReadyToLunge = false;
         m_SubmarineContactPushBackForce = 400;
         m_Health = m_MaxHealth = 75;
-        m_AttackDamage = 5; 
+        m_AttackDamage = 5;
         m_AttackSpeed = 1f;
         m_MoveSpeed = 6f;
         m_AttackRange = 20;
@@ -50,6 +51,7 @@ public class Eel : BaseEnemy
         base.Update();
         if (!CurrentlyLunging()) //&& !CurrentlyStunned()) //Only change direction we look in if not lunging
         {
+            m_CanLunge = true;
             LookAtSubmarine();
         }
         if (CurrentlyStunned()) //If currently stunned, look towards the reflection angle
@@ -70,15 +72,15 @@ public class Eel : BaseEnemy
 
     private bool CurrentlyLunging()
     {
-        
+
         if (Time.realtimeSinceStartup - m_RestTimeAfterLunge > 1) { m_Animator.speed = 1; return false; }
-        else { if (!CurrentlyShieldStunned()) { m_Animator.speed = 3; } return true; }
+        else { if (!CurrentlyShieldStunned() && m_CanLunge) { m_Animator.speed = 3; } else { m_Animator.speed = 1; } return true; }
     }
 
     private bool CurrentlyStunned()
     {
         if (Time.realtimeSinceStartup - m_TimeWhenStunned > 1.5) { return false; }
-        else 
+        else
         { return true; }
     }
 
@@ -91,6 +93,8 @@ public class Eel : BaseEnemy
 
     public override void HitSubmarine(ContactPoint2D _impactSpot)
     {
+
+        // m_RestTimeAfterLunge
         m_RestTimeAfterLunge += 1; //if 
 
         //Reflection Method:
@@ -106,6 +110,8 @@ public class Eel : BaseEnemy
         //m_Rigidbody.velocity = Vector3.zero;
         //m_Rigidbody.AddForce(-m_DirectionToSubmarine * m_SubmarineContactPushBackForce);
 
+
+
         Attack();
     }
 
@@ -114,8 +120,8 @@ public class Eel : BaseEnemy
         float dot = Vector3.Dot(m_SubmarineDirectionAtImpact, m_ReflectionDirection);
         //if (!(dot < -0.995 && dot > -1.005)) //Did we hit "head on" - if so, don't change rotation
         //{
-            float angle = Mathf.Atan2(m_ReflectionDirection.y, m_ReflectionDirection.x) * Mathf.Rad2Deg;
-            transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.AngleAxis(angle + 90, Vector3.forward), Time.deltaTime * 10);
+        float angle = Mathf.Atan2(m_ReflectionDirection.y, m_ReflectionDirection.x) * Mathf.Rad2Deg;
+        transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.AngleAxis(angle + 90, Vector3.forward), Time.deltaTime * 10);
         //}
     }
 
@@ -125,9 +131,9 @@ public class Eel : BaseEnemy
         {
             m_AttackCoolDownTime = Time.realtimeSinceStartup;
             //Let the sub handle how it takes this damage
-            SubmarineManager.GetInstance().m_Submarine.TakeDamage(m_AttackDamage); 
+            SubmarineManager.GetInstance().m_Submarine.TakeDamage(m_AttackDamage);
         }
-        
+
     }
 
     public override void Move()
@@ -174,4 +180,9 @@ public class Eel : BaseEnemy
         m_IsBoss = true;
     }
 
+    new protected void OnCollisionEnter2D(Collision2D collision)
+    {
+        base.OnCollisionEnter2D(collision);
+        m_CanLunge = false;
+    }
 }

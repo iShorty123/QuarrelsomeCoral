@@ -134,6 +134,7 @@ public class SubmarineController : MonoBehaviour, ITakeDamage
 
     public void CollidedWithTerrain(ContactPoint2D _impactPoint)
     {
+        Debug.Log("Terrain");
         if (m_HitTerrainFlag) { return; } //Prevent multiple shield collisions
         m_HitTerrainFlag = true;
 

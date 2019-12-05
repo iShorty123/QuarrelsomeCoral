@@ -11,7 +11,7 @@ public class SubmarineCollisionController : MonoBehaviour
         {
             enemy.HitSubmarine(collision.GetContact(0));
         }
-        else if (collision.collider.name == "Tilemap")
+        else if (collision.collider.GetComponent<UnityEngine.Tilemaps.Tilemap>() != null)
         {
             SubmarineManager.GetInstance().m_Submarine.CollidedWithTerrain(collision.GetContact(0));
         }
