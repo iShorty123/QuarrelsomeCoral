@@ -494,9 +494,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PlantTypes:
-  - {fileID: 8221092459742582421, guid: 70867c1bfd86b4713b0a744b75c367d6, type: 3}
-  - {fileID: 625552810609512805, guid: cba2a479af4104aeea7f0a74e3b2484e, type: 3}
-  - {fileID: 8091923761175868314, guid: 5fa7ca8dfdafd4fd68b74c9db243cc1a, type: 3}
+  - {fileID: 9001713069763073102, guid: 244a6100fc6b24644a892def2d1e7d9f, type: 3}
+  - {fileID: 8387591823078556588, guid: 9185e450c48d24899af0d9830e5c0146, type: 3}
+  - {fileID: 7175735178307849577, guid: 746282de7264d49bf8855212a9d8c685, type: 3}
+  - {fileID: 8885380011520980944, guid: 193cbde76094a40e5b1f60d467f8263a, type: 3}
+  - {fileID: 8185005297946425855, guid: 11fc2eb076ee14c76a53bc4c0d6067f4, type: 3}
+  - {fileID: 3494501720907599184, guid: 5ca11895d03474fd68bc05f8d7d6b037, type: 3}
+  - {fileID: 2313868027006946354, guid: 924c125e154664706b18cbe53be75d94, type: 3}
 --- !u!4 &385254307
 Transform:
   m_ObjectHideFlags: 0
@@ -1056,7 +1060,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: -1
-  m_Sprite: {fileID: 21300000, guid: 8e065db09610d490fb929ccddca8f7ae, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 24345d1a0542942a0853ac3174fd5b5e, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0

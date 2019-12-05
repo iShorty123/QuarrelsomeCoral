@@ -57,16 +57,16 @@ public class RandomPlant : MonoBehaviour
 
         Vector3 newPosition = mapPosition;
 
-        int rand = Random.Range(0, 4);
+        int rand = Random.Range(0, 2);
 
         if (checkIfEmpty("T", mapPosition) && rand == 0) {
             newPosition.x -= Random.Range(0.2f, 0.8f);
-            newPosition.y += 0.5f;
+            newPosition.y += 0.3f;
         }
         else if (checkIfEmpty("B", mapPosition) && rand == 1)
         {
             newPosition.x -= Random.Range(0.2f, 0.8f);
-            newPosition.y -= 1.5f;
+            newPosition.y -= 1.3f;
             shouldRotate = true;
         }
 
