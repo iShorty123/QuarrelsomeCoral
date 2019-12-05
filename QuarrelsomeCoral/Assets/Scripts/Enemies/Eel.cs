@@ -13,7 +13,7 @@ public class Eel : BaseEnemy
     private float m_TimeWhenStunned;
     private Vector3 m_ReflectionDirection;
     private Vector3 m_SubmarineDirectionAtImpact;
-
+    private Animator m_Animator;
 
     // Start is called before the first frame update
     new void Start()
@@ -27,7 +27,8 @@ public class Eel : BaseEnemy
         m_MoveSpeed = 6f;
         m_AttackRange = 20;
         m_ProjectileSpeed = 1500;
-        
+        m_Animator = GetComponent<Animator>();
+
         if (m_IsBoss)
         {
             m_Rigidbody.mass = 2;
@@ -55,31 +56,36 @@ public class Eel : BaseEnemy
         {
             LookTowardsReflectionAngle();
         }
+        if (CurrentlyShieldStunned())
+        {
+            LookAtSubmarine();
+        }
     }
 
     private void FixedUpdate()
     {
         m_Rigidbody.angularVelocity = 0; //No spinning allowed
         Move();
-
     }
 
     private bool CurrentlyLunging()
     {
-        if (Time.realtimeSinceStartup - m_RestTimeAfterLunge > 1) { return false; }
-        else { return true; }
+        
+        if (Time.realtimeSinceStartup - m_RestTimeAfterLunge > 1) { m_Animator.speed = 1; return false; }
+        else { if (!CurrentlyShieldStunned()) { m_Animator.speed = 3; } return true; }
     }
 
     private bool CurrentlyStunned()
     {
         if (Time.realtimeSinceStartup - m_TimeWhenStunned > 1.5) { return false; }
-        else { return true; }
+        else 
+        { return true; }
     }
 
     private bool CurrentlyShieldStunned()
     {
         if (Time.realtimeSinceStartup - m_TimeWhenStunnedByShield > 1.5) { return false; }
-        else { return true; }
+        else { m_Animator.speed = 1; return true; }
     }
 
 
@@ -109,7 +115,7 @@ public class Eel : BaseEnemy
         //if (!(dot < -0.995 && dot > -1.005)) //Did we hit "head on" - if so, don't change rotation
         //{
             float angle = Mathf.Atan2(m_ReflectionDirection.y, m_ReflectionDirection.x) * Mathf.Rad2Deg;
-            transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.AngleAxis(angle - 90, Vector3.forward), Time.deltaTime * 10);
+            transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.AngleAxis(angle + 90, Vector3.forward), Time.deltaTime * 10);
         //}
     }
 

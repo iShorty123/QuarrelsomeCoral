@@ -1,19 +1,28 @@
 fileFormatVersion: 2
-guid: 29e78a58dfb8f430ab940edcbf5664d3
+guid: 13b71f0818ca64a438c566acdda07b17
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 8966945178157639174
-    second: fish_0
+      213: 620221432124653775
+    second: Eel_0
   - first:
-      213: 7910131988914132003
-    second: fish_1
+      213: -5556104480176539947
+    second: Eel_1
   - first:
-      213: 4694313144681828600
-    second: fish_2
+      213: -1082338350020027713
+    second: Eel_2
   - first:
-      213: -5337588824987023507
-    second: fish_3
+      213: -7054289310717144099
+    second: Eel_3
+  - first:
+      213: 305064913068425737
+    second: Eel_4
+  - first:
+      213: -1208538524832286870
+    second: Eel_5
+  - first:
+      213: 8517132305254357360
+    second: Eel_6
   externalObjects: {}
   serializedVersion: 10
   mipmaps:
@@ -95,18 +104,6 @@ TextureImporter:
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
-    buildTarget: Android
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 3
     buildTarget: WebGL
     maxTextureSize: 2048
     resizeAlgorithm: 0
@@ -122,13 +119,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: fish_0
+      name: Eel_0
       rect:
         serializedVersion: 2
-        x: 2
-        y: 6
-        width: 26
-        height: 20
+        x: 0
+        y: 5000
+        width: 2500
+        height: 2500
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -136,20 +133,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 66b1bc8138deb4b4fade6f8fca57f5ff
-      internalID: 8966945178157639174
+      spriteID: 4f4f0ee26fca99c4ca2ea244a72a1724
+      internalID: 620221432124653775
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: fish_1
+      name: Eel_1
       rect:
         serializedVersion: 2
-        x: 33
-        y: 6
-        width: 25
-        height: 20
+        x: 2500
+        y: 5000
+        width: 2500
+        height: 2500
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -157,20 +154,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b935dc06cdee245c490e4455fe25916a
-      internalID: 7910131988914132003
+      spriteID: 8a6497ee7d0ba9c46bec9ab605f0a527
+      internalID: -5556104480176539947
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: fish_2
+      name: Eel_2
       rect:
         serializedVersion: 2
-        x: 66
-        y: 6
-        width: 26
-        height: 20
+        x: 5000
+        y: 5000
+        width: 2500
+        height: 2500
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -178,20 +175,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: dc942383bab9143f4bb8e25b693f2810
-      internalID: 4694313144681828600
+      spriteID: 43952a3abda8ddf4c82ee38ac2f3fcbb
+      internalID: -1082338350020027713
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: fish_3
+      name: Eel_3
       rect:
         serializedVersion: 2
-        x: 100
-        y: 6
-        width: 23
-        height: 20
+        x: 0
+        y: 2500
+        width: 2500
+        height: 2500
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -199,8 +196,71 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4cc4fbac6112f4a028ceb1c3d62c77dd
-      internalID: -5337588824987023507
+      spriteID: 2b69310f7bb103644a495b0cf6b39787
+      internalID: -7054289310717144099
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eel_4
+      rect:
+        serializedVersion: 2
+        x: 2500
+        y: 2500
+        width: 2500
+        height: 2500
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: dbc06261f97ce16428530ab6a6206e4b
+      internalID: 305064913068425737
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eel_5
+      rect:
+        serializedVersion: 2
+        x: 5000
+        y: 2500
+        width: 2500
+        height: 2500
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2e4eb1f4c5e7ca7478407551f629075c
+      internalID: -1208538524832286870
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eel_6
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 2500
+        height: 2500
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5d392fbdb2e8fae4ba2f173886d63e32
+      internalID: 8517132305254357360
       vertices: []
       indices: 
       edges: []
