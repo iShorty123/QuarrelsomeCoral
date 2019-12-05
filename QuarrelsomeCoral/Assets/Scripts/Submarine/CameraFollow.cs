@@ -49,32 +49,35 @@ public class CameraFollow : MonoBehaviour
         {
             //double mid image width
             Vector2 size = midRenderer.size;
-            size.x += (float)39.07; //30;
+            size.x += (float)43.89; //30;
             midRenderer.size = size;
+            //78.89
 
             size = midTopRenderer.size;
-            size.x += (float)39.07; 
+            size.x += (float)44.05; 
             midTopRenderer.size = size;
+            //79.05
 
             //double bg image width
             size = bgRenderer.size;
-            size.x += (float)39.07; //(float)6.48; //12.96
+            size.x += (float)52.1; //(float)6.48; //12.96
             bgRenderer.size = size;
+            //87.1
 
             //double top bg image width
             size = bgTopRenderer.size;
-            size.x += (float)39.07; 
+            size.x += (float)52.1; 
             bgTopRenderer.size = size;
 
 
             //double sky image width
             size = Sky.transform.localScale;
-            size.x += 1f;
+            size.x += 1.5f;
             Sky.transform.localScale = size;
 
             //double sky collider image width
             size = SkyCollider.transform.localScale;
-            size.x += 10f;
+            size.x += 50f;
             SkyCollider.transform.localScale = size;
         }
 
