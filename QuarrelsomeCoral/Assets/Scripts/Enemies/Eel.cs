@@ -178,7 +178,6 @@ public class Eel : BaseEnemy
 
     protected override void TransformIntoBoss()
     {
-        Debug.Log("B");
         m_IsBoss = true;
         m_CanDestroyTerrainWithTouch = true;
     }

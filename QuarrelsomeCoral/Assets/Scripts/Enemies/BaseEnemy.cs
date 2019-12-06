@@ -135,7 +135,6 @@ public abstract class BaseEnemy : MonoBehaviour, IBaseEnemy, ITakeDamage
         if (m_IsBoss && m_CanDestroyTerrainWithTouch)
         {
             Tilemap map = collision.collider.GetComponent<Tilemap>();
-            Debug.Log("F");
             //print(map);
             if (map != null)
             {
@@ -172,7 +171,6 @@ public abstract class BaseEnemy : MonoBehaviour, IBaseEnemy, ITakeDamage
         if (m_IsBoss && m_CanDestroyTerrainWithTouch)
         {
             Tilemap map = collision.collider.GetComponent<Tilemap>();
-            Debug.Log("F");
             //print(map);
             if (map != null)
             {
