@@ -10,6 +10,7 @@ public class CameraFollow : MonoBehaviour
     public Transform MidImageTop = null;
     public Transform Sky = null;
     public Collider2D SkyCollider = null;
+    public GameObject waves = null;
 
     private string m_HorizontalControls;
     private string m_VerticalControls;
@@ -24,6 +25,9 @@ public class CameraFollow : MonoBehaviour
     {
         m_SubmarineRigidbody = SubmarineManager.GetInstance().m_Submarine.m_RigidBody;
         m_Submarine = m_SubmarineRigidbody.gameObject;
+
+        Animator anim = waves.GetComponent<Animator>();
+        anim.speed = 0.1f;
     }
 
     // Update is called once per frame
@@ -37,13 +41,13 @@ public class CameraFollow : MonoBehaviour
 
         SpriteRenderer bgRenderer = BgImage.GetComponent<SpriteRenderer>();
         SpriteRenderer bgTopRenderer = BgImageTop.GetComponent<SpriteRenderer>();
-        float rightBorder = bgRenderer.bounds.max.x;
-        float leftBorder = bgRenderer.bounds.min.x;
-
+        SpriteRenderer wavesRenderer = waves.transform.GetComponent<SpriteRenderer>();
         SpriteRenderer midRenderer = MidImage.GetComponent<SpriteRenderer>();
         SpriteRenderer midTopRenderer = MidImageTop.GetComponent<SpriteRenderer>();
-        rightBorder = midRenderer.bounds.max.x;
-        leftBorder = midRenderer.bounds.min.x;
+        SpriteRenderer skyRenderer = Sky.GetComponent<SpriteRenderer>();
+
+        float rightBorder = skyRenderer.bounds.max.x;
+        float leftBorder = skyRenderer.bounds.min.x;
 
         if ((m_Submarine.transform.position.x - leftBorder) < 75 || (rightBorder - m_Submarine.transform.position.x) < 75)
         {
@@ -69,11 +73,16 @@ public class CameraFollow : MonoBehaviour
             size.x += (float)52.1; 
             bgTopRenderer.size = size;
 
+            //double waves image width
+            size = wavesRenderer.size;
+            size.x += (float)200;
+            wavesRenderer.size = size;
 
             //double sky image width
-            size = Sky.transform.localScale;
-            size.x += 1.5f;
-            Sky.transform.localScale = size;
+            size = skyRenderer.size;
+            size.x += 105.87f;
+            skyRenderer.size = size;
+            //205.87
 
             //double sky collider image width
             size = SkyCollider.transform.localScale;
