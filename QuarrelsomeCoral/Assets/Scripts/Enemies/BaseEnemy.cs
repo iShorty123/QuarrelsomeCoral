@@ -34,7 +34,7 @@ public abstract class BaseEnemy : MonoBehaviour, IBaseEnemy, ITakeDamage
     protected Rigidbody2D m_Rigidbody;
     protected float m_DistanceToSubmarine;
     protected Vector3 m_DirectionToSubmarine;
-
+    protected bool m_CanDestroyTerrainWithTouch;
 
 
 
@@ -79,9 +79,7 @@ public abstract class BaseEnemy : MonoBehaviour, IBaseEnemy, ITakeDamage
         m_LookAtSpeed = 4;
         m_MaxPursuitDistance = 500;
         m_SubmarineRigidbody = SubmarineManager.GetInstance().m_Submarine.m_RigidBody;
-        m_Rigidbody = GetComponent<Rigidbody2D>();
-
-        
+        m_Rigidbody = GetComponent<Rigidbody2D>();      
     }
 
     protected abstract void TransformIntoBoss();
@@ -132,13 +130,49 @@ public abstract class BaseEnemy : MonoBehaviour, IBaseEnemy, ITakeDamage
         }
     }
 
-
-
     protected void OnCollisionEnter2D(Collision2D collision)
     {
-        if (m_IsBoss)
+        if (m_IsBoss && m_CanDestroyTerrainWithTouch)
         {
             Tilemap map = collision.collider.GetComponent<Tilemap>();
+            Debug.Log("F");
+            //print(map);
+            if (map != null)
+            {
+                Vector3 collisionPoint = new Vector3(collision.GetContact(0).point.x, collision.GetContact(0).point.y, 0);
+                Vector3Int pos = Vector3Int.FloorToInt(collisionPoint - map.transform.position);
+
+                char number = map.name[map.name.Length - 1];
+                GameObject plantObject = GameObject.Find("Plant" + number);
+                RandomPlant plant = plantObject.GetComponent<RandomPlant>();
+                GameObject[,] plantArray = plant.GetPlants();
+
+                //delete hit tile
+                map.SetTile(pos, null);
+                Vector2Int plantPos = new Vector2Int(pos.x + map.size.x / 2, pos.y + map.size.y / 2);
+                if (plantArray[plantPos.x, plantPos.y] != null) Destroy(plantArray[plantPos.x, plantPos.y]);
+
+                //delete surrounding tiles
+                for (int i = 0; i < 24; i++)
+                {
+                    Vector3Int adjPos = new Vector3Int(pos.x + adj[i].x, pos.y + adj[i].y, 0);
+                    map.SetTile(adjPos, null);
+                    plantPos = new Vector2Int(adjPos.x + map.size.x / 2, adjPos.y + map.size.y / 2);
+                    if (plantArray[plantPos.x, plantPos.y] != null) Destroy(plantArray[plantPos.x, plantPos.y]);
+                }
+
+
+
+            }
+        }
+    }
+
+    protected void OnCollisionStay2D(Collision2D collision)
+    {
+        if (m_IsBoss && m_CanDestroyTerrainWithTouch)
+        {
+            Tilemap map = collision.collider.GetComponent<Tilemap>();
+            Debug.Log("F");
             //print(map);
             if (map != null)
             {
