@@ -56,7 +56,7 @@ public class ShieldController : MonoBehaviour
             enemy.HitShield(collision.GetContact(0));
         }
 
-        if (collision.collider.name == "Tilemap")
+        if (collision.collider.GetComponent<UnityEngine.Tilemaps.Tilemap>() != null)
         {
             SubmarineManager.GetInstance().m_Shield.ShieldCollidiedWithTerrain(transform.position);
         }
