@@ -10,6 +10,7 @@ public class CameraFollow : MonoBehaviour
     public Transform MidImageTop = null;
     public Transform Sky = null;
     public Collider2D SkyCollider = null;
+    public GameObject waves = null;
 
     private string m_HorizontalControls;
     private string m_VerticalControls;
@@ -24,6 +25,9 @@ public class CameraFollow : MonoBehaviour
     {
         m_SubmarineRigidbody = SubmarineManager.GetInstance().m_Submarine.m_RigidBody;
         m_Submarine = m_SubmarineRigidbody.gameObject;
+
+        Animator anim = waves.GetComponent<Animator>();
+        anim.speed = 0.1f;
     }
 
     // Update is called once per frame
@@ -37,6 +41,7 @@ public class CameraFollow : MonoBehaviour
 
         SpriteRenderer bgRenderer = BgImage.GetComponent<SpriteRenderer>();
         SpriteRenderer bgTopRenderer = BgImageTop.GetComponent<SpriteRenderer>();
+        SpriteRenderer wavesRenderer = waves.transform.GetComponent<SpriteRenderer>();
         float rightBorder = bgRenderer.bounds.max.x;
         float leftBorder = bgRenderer.bounds.min.x;
 
@@ -69,6 +74,10 @@ public class CameraFollow : MonoBehaviour
             size.x += (float)52.1; 
             bgTopRenderer.size = size;
 
+            //double waves image width
+            size = wavesRenderer.size;
+            size.x += (float)100;
+            wavesRenderer.size = size;
 
             //double sky image width
             size = Sky.transform.localScale;
