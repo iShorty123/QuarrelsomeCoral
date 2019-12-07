@@ -22,16 +22,8 @@ public class LightController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (gameObject.name == "EndLight-P")
-        {
-            Debug.Log(m_StartingHeight);
-        }
         if (SubmarineManager.GetInstance().m_Submarine.transform.position.y > 0)
         {
-            if (gameObject.name == "EndLight-P")
-            {
-                Debug.Log(m_IntensityRatio);
-            }
             m_MyLight.intensity = m_InitialIntensity - (m_IntensityRatio * SubmarineManager.GetInstance().m_Submarine.transform.position.y);
         }
     }
