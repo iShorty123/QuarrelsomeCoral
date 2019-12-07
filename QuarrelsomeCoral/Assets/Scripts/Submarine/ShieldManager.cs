@@ -65,13 +65,13 @@ public class ShieldManager : MonoBehaviour
     {
         GameObject lightObject = new GameObject();
         lightObject.transform.parent = _shieldPiece.transform;
-        lightObject.transform.localPosition = new Vector3(0, 0, -2);
+        lightObject.transform.localPosition = new Vector3(0, 0, -1);
         lightObject.transform.localScale = Vector3.one;
         lightObject.AddComponent<Light>().type = LightType.Point;
         lightObject.name = "ShieldLight";
         lightObject.GetComponent<Light>().intensity = 0.75f;
         lightObject.GetComponent<Light>().range = 6;
-        lightObject.GetComponent<Light>().cullingMask ^= 1 << (LayerMask.NameToLayer("Player"));
+        lightObject.GetComponent<Light>().cullingMask ^= 1 << (LayerMask.NameToLayer("Player")) | 1 << (LayerMask.NameToLayer("SubmarineExterior"));
     }
 
     public void SetControls(bool _underPlayerControl, string _controlScheme)

@@ -170,9 +170,9 @@ public class CharacterMovement : MonoBehaviour
         if ((moveHorizontally > 0 && !canMoveRight) || (moveHorizontally < 0 && !canMoveLeft)) { moveHorizontally = 0;}
 
         //Prevent moving too high or too low
-        if (transform.localPosition.y >= 0.1f && moveVertically > 0) { moveVertically = 0; }
+        if (transform.localPosition.y >= 0.02f && moveVertically > 0) { moveVertically = 0; }
         if (transform.localPosition.y <= -6.07f && moveVertically < 0) { moveVertically = 0; }
-        if (transform.localPosition.y >= 0.1f) { transform.localPosition = new Vector3(transform.localPosition.x, 0.1f, 0); }
+        if (transform.localPosition.y >= 0.02f) { transform.localPosition = new Vector3(transform.localPosition.x, 0.02f, 0); }
         if (transform.localPosition.y <= -6.07f) { transform.localPosition = new Vector3(transform.localPosition.x, -6.07f, 0); }
         
 
@@ -241,12 +241,16 @@ public class CharacterMovement : MonoBehaviour
             {
                 m_InStation = false;
                 DetermineStationExit(m_CurrentStation.name);
+                m_ClosestStation.GetComponent<StationController>().m_PlayerControlled = false;
+                m_ClosestStation.GetComponent<StationController>().AddNoPlayerLight(m_Player);
                 m_CurrentStation = null;                            
             }
             else // Out -> In
             {
                 if (!m_ClosestStation.GetComponent<StationController>().m_PlayerControlled) //Can only enter if no one else is already there
                 {
+                    m_ClosestStation.GetComponent<StationController>().m_PlayerControlled = true;
+                    m_ClosestStation.GetComponent<StationController>().RemoveAllPlayerLightsExceptControllers(m_Player);
                     m_RigidBody.velocity = Vector2.zero;
                     m_InStation = true;
                     m_CurrentStation = m_ClosestStation;

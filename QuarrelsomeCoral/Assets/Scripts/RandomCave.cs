@@ -13,7 +13,7 @@ using System.Linq;
 
 public class RandomCave : MonoBehaviour
 {
-
+    public Material m_LightMaterial;
     Camera FarCamera = null;
     Camera MainCamera = null;
     public Transform BgImage = null;
@@ -64,7 +64,7 @@ public class RandomCave : MonoBehaviour
         clusters = new List<CaveCluster>();
     }
 
-    public void Init(int iniC, int birthL, int deathL, int nR, Vector3Int tmp, Transform bgImage, Transform midImage, Vector3Int pos, int minS)
+    public void Init(int iniC, int birthL, int deathL, int nR, Vector3Int tmp, Transform bgImage, Transform midImage, Vector3Int pos, int minS, Material _lightMaterial)
     {
         iniChance = iniC;
         birthLimit = birthL;
@@ -80,13 +80,15 @@ public class RandomCave : MonoBehaviour
         minSize = minS;
 
         clusters = new List<CaveCluster>();
+
+        m_LightMaterial = _lightMaterial;
     }
 
     public void Setup(GameObject mapGrid, Camera mainCamera, Camera farCamera, RuleTile tile)
     {
         GameObject tileMap = new GameObject();
         topMap = tileMap.AddComponent<Tilemap>();
-        tileMap.AddComponent<TilemapRenderer>();
+        tileMap.AddComponent<TilemapRenderer>().material = m_LightMaterial;
         tileMap.AddComponent<TilemapCollider2D>();
         tileMap.AddComponent<Rigidbody2D>();
         tileMap.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Static;
