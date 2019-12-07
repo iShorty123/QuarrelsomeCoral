@@ -28,7 +28,7 @@ public class ShieldController : MonoBehaviour
 
             //Calculate new position for this frame
             m_NewPosition = new Vector3(SubmarineManager.GetInstance().m_Shield.m_XAxisRadius * Mathf.Cos(m_AlphaValue * Mathf.Deg2Rad),
-                    (SubmarineManager.GetInstance().m_Shield.m_YAxisRadius) * Mathf.Sin(Mathf.Deg2Rad * m_AlphaValue), 1);
+                    (SubmarineManager.GetInstance().m_Shield.m_YAxisRadius) * Mathf.Sin(Mathf.Deg2Rad * m_AlphaValue), 0);
 
             //Set position
             transform.localPosition = m_NewPosition;

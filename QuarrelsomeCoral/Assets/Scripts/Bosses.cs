@@ -89,7 +89,7 @@ public class Bosses : MonoBehaviour
         if (y > 92) y = 87;
         if (y < -50) y = camPosition.y + diff;
 
-        Vector3 screenPosition = new Vector3(x, y, -4);
+        Vector3 screenPosition = new Vector3(x, y, 0);
         return screenPosition;
     }
 

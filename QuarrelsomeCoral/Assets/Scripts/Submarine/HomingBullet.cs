@@ -12,6 +12,7 @@ public class HomingBullet : MonoBehaviour
     public float m_AngleChangingSpeed;
     private GameObject m_Target;
     private List<GameObject> m_NearbyEnemies = new List<GameObject>();
+    private bool m_FoundTarget;
 
     Vector2Int[] adj = new[] { new Vector2Int(-1, 1), new Vector2Int(0,1), new Vector2Int(1,1), new Vector2Int(-1,0), new Vector2Int(1,0), new Vector2Int(-1,-1),
         new Vector2Int(0,-1), new Vector2Int(1,-1), new Vector2Int(-1, 2), new Vector2Int(0,2), new Vector2Int(1,2), new Vector2Int(-2,0), new Vector2Int(2,0),
@@ -23,7 +24,7 @@ public class HomingBullet : MonoBehaviour
     {
         transform.rotation = Quaternion.Euler(0, 0,-90);
         m_RigidBody = GetComponent<Rigidbody2D>();
-        m_Speed = 5;
+        m_Speed = .25f;
         m_AngleChangingSpeed = 500;
         m_Direction = new Vector2(transform.parent.transform.up.x, transform.parent.transform.up.y); //Use parent's orientation to determine bullet direction   
         transform.parent = null; //Break parenting so rotation can occur without effecting bullets
@@ -52,10 +53,12 @@ public class HomingBullet : MonoBehaviour
             m_RigidBody.angularVelocity = -rotateAmount * m_AngleChangingSpeed;
             m_Speed += Time.fixedDeltaTime * 1.5f;
             m_RigidBody.velocity = transform.up * m_Speed;
+            m_FoundTarget = true;
         }
         else
         {
-            m_RigidBody.AddForce(m_Direction * m_Speed);
+            if (m_FoundTarget) { m_RigidBody.AddForce(m_Direction * .1f); m_RigidBody.angularVelocity = 0; }
+            else { m_RigidBody.AddForce(m_Direction * m_Speed); }
         }
     }
 
@@ -90,6 +93,7 @@ public class HomingBullet : MonoBehaviour
         if (target != null)
         {
             m_Target = target;
+            m_Speed = 8;
         }
          
     }

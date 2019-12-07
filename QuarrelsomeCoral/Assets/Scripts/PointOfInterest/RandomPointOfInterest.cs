@@ -79,7 +79,7 @@ public class RandomPointOfInterest : MonoBehaviour
         }
 
         if (newPosition == mapPosition || newPosition.y < Map.cellBounds.yMin) return null;
-        newPosition.z = -4;
+        newPosition.z = 0;
 
         m_Count++;
         if (m_Count % 75 == 0) //Spawns about 4 - 5

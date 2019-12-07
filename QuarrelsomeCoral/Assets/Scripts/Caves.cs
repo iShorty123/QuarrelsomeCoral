@@ -11,6 +11,7 @@ public class Caves : MonoBehaviour
 
     public int minSize = 100; //cluster smallest allowed size
     public float speed = 5.0f;
+    public Material m_LightMaterial;
 
     [Range(0, 100)]
     public int iniChance;
@@ -82,7 +83,7 @@ public class Caves : MonoBehaviour
         GameObject cave = new GameObject();
         cave.SetActive(false);
         RandomCave caveScript = cave.AddComponent<RandomCave>();
-        caveScript.Init(iniChance, birthLimit, deathLimit, numR, tmpSize, BgImage, MidImage, new Vector3Int(0, 0, 0), minSize);
+        caveScript.Init(iniChance, birthLimit, deathLimit, numR, tmpSize, BgImage, MidImage, new Vector3Int(0, 0, 0), minSize, m_LightMaterial);
         cave.SetActive(true);
 
         caves.Add(caveScript);
@@ -109,7 +110,7 @@ public class Caves : MonoBehaviour
         if (dir == "right") borderRight += tmpSize.x - diff;
         else borderLeft -= tmpSize.x + diff;
 
-        caveScript.Init(iniChance, birthLimit, deathLimit, numR, tmpSize, BgImage, MidImage, pos, minSize);
+        caveScript.Init(iniChance, birthLimit, deathLimit, numR, tmpSize, BgImage, MidImage, pos, minSize, m_LightMaterial);
         cave.SetActive(true);
 
         caves.Add(caveScript);

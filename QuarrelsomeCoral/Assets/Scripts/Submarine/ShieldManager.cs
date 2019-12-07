@@ -27,12 +27,18 @@ public class ShieldManager : MonoBehaviour
                 shieldPiece.GetComponent<CapsuleCollider2D>().size = new Vector2(3.15f, .5f);
                 shieldPiece.GetComponent<CapsuleCollider2D>().offset = new Vector2(1.5f, 0);
                 shieldPiece.GetComponent<CapsuleCollider2D>().direction = CapsuleDirection2D.Horizontal;
+                CreateShieldLight(shieldPiece.gameObject);
             }
             else if (shieldPiecesCount == m_ShieldPieces.Length-1)
             {
                 shieldPiece.GetComponent<CapsuleCollider2D>().size = new Vector2(3.15f, .5f);
                 shieldPiece.GetComponent<CapsuleCollider2D>().offset = new Vector2(1.5f, 0);
                 shieldPiece.GetComponent<CapsuleCollider2D>().direction = CapsuleDirection2D.Horizontal;
+                CreateShieldLight(shieldPiece.gameObject);
+            }
+            else if (shieldPiecesCount % ((m_ShieldPieces.Length) /4) == 0) //if 1 of three points between 0 and 76
+            {
+                CreateShieldLight(shieldPiece.gameObject);
             }
             shieldPiecesCount++;
         }
@@ -53,6 +59,20 @@ public class ShieldManager : MonoBehaviour
         m_PlayerControlled = false;
         m_PlayerControlScheme = string.Empty; //Set to Player 1 control scheme for initialization
         yield break;
+    }
+
+    private void CreateShieldLight(GameObject _shieldPiece)
+    {
+        GameObject lightObject = new GameObject();
+        lightObject.transform.parent = _shieldPiece.transform;
+        lightObject.transform.localPosition = new Vector3(0, 0, -1);
+        lightObject.transform.localScale = Vector3.one;
+        lightObject.AddComponent<Light>().type = LightType.Point;
+        lightObject.name = "ShieldLight";
+        lightObject.GetComponent<Light>().intensity = 0.75f;
+        lightObject.GetComponent<Light>().range = 6;
+        lightObject.GetComponent<Light>().cullingMask ^= 1 << (LayerMask.NameToLayer("Player")) | 1 << (LayerMask.NameToLayer("SubmarineExterior"));
+        lightObject.AddComponent<LightController>();
     }
 
     public void SetControls(bool _underPlayerControl, string _controlScheme)

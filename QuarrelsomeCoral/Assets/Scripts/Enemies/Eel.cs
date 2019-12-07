@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Tilemaps;
 
 public class Eel : BaseEnemy
 {
@@ -178,11 +179,28 @@ public class Eel : BaseEnemy
     protected override void TransformIntoBoss()
     {
         m_IsBoss = true;
+        m_CanDestroyTerrainWithTouch = true;
     }
 
     new protected void OnCollisionEnter2D(Collision2D collision)
     {
         base.OnCollisionEnter2D(collision);
         m_CanLunge = false;
+        Tilemap map = collision.collider.GetComponent<Tilemap>();
+        if (map != null)
+        {
+            m_RestTimeAfterLunge -= 1;
+        }
+    }
+
+    new protected void OnCollisionStay2D(Collision2D collision)
+    {
+        base.OnCollisionStay2D(collision);
+        m_CanLunge = false;
+        Tilemap map = collision.collider.GetComponent<Tilemap>();
+        if (map != null)
+        {
+            m_RestTimeAfterLunge -= 1;
+        }
     }
 }

@@ -72,7 +72,7 @@ public class RandomPlant : MonoBehaviour
 
         if (newPosition == mapPosition || newPosition.y < Map.cellBounds.yMin) return null;
 
-        newPosition.z = -4;
+        newPosition.z = 0;
         GameObject plant = Instantiate(Plants[Random.Range(0, Plants.Length)]);
         plant.transform.position = newPosition;
         if (shouldRotate) plant.transform.localRotation *= Quaternion.Euler(0, 0, 180);

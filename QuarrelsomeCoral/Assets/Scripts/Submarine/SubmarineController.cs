@@ -14,7 +14,7 @@ public class SubmarineController : MonoBehaviour, ITakeDamage
     private string m_VerticalControls;
     private string m_FireButton;
     private GameObject m_PilotWeapon;
-
+    public GameObject m_Bubbles;
     private float m_MaxSpeed;
     private float m_MaxY = 92f;
 
@@ -33,6 +33,7 @@ public class SubmarineController : MonoBehaviour, ITakeDamage
         m_HitTerrainFlag = false;
         m_MaxHealth = m_Health = 100;
         m_AmmoCount = 50;
+        m_Bubbles.SetActive(false);
     }
 
     // Update is called once per frame
@@ -71,10 +72,21 @@ public class SubmarineController : MonoBehaviour, ITakeDamage
         if (moveHorizontally < 0 && m_RigidBody.velocity.x > -m_MaxSpeed) //If want to go left and can go left
         {
             m_RigidBody.AddForce(new Vector2(moveHorizontally * m_Speed, 0)); //Move left
+            m_Bubbles.SetActive(true);
+            m_Bubbles.transform.localPosition = new Vector3(28.45f, 0, 0);
+            m_Bubbles.transform.localRotation = Quaternion.AngleAxis(90, Vector3.forward);
         }
         else if (moveHorizontally > 0 && m_RigidBody.velocity.x < m_MaxSpeed) //If want to go right and can go right
         {
             m_RigidBody.AddForce(new Vector2(moveHorizontally * m_Speed, 0));
+            m_Bubbles.SetActive(true);
+            m_Bubbles.transform.localPosition = new Vector3(-28.45f, 0, 0);
+            m_Bubbles.transform.localRotation = Quaternion.AngleAxis(-90, Vector3.forward);
+            
+        }
+        else
+        {
+            m_Bubbles.SetActive(false);
         }
 
         if (moveVertically < 0 && m_RigidBody.velocity.y > -m_MaxSpeed) //If want to go down and can go down
@@ -153,6 +165,7 @@ public class SubmarineController : MonoBehaviour, ITakeDamage
         //Deal small damage to the Sub
         TakeDamage(1);
     }
+
 
 
 }
