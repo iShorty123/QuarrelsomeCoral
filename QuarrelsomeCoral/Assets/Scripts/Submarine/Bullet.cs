@@ -22,7 +22,7 @@ public class Bullet : MonoBehaviour
     {
         m_MaxSpeed = 30;
         m_RigidBody = GetComponent<Rigidbody2D>();
-        m_Speed = 8;
+        m_Speed = .5f;
         m_Direction = new Vector2(transform.parent.transform.up.x, transform.parent.transform.up.y); //Use parent's orientation to determine bullet direction   
         transform.up = transform.parent.transform.up;
         transform.parent = null; //Break parenting so rotation can occur without effecting bullets

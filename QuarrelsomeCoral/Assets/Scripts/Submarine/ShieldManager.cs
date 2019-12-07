@@ -72,6 +72,7 @@ public class ShieldManager : MonoBehaviour
         lightObject.GetComponent<Light>().intensity = 0.75f;
         lightObject.GetComponent<Light>().range = 6;
         lightObject.GetComponent<Light>().cullingMask ^= 1 << (LayerMask.NameToLayer("Player")) | 1 << (LayerMask.NameToLayer("SubmarineExterior"));
+        lightObject.AddComponent<LightController>();
     }
 
     public void SetControls(bool _underPlayerControl, string _controlScheme)
