@@ -2003,11 +2003,11 @@ GameObject:
   - component: {fileID: 501361049}
   m_Layer: 0
   m_Name: BottomTurretAmmo
-  m_TagString: Score
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &501361048
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2394,11 +2394,11 @@ GameObject:
   - component: {fileID: 625555552}
   m_Layer: 0
   m_Name: PilotTurretAmmo
-  m_TagString: Score
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &625555551
 RectTransform:
   m_ObjectHideFlags: 0
@@ -6277,11 +6277,11 @@ GameObject:
   - component: {fileID: 1523954967}
   m_Layer: 0
   m_Name: TopTurretAmmo
-  m_TagString: Score
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1523954966
 RectTransform:
   m_ObjectHideFlags: 0
