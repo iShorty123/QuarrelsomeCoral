@@ -30,9 +30,9 @@ public class HSController : MonoBehaviour
 
         using (var upload = UnityWebRequest.Post(addScoreURL, form))
         {
-            upload.SetRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-            upload.SetRequestHeader("User-Agent", "DefaultBrowser");
-            upload.SetRequestHeader("Cookie", string.Format("DummyCookie"));
+            upload.SetRequestHeader("content-type", "application/x-www-form-urlencoded");
+            upload.SetRequestHeader("user-agent", "DefaultBrowser");
+            upload.SetRequestHeader("cookie", string.Format("DummyCookie"));
             upload.chunkedTransfer = false;
 
             //Debug.Log(upload.certificateHandler);
@@ -57,9 +57,12 @@ public class HSController : MonoBehaviour
         Debug.Log("Getting Scores");
         using (var download = UnityWebRequest.Get(highscoreURL))
         {
-            download.SetRequestHeader("Content-Type", "application/json");
-            download.SetRequestHeader("User-Agent", "DefaultBrowser");
-            download.SetRequestHeader("Cookie", string.Format("DummyCookie"));
+            download.SetRequestHeader("content-type", "application/x-www-form-urlencoded; charset=UTF-8");
+            download.SetRequestHeader("user-agent", "DefaultBrowser");
+            download.SetRequestHeader("cookie", string.Format("DummyCookie"));
+            download.SetRequestHeader("Access-Control-Allow-Origin", "*");
+            download.SetRequestHeader("Access-Control-Allow-Methods", "HEAD, PUT, DELETE, POST, GET, OPTIONS");
+            download.SetRequestHeader("Access-Control-Allow-Headers", "Content-Type, Access-Control-Allow-Headers, text/html, Authorization, X-Requested-With, Origin, Accept,user-agent");
             download.chunkedTransfer = false;
 
             yield return download.SendWebRequest();
