@@ -44,7 +44,7 @@ public class ShieldManager : MonoBehaviour
         }
         m_XAxisRadius = 30;
         m_YAxisRadius = 11;
-        m_Speed = 25;
+        m_Speed = 50;
         m_HitTerrainFlag = false;
         StartCoroutine(InitializeShield());
     }
