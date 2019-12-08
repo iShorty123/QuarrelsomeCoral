@@ -73,7 +73,7 @@ public class HSController : MonoBehaviour
             else
             {
                 var scores = Regex.Matches(download.downloadHandler.text, ".*\n");
-                m_HighScores.text = "High Scores:\n";
+                m_HighScores.text = "";
                 foreach (var score in scores)
                 {
                     m_HighScores.text += score.ToString();
