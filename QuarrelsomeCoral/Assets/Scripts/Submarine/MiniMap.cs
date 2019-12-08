@@ -31,9 +31,9 @@ public class MiniMap : MonoBehaviour
         TurnOffMiniMap();
 
         m_FullMapMinimumY = -10.5F;
-        m_FullMapMaximumY = 60;
+        m_FullMapMaximumY = 50;
         m_MiniMapMinimumY = -40;      
-        m_MiniMapMaximumY = 89.5f;
+        m_MiniMapMaximumY = 79.5f;
     }
 
     // Update is called once per frame
