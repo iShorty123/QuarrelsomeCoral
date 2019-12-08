@@ -59,7 +59,6 @@ public class HSController : MonoBehaviour
         {
             download.SetRequestHeader("content-type", "application/x-www-form-urlencoded; charset=UTF-8");
             download.SetRequestHeader("user-agent", "DefaultBrowser");
-            download.SetRequestHeader("cookie", string.Format("DummyCookie"));
             download.SetRequestHeader("Access-Control-Allow-Origin", "*");
             download.SetRequestHeader("Access-Control-Allow-Methods", "HEAD, PUT, DELETE, POST, GET, OPTIONS");
             download.SetRequestHeader("Access-Control-Allow-Headers", "Content-Type, Access-Control-Allow-Headers, text/html, Authorization, X-Requested-With, Origin, Accept,user-agent");
