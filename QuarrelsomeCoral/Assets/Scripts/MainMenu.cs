@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 public class MainMenu : MonoBehaviour
 {
     public GameObject PauseMenu = null;
+    public GameObject TutorialMenu = null;
 
     public Camera MainCamera = null;
     public GameObject PauseBG = null;
@@ -22,24 +23,12 @@ public class MainMenu : MonoBehaviour
             PauseMenu.SetActive(false);
         }
 
-    }
+        if (TutorialMenu != null)
+        {
+            TutorialMenu.SetActive(false);
+        }
 
-    //private IEnumerator GetInstanceOnceReady()
-    //{
-    //    while (this == null)
-    //    {
-    //        yield return new WaitForEndOfFrame();
-    //    }
-    //    while (SubmarineManager.GetInstance() == null)
-    //    {
-    //        yield return new WaitForEndOfFrame();
-    //    }
-    //    SubmarineManager.GetInstance().m_MainMenu = this;
-    //    if (PauseMenu != null)
-    //    {
-    //        PauseMenu.SetActive(false);
-    //    }
-    //}
+    }
 
     private void Update()
     {
@@ -95,6 +84,32 @@ public class MainMenu : MonoBehaviour
             recDisabler(submarine.transform);
         }
 
+    }
+
+    public void GotoPauseTutorialScene()
+    {
+        if (PauseMenu != null)
+        {
+            PauseMenu.SetActive(false);
+        }
+
+        if (TutorialMenu != null)
+        {
+            TutorialMenu.SetActive(true);
+        }
+    }
+
+    public void GotoTutorialBackScene()
+    {
+        if (PauseMenu != null)
+        {
+            PauseMenu.SetActive(true);
+        }
+
+        if (TutorialMenu != null)
+        {
+            TutorialMenu.SetActive(false);
+        }
     }
 
     public void GotoResumeScene()
