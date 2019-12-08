@@ -34,6 +34,7 @@ public class SubmarineManager : MonoBehaviour
     public const string ARMORY_STATION = "ArmoryStation";
 
     private Text m_ScoreText;
+    private bool m_CalledHighScoreList;
     public int m_Score;
 
     private void Awake()
@@ -50,11 +51,17 @@ public class SubmarineManager : MonoBehaviour
 
         m_ScoreText = GameObject.FindGameObjectWithTag("Score").GetComponent<Text>();
         m_Died = false;
+        m_CalledHighScoreList = false;
     }
 
     private void Update()
     {
         m_ScoreText.text = "Score: " + m_Score;
+        if (m_Died && !m_CalledHighScoreList)
+        {
+            StartCoroutine(m_GameOverScript.GetComponentInChildren<HSController>().GetScores());
+            m_CalledHighScoreList = true;
+        }
     }
 
     public static SubmarineManager GetInstance()
