@@ -17,7 +17,7 @@ public class CharacterMovement : MonoBehaviour
     private bool m_InStation;
     private bool m_AtTopOfLadder = true;
     private bool m_AtBottomOfLadder;
-    private const float DISTANCE_ALLOWED_BETWEEN_WALL_AND_PLAYER = 0.35f;
+    private const float DISTANCE_ALLOWED_BETWEEN_WALL_AND_PLAYER = 0.1f;
     private Animator m_Animator;
 
     private string m_Horizontal = "Horizontal_P";
@@ -126,7 +126,6 @@ public class CharacterMovement : MonoBehaviour
         }
     }
 
-
     private void FlipSprite(SpriteRenderer _mySprite, float _direction)
     {
         if (_direction > 0)
@@ -144,8 +143,10 @@ public class CharacterMovement : MonoBehaviour
         //Determine if against a wall
         int layerMask = 1 << LayerMask.NameToLayer("SubmarineInterior"); //Layer: Submarine Walls
         bool canMoveRight, canMoveLeft;
-        if (Physics2D.Raycast(transform.position, Vector2.right, DISTANCE_ALLOWED_BETWEEN_WALL_AND_PLAYER, layerMask))
+        RaycastHit2D hitWall;
+        if (hitWall = Physics2D.Raycast(transform.position, Vector2.right, DISTANCE_ALLOWED_BETWEEN_WALL_AND_PLAYER, layerMask))
         {
+            //transform.localPosition = new Vector3(transform.localPosition.x + (hitWall.distance - DISTANCE_ALLOWED_BETWEEN_WALL_AND_PLAYER), transform.localPosition.y, transform.localPosition.z);
             canMoveRight = false;
         }
         else
@@ -154,6 +155,7 @@ public class CharacterMovement : MonoBehaviour
         }
         if (Physics2D.Raycast(transform.position, Vector2.left, DISTANCE_ALLOWED_BETWEEN_WALL_AND_PLAYER, layerMask))
         {
+            //transform.localPosition = new Vector3(transform.localPosition.x - (hitWall.distance - DISTANCE_ALLOWED_BETWEEN_WALL_AND_PLAYER), transform.localPosition.y, transform.localPosition.z);
             canMoveLeft = false;
         }
         else

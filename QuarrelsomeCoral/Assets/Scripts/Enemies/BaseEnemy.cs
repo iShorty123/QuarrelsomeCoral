@@ -12,6 +12,7 @@ public abstract class BaseEnemy : MonoBehaviour, IBaseEnemy, ITakeDamage
         new Vector2Int(0,-1), new Vector2Int(1,-1), new Vector2Int(-1, 2), new Vector2Int(0,2), new Vector2Int(1,2), new Vector2Int(-2,0), new Vector2Int(2,0),
         new Vector2Int(-1,-2), new Vector2Int(0,-2), new Vector2Int(1,-2), new Vector2Int(0,3), new Vector2Int(0,-3), new Vector2Int(-3,0), new Vector2Int(3,0),
         new Vector2Int(-2,-1), new Vector2Int(-2,1), new Vector2Int(2,-1), new Vector2Int(2,1)};
+    private Vector3 m_Target;
 
     protected int m_Health;
     protected int m_MaxHealth;
@@ -79,7 +80,8 @@ public abstract class BaseEnemy : MonoBehaviour, IBaseEnemy, ITakeDamage
         m_LookAtSpeed = 4;
         m_MaxPursuitDistance = 500;
         m_SubmarineRigidbody = SubmarineManager.GetInstance().m_Submarine.m_RigidBody;
-        m_Rigidbody = GetComponent<Rigidbody2D>();      
+        m_Rigidbody = GetComponent<Rigidbody2D>();
+        StartCoroutine(AimAtRandomSubmarinePosition());
     }
 
     protected abstract void TransformIntoBoss();
@@ -93,7 +95,7 @@ public abstract class BaseEnemy : MonoBehaviour, IBaseEnemy, ITakeDamage
     // Update is called once per frame
     protected virtual void Update()
     {
-        Vector3 direction = m_SubmarineRigidbody.transform.position - m_Rigidbody.transform.position;        
+        Vector3 direction = m_Target - m_Rigidbody.transform.position;        
         m_DistanceToSubmarine = direction.magnitude;
         m_DirectionToSubmarine = direction.normalized;
     }
@@ -105,6 +107,14 @@ public abstract class BaseEnemy : MonoBehaviour, IBaseEnemy, ITakeDamage
         // +90 is specific to the Eel right now
         //if others need different adjustment then we'll take this function out of the base class and place into IBaseEnemy
 
+    }
+
+    private IEnumerator AimAtRandomSubmarinePosition()
+    {
+        m_Target = new Vector3(Random.Range(m_SubmarineRigidbody.transform.position.x - 4, m_SubmarineRigidbody.transform.position.x + 4), 
+            m_SubmarineRigidbody.transform.position.y, m_SubmarineRigidbody.transform.position.z);
+        yield return new WaitForSeconds(1);
+        StartCoroutine(AimAtRandomSubmarinePosition());
     }
 
     protected IEnumerator ShieldCooldown()
