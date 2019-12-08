@@ -6208,7 +6208,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1467010567
 RectTransform:
   m_ObjectHideFlags: 0
@@ -7898,7 +7898,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1838849886
 RectTransform:
   m_ObjectHideFlags: 0
@@ -13651,6 +13651,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_HealthBarBackground: {fileID: 0}
   m_HealthBarForeground: {fileID: 0}
+  m_HealthBarForegroundFront: {fileID: 0}
+  m_HealthBarForegroundBack: {fileID: 0}
 --- !u!1 &8005165451698809909
 GameObject:
   m_ObjectHideFlags: 0
