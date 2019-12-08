@@ -71,7 +71,11 @@ public class GunController : MonoBehaviour
     {
         m_Ammo = _ammoToUse;
         m_RotationAngle = _startingRotationAngle / _rotationSpeed;
+#if UNITY_WEBGL
+        m_Speed = _rotationSpeed * 4;
+#else
         m_Speed = _rotationSpeed;
+#endif
         m_FireRate = _fireRate;
         m_TurretLength = _turretLength;
     }

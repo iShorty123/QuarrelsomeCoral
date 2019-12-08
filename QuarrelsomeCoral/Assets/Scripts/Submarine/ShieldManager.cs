@@ -44,7 +44,11 @@ public class ShieldManager : MonoBehaviour
         }
         m_XAxisRadius = 30;
         m_YAxisRadius = 11;
-        m_Speed = 50;
+#if UNITY_WEBGL
+        m_Speed = 100;
+#else
+        m_Speed = 25;
+#endif
         m_HitTerrainFlag = false;
         StartCoroutine(InitializeShield());
     }
