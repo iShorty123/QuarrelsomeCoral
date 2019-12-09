@@ -89,7 +89,7 @@ public class MainController : MonoBehaviour
 
     void SetupFirstCaves()
     {
-        //if (!Caves.GetFirstCave().IsDone()) return;
+        if (!Caves.GetFirstCave().IsDoneBuilding()) return;
 
         //here stop progress
 
