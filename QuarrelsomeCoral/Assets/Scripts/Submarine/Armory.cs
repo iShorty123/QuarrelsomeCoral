@@ -19,6 +19,11 @@ public class Armory : MonoBehaviour
     void Start()
     {
         m_TimeSinceLastReload = Time.realtimeSinceStartup;
+
+
+        m_TopAmmo = GameObject.Find("topAmmoText").GetComponent<Text>();
+        m_BottomAmmo = GameObject.Find("bottomAmmoText").GetComponent<Text>();
+        m_PilotAmmo = GameObject.Find("frontAmmoText").GetComponent<Text>();
     }
 
     // Update is called once per frame
@@ -67,9 +72,9 @@ public class Armory : MonoBehaviour
 
     private void UpdateText()
     {
-        m_TopAmmo.text = "|Top Ammo: " + SubmarineManager.GetInstance().m_TopWeaponStation.m_AmmoCount + "|";
-        m_BottomAmmo.text = "|Bottom Ammo: " + SubmarineManager.GetInstance().m_BottomWeaponStation.m_AmmoCount + "|";
-        m_PilotAmmo.text = "|Top Ammo: " + SubmarineManager.GetInstance().m_Submarine.m_AmmoCount + "|";
+        m_TopAmmo.text = "" + SubmarineManager.GetInstance().m_TopWeaponStation.m_AmmoCount;
+        m_BottomAmmo.text = "" + SubmarineManager.GetInstance().m_BottomWeaponStation.m_AmmoCount;
+        m_PilotAmmo.text = "" + SubmarineManager.GetInstance().m_Submarine.m_AmmoCount;
     }
 
     public void SetControls(bool _userControlled, string _reloadButton)

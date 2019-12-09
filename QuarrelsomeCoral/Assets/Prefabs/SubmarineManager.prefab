@@ -383,11 +383,11 @@ GameObject:
   - component: {fileID: 127393081}
   m_Layer: 0
   m_Name: Score
-  m_TagString: Score
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &127393080
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2003,11 +2003,11 @@ GameObject:
   - component: {fileID: 501361049}
   m_Layer: 0
   m_Name: BottomTurretAmmo
-  m_TagString: Score
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &501361048
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2394,11 +2394,11 @@ GameObject:
   - component: {fileID: 625555552}
   m_Layer: 0
   m_Name: PilotTurretAmmo
-  m_TagString: Score
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &625555551
 RectTransform:
   m_ObjectHideFlags: 0
@@ -6208,7 +6208,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1467010567
 RectTransform:
   m_ObjectHideFlags: 0
@@ -6277,11 +6277,11 @@ GameObject:
   - component: {fileID: 1523954967}
   m_Layer: 0
   m_Name: TopTurretAmmo
-  m_TagString: Score
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1523954966
 RectTransform:
   m_ObjectHideFlags: 0
@@ -7898,7 +7898,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1838849886
 RectTransform:
   m_ObjectHideFlags: 0
@@ -13651,6 +13651,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_HealthBarBackground: {fileID: 0}
   m_HealthBarForeground: {fileID: 0}
+  m_HealthBarForegroundFront: {fileID: 0}
+  m_HealthBarForegroundBack: {fileID: 0}
 --- !u!1 &8005165451698809909
 GameObject:
   m_ObjectHideFlags: 0

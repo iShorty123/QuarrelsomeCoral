@@ -56,7 +56,7 @@ public class SubmarineManager : MonoBehaviour
 
     private void Update()
     {
-        m_ScoreText.text = "Score: " + m_Score;
+        m_ScoreText.text = "" + m_Score;
         if (m_Died && !m_CalledHighScoreList)
         {
             StartCoroutine(m_GameOverScript.GetComponentInChildren<HSController>().GetScores());
