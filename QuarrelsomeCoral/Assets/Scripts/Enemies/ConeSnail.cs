@@ -39,8 +39,7 @@ public class ConeSnail : BaseEnemy
         m_Animator = GetComponent<Animator>();
         m_Animator.SetBool("Hit", false);
         m_FiredProjectile = Time.realtimeSinceStartup;
-        m_IsBoss = true;
-        transform.localScale = new Vector3(transform.localScale.x * 3, transform.localScale.y * 3, 1);
+
         if (m_IsBoss)
         {
             m_Rigidbody.mass = 2;
