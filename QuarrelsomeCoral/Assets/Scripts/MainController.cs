@@ -84,6 +84,7 @@ public class MainController : MonoBehaviour
 
     void hideLoadingView()
     {
+        Debug.Log("Hide");
         if (LoadingScreen != null) LoadingScreen.SetActive(false);
     }
 
@@ -105,7 +106,7 @@ public class MainController : MonoBehaviour
             SetupCave(cave);
             cave.IsDone();
         }
-
+        Debug.Log("About to be done");
         hideLoadingView();
 
     }
