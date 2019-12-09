@@ -1,28 +1,49 @@
 fileFormatVersion: 2
-guid: 13b71f0818ca64a438c566acdda07b17
+guid: cdfe5cfb2ef8c02409211ffb0c77f560
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 620221432124653775
-    second: Eel_0
+      213: -4649522129922812123
+    second: EelFull_0
   - first:
-      213: -5556104480176539947
-    second: Eel_1
+      213: -5345255377453362060
+    second: EelFull_1
   - first:
-      213: -1082338350020027713
-    second: Eel_2
+      213: 217127605992555409
+    second: EelFull_2
   - first:
-      213: -7054289310717144099
-    second: Eel_3
+      213: 8621257343708281279
+    second: EelFull_3
   - first:
-      213: 305064913068425737
-    second: Eel_4
+      213: -5041934749637393896
+    second: EelFull_4
   - first:
-      213: -1208538524832286870
-    second: Eel_5
+      213: 1580012166389009882
+    second: EelFull_5
   - first:
-      213: 8517132305254357360
-    second: Eel_6
+      213: -8311532612829319801
+    second: EelFull_6
+  - first:
+      213: 7414072409219737877
+    second: EelFull_7
+  - first:
+      213: 3172022803213585289
+    second: EelFull_8
+  - first:
+      213: 2939835233576816769
+    second: EelFull_9
+  - first:
+      213: 8924122034410392712
+    second: EelFull_10
+  - first:
+      213: -4297040477835185992
+    second: EelFull_11
+  - first:
+      213: -7777760479996661119
+    second: EelFull_12
+  - first:
+      213: 584553462397946096
+    second: EelFull_13
   externalObjects: {}
   serializedVersion: 10
   mipmaps:
@@ -119,13 +140,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Eel_0
+      name: EelFull_0
       rect:
         serializedVersion: 2
         x: 0
-        y: 5000
-        width: 2500
-        height: 2500
+        y: 4700
+        width: 2350
+        height: 2350
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -133,20 +154,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4f4f0ee26fca99c4ca2ea244a72a1724
-      internalID: 620221432124653775
+      spriteID: be26636196729e742b916a0792ee5856
+      internalID: -4649522129922812123
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Eel_1
+      name: EelFull_1
       rect:
         serializedVersion: 2
-        x: 2500
-        y: 5000
-        width: 2500
-        height: 2500
+        x: 2350
+        y: 4700
+        width: 2350
+        height: 2350
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -154,20 +175,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 8a6497ee7d0ba9c46bec9ab605f0a527
-      internalID: -5556104480176539947
+      spriteID: 09603c3dde89afd41a39a2cc7609a859
+      internalID: -5345255377453362060
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Eel_2
+      name: EelFull_2
       rect:
         serializedVersion: 2
-        x: 5000
-        y: 5000
-        width: 2500
-        height: 2500
+        x: 4700
+        y: 4700
+        width: 2350
+        height: 2350
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -175,20 +196,83 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 43952a3abda8ddf4c82ee38ac2f3fcbb
-      internalID: -1082338350020027713
+      spriteID: 7d3e41defb8b68d4492e10c0cc15d071
+      internalID: 217127605992555409
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Eel_3
+      name: EelFull_3
+      rect:
+        serializedVersion: 2
+        x: 7050
+        y: 4700
+        width: 2350
+        height: 2350
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ff1c6247d7384ad48b5910808e8fa22f
+      internalID: 8621257343708281279
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: EelFull_4
+      rect:
+        serializedVersion: 2
+        x: 9400
+        y: 4700
+        width: 2350
+        height: 2350
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 50317658d7f97d246a0acf2e92b23042
+      internalID: -5041934749637393896
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: EelFull_5
+      rect:
+        serializedVersion: 2
+        x: 11750
+        y: 4700
+        width: 2350
+        height: 2350
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2a756c2537226094eb78d76e5363ba85
+      internalID: 1580012166389009882
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: EelFull_6
       rect:
         serializedVersion: 2
         x: 0
-        y: 2500
-        width: 2500
-        height: 2500
+        y: 2350
+        width: 2350
+        height: 2350
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -196,20 +280,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 2b69310f7bb103644a495b0cf6b39787
-      internalID: -7054289310717144099
+      spriteID: 25c9b1ef96777864ab289053e49d8859
+      internalID: -8311532612829319801
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Eel_4
+      name: EelFull_7
       rect:
         serializedVersion: 2
-        x: 2500
-        y: 2500
-        width: 2500
-        height: 2500
+        x: 2350
+        y: 2350
+        width: 2350
+        height: 2350
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -217,20 +301,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: dbc06261f97ce16428530ab6a6206e4b
-      internalID: 305064913068425737
+      spriteID: 01bc421e537be8842b1b6b30a2090766
+      internalID: 7414072409219737877
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Eel_5
+      name: EelFull_8
       rect:
         serializedVersion: 2
-        x: 5000
-        y: 2500
-        width: 2500
-        height: 2500
+        x: 4700
+        y: 2350
+        width: 2350
+        height: 2350
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -238,20 +322,83 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 2e4eb1f4c5e7ca7478407551f629075c
-      internalID: -1208538524832286870
+      spriteID: 28975fce87efe3f4aa2a1766b8d21796
+      internalID: 3172022803213585289
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Eel_6
+      name: EelFull_9
+      rect:
+        serializedVersion: 2
+        x: 7050
+        y: 2350
+        width: 2350
+        height: 2350
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b469e650352a6f84eb709f8d46d218ed
+      internalID: 2939835233576816769
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: EelFull_10
+      rect:
+        serializedVersion: 2
+        x: 9400
+        y: 2350
+        width: 2350
+        height: 2350
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 058aaaa2b6b2d124ca8fff0c95a9d1cf
+      internalID: 8924122034410392712
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: EelFull_11
+      rect:
+        serializedVersion: 2
+        x: 11750
+        y: 2350
+        width: 2350
+        height: 2350
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d7ad84275fa957949a33aef20b7e31ae
+      internalID: -4297040477835185992
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: EelFull_12
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 2500
-        height: 2500
+        width: 2350
+        height: 2350
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -259,8 +406,29 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 5d392fbdb2e8fae4ba2f173886d63e32
-      internalID: 8517132305254357360
+      spriteID: 4cb5f7e622c7dca48887e01b3f87a643
+      internalID: -7777760479996661119
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: EelFull_13
+      rect:
+        serializedVersion: 2
+        x: 7050
+        y: 0
+        width: 2350
+        height: 2350
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7eb05780205ad7443ad1f98a34d8bd6d
+      internalID: 584553462397946096
       vertices: []
       indices: 
       edges: []

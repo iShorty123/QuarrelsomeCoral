@@ -24,13 +24,13 @@ public class Eel : BaseEnemy
         m_ReadyToLunge = false;
         m_SubmarineContactPushBackForce = 400;
         m_Health = m_MaxHealth = 75;
-        m_AttackDamage = 5;
+        m_AttackDamage = 3;
         m_AttackSpeed = 1f;
         m_MoveSpeed = 6f;
         m_AttackRange = 20;
         m_ProjectileSpeed = 1500;
         m_Animator = GetComponent<Animator>();
-
+        m_Animator.SetBool("Hit", false);
         if (m_IsBoss)
         {
             m_Rigidbody.mass = 2;
@@ -173,8 +173,15 @@ public class Eel : BaseEnemy
         {
             Destroy(gameObject);
         }
+        StartCoroutine(HitAnimationTimer());
     }
 
+    private IEnumerator HitAnimationTimer()
+    {
+        m_Animator.SetBool("Hit", true);
+        yield return new WaitForSeconds(1);
+        m_Animator.SetBool("Hit", false);
+    }
 
     protected override void TransformIntoBoss()
     {
