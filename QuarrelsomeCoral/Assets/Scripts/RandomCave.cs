@@ -224,34 +224,11 @@ public class RandomCave : MonoBehaviour
     void Update()
     {
 
-        if (Input.GetKeyDown("p"))
-        {
-            ToggleCamera();
-        }
-
     }
 
     public void ConstructCave() { 
         StartCoroutine(doSim(numR));
         //MakeCaves();
-    }
-
-    void ToggleCamera() {
-        if (currCamera)
-        {
-            MainCamera.enabled = false;
-            MainCamera.enabled = true;
-        }
-        else
-        {
-            MainCamera.enabled = true;
-            MainCamera.enabled = false;
-        }
-
-        BgImage.gameObject.GetComponent<SpriteRenderer>().enabled ^= true;
-        MidImage.gameObject.GetComponent<SpriteRenderer>().enabled ^= true;
-
-        currCamera = !currCamera;
     }
 
     public void clearMap(bool complete)
