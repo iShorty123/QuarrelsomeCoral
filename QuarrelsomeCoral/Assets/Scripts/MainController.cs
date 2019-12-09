@@ -91,6 +91,9 @@ public class MainController : MonoBehaviour
     {
         if (!Caves.GetFirstCave().IsDone()) return;
 
+        //here stop progress
+        hideLoadingView();
+
         List<RandomCave> caves = Caves.GetCaves();
 
         foreach (RandomCave cave in caves)
@@ -99,8 +102,6 @@ public class MainController : MonoBehaviour
             cave.IsDone();
         }
 
-        //here stop progress
-        hideLoadingView();
     }
 
     void SetupLastCave() {
