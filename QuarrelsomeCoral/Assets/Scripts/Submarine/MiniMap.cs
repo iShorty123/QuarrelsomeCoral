@@ -11,7 +11,7 @@ public class MiniMap : MonoBehaviour
     private Camera m_MiniMapCamera;
     private Camera m_MiniMapBorderCamera;
     private bool m_CurrentlyFullScreen;
-    private Rect m_MiniMapRect = new Rect(.75f, .8f, .25f, .2f);
+    private Rect m_MiniMapRect = new Rect(.75f, 0f, .25f, .2f);
     private Rect m_FullMapRect = new Rect(.05f, .05f, .9f, .9f);
     private float m_MapSpeed;
     private Vector3 m_Offset;
