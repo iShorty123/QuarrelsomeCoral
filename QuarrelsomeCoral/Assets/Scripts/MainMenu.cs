@@ -121,6 +121,11 @@ public class MainMenu : MonoBehaviour
             Time.timeScale = 1.0f;
             recEnabler(submarine.transform);
         }
+
+        if (TutorialMenu != null)
+        {
+            TutorialMenu.SetActive(false);
+        }
     }
 
     void PutThingsBack() {
