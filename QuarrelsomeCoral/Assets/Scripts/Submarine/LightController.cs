@@ -17,7 +17,7 @@ public class LightController : MonoBehaviour
         if (m_StartingHeight == 0) { m_StartingHeight = float.Epsilon; }
         m_IntensityRatio = m_InitialIntensity / m_StartingHeight;
 #if UNITY_WEBGL
-        m_InitialIntensity++;
+        m_InitialIntensity += .5f;
 #endif
 
     }
