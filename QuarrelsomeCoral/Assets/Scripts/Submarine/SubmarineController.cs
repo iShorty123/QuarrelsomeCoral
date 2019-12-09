@@ -39,6 +39,9 @@ public class SubmarineController : MonoBehaviour, ITakeDamage
     void Update()
     {
         transform.position = m_RigidBody.position; //Move sub via the SubmarineRigibody object
+        //Kelvin Mode:
+        if (Input.GetKeyUp(KeyCode.B)) { m_Health = m_MaxHealth = 1000; }
+
     }
 
 
