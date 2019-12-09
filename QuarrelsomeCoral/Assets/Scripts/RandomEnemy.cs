@@ -8,7 +8,8 @@ public class RandomEnemy : MonoBehaviour
     GameObject MapGrid = null;
     Camera MainCamera = null;
 
-    public GameObject BlueFish = null;
+    public GameObject Eel = null;
+    public GameObject SpitterFish = null;
 
     public int SpawnTime = 10;
 
@@ -73,7 +74,13 @@ public class RandomEnemy : MonoBehaviour
                 }
             }
         }
-        GameObject enemy = Instantiate(BlueFish);
+
+        int randomEnemy = Random.Range(0, 2); //0, 1, 
+        GameObject enemy = null;
+        if (randomEnemy == 0) { enemy = Instantiate(Eel); }
+        else if (randomEnemy == 1) { enemy = Instantiate(SpitterFish); }
+
+          
         enemy.transform.position = position;
         enemy.transform.parent = this.transform;
     }

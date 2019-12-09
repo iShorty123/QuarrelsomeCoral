@@ -19,6 +19,7 @@ public class CharacterMovement : MonoBehaviour
     private bool m_AtBottomOfLadder;
     private const float DISTANCE_ALLOWED_BETWEEN_WALL_AND_PLAYER = 0.1f;
     private Animator m_Animator;
+    private bool m_CanMoveRight, m_CanMoveLeft;
 
     private string m_Horizontal = "Horizontal_P";
     private string m_Vertical = "Vertical_P";
@@ -42,6 +43,8 @@ public class CharacterMovement : MonoBehaviour
         m_Animator = GetComponent<Animator>();
         m_Animator.SetBool("Move", false);
         m_Animator.SetBool("Ladder", false);
+        m_CanMoveRight = true;
+        m_CanMoveLeft = true;
     }
 
     // Update is called once per frame
@@ -126,6 +129,30 @@ public class CharacterMovement : MonoBehaviour
         }
     }
 
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.collider.tag == "LeftWall")
+        {
+            m_CanMoveLeft = false;
+        }
+        if (collision.collider.tag == "RightWall")
+        {
+            m_CanMoveRight = false;
+        }
+    }
+
+    private void OnCollisionExit2D(Collision2D collision)
+    {
+        if (collision.collider.tag == "LeftWall")
+        {
+            m_CanMoveLeft = true;
+        }
+        if (collision.collider.tag == "RightWall")
+        {
+            m_CanMoveRight = true;
+        }
+    }
+
     private void FlipSprite(SpriteRenderer _mySprite, float _direction)
     {
         if (_direction > 0)
@@ -141,27 +168,27 @@ public class CharacterMovement : MonoBehaviour
     private void MoveCharacter()
     {
         //Determine if against a wall
-        int layerMask = 1 << LayerMask.NameToLayer("SubmarineInterior"); //Layer: Submarine Walls
-        bool canMoveRight, canMoveLeft;
-        RaycastHit2D hitWall;
-        if (hitWall = Physics2D.Raycast(transform.position, Vector2.right, DISTANCE_ALLOWED_BETWEEN_WALL_AND_PLAYER, layerMask))
-        {
-            //transform.localPosition = new Vector3(transform.localPosition.x + (hitWall.distance - DISTANCE_ALLOWED_BETWEEN_WALL_AND_PLAYER), transform.localPosition.y, transform.localPosition.z);
-            canMoveRight = false;
-        }
-        else
-        {
-            canMoveRight = true;
-        }
-        if (Physics2D.Raycast(transform.position, Vector2.left, DISTANCE_ALLOWED_BETWEEN_WALL_AND_PLAYER, layerMask))
-        {
-            //transform.localPosition = new Vector3(transform.localPosition.x - (hitWall.distance - DISTANCE_ALLOWED_BETWEEN_WALL_AND_PLAYER), transform.localPosition.y, transform.localPosition.z);
-            canMoveLeft = false;
-        }
-        else
-        {
-            canMoveLeft = true;
-        }
+        //int layerMask = 1 << LayerMask.NameToLayer("SubmarineInterior"); //Layer: Submarine Walls
+        //bool canMoveRight, canMoveLeft;
+        //RaycastHit2D hitWall;
+        //if (hitWall = Physics2D.Raycast(transform.position, Vector2.right, DISTANCE_ALLOWED_BETWEEN_WALL_AND_PLAYER, layerMask))
+        //{
+        //    //transform.localPosition = new Vector3(transform.localPosition.x + (hitWall.distance - DISTANCE_ALLOWED_BETWEEN_WALL_AND_PLAYER), transform.localPosition.y, transform.localPosition.z);
+        //    canMoveRight = false;
+        //}
+        //else
+        //{
+        //    canMoveRight = true;
+        //}
+        //if (Physics2D.Raycast(transform.position, Vector2.left, DISTANCE_ALLOWED_BETWEEN_WALL_AND_PLAYER, layerMask))
+        //{
+        //    //transform.localPosition = new Vector3(transform.localPosition.x - (hitWall.distance - DISTANCE_ALLOWED_BETWEEN_WALL_AND_PLAYER), transform.localPosition.y, transform.localPosition.z);
+        //    canMoveLeft = false;
+        //}
+        //else
+        //{
+        //    canMoveLeft = true;
+        //}
 
         //Horizontally
         float moveHorizontally = Input.GetAxis(m_Horizontal);
@@ -169,7 +196,7 @@ public class CharacterMovement : MonoBehaviour
         FlipSprite(m_SpriteRenderer, moveHorizontally);
 
         //Prevent moving through a wall
-        if ((moveHorizontally > 0 && !canMoveRight) || (moveHorizontally < 0 && !canMoveLeft)) { moveHorizontally = 0;}
+        if ((moveHorizontally > 0 && !m_CanMoveRight) || (moveHorizontally < 0 && !m_CanMoveLeft)) { moveHorizontally = 0;}
 
         //Prevent moving too high or too low
         if (transform.localPosition.y >= 0.02f && moveVertically > 0) { moveVertically = 0; }

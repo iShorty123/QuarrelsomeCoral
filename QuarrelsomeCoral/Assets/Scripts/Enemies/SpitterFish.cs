@@ -17,7 +17,6 @@ public class SpitterFish : BaseEnemy
     private float m_RestAfterFireTimeStart;
     private float m_RestBeforeFireTimeStart;
     private float m_MaxRestTime;
-    private bool m_Attack;
 
     // Start is called before the first frame update
     new void Start()
@@ -27,7 +26,7 @@ public class SpitterFish : BaseEnemy
         m_Health = m_MaxHealth = 50;
         m_AttackDamage = 1; //weak melee attack
         m_AttackSpeed = 5f;
-        m_MoveSpeed = 4f;
+        m_MoveSpeed = 5.5f;
         m_AttackRange = 15;
         m_ProjectileSpeed = 1500;
         m_Animator = GetComponent<Animator>();
@@ -37,11 +36,9 @@ public class SpitterFish : BaseEnemy
         {
             m_Rigidbody.mass = 2;
             m_Health = m_MaxHealth = m_Health * 3;
-            m_AttackDamage = m_AttackDamage * 5;
-            m_MoveSpeed = m_MoveSpeed * 3;
+            m_AttackDamage = m_AttackDamage * 3;
             m_SubmarineContactPushBackForce = m_SubmarineContactPushBackForce * 2;
             m_ProjectileSpeed = m_ProjectileSpeed * 2;
-
         }
         m_TimeStartedRetreating = Time.realtimeSinceStartup;
         m_RandomPathTimeStart = Time.realtimeSinceStartup;
@@ -83,11 +80,11 @@ public class SpitterFish : BaseEnemy
 
     public override void Move()
     {
-        if (m_RestBeforeFireTimeStart + m_MaxRestTime > Time.realtimeSinceStartup) { m_Attack = true; return; } //Just chill
-        //if (m_Attack && FacingFireDirection()) { m_Attack = false; RangeAttack(); }
+        if (m_RestBeforeFireTimeStart + m_MaxRestTime > Time.realtimeSinceStartup) { return; } //Just chill
         if ( m_RestAfterFireTimeStart + m_MaxRestTime > Time.realtimeSinceStartup) { return; } //Just chill
-        if (m_TimeStartedRetreating + m_RetreatTime > Time.realtimeSinceStartup 
-            && Physics2D.Raycast(transform.position, m_DirectionToSubmarine, m_AttackRange * 2.5f, 1 << LayerMask.NameToLayer("SubmarineExterior"))) { Retreat();  return; } //If currently retreating - only do that
+        if (m_TimeStartedRetreating + m_RetreatTime > Time.realtimeSinceStartup
+            && Physics2D.Raycast(transform.position, m_DirectionToSubmarine, m_AttackRange * 2.5f, 1 << LayerMask.NameToLayer("SubmarineExterior"))) { Retreat(); return; }
+        else { m_TimeStartedRetreating = 0; }//If currently retreating - only do that
         if (m_RandomPathTimeStart + m_RandomPathMax > Time.realtimeSinceStartup) { RandomPath(); return; } //If currently on a random path - only do that
         RaycastHit2D hit = Physics2D.Raycast(transform.position, m_DirectionToSubmarine, m_AttackRange, 1 << LayerMask.NameToLayer("SubmarineExterior"));
         
@@ -103,11 +100,9 @@ public class SpitterFish : BaseEnemy
             m_Rigidbody.velocity = m_DirectionToSubmarine * m_MoveSpeed;
             LookAtPosition(m_DirectionToSubmarine);
             SetRandomPosition();
-            Debug.Log("Too far");
         }
         else if (m_DistanceToSubmarine <= m_AttackRange && !m_TooClose) //If inside attack range but not too close
         {
-            Debug.Log("Golden");
             m_Rigidbody.drag = 3; //Come to a stop
             if (!CurrentlyAttacking() && FacingFireDirection()) //if not attacking
             {
@@ -119,7 +114,6 @@ public class SpitterFish : BaseEnemy
                 if (!CurrentlyAttacking()) { LookAtPosition(m_DirectionToSubmarine); }
                 else
                 {
-                    Debug.Log("random");
                     m_RandomPathTimeStart = Time.realtimeSinceStartup;
                 }
             }
@@ -127,7 +121,6 @@ public class SpitterFish : BaseEnemy
         }
         else if(m_TooClose) //If too close
         {
-            Debug.Log("Too close");
             m_TimeStartedRetreating = Time.realtimeSinceStartup;
             Retreat();
             SetRandomPosition();
@@ -181,8 +174,6 @@ public class SpitterFish : BaseEnemy
 
     private void FireProjectile()
     {
-        Debug.Log("Fire!");
-
         GameObject projectile = Instantiate(m_Projectile, transform.position + m_DirectionToSubmarine *2, Quaternion.identity, transform);
         if (m_IsBoss) { projectile.GetComponent<SpitterFishProjectile>().m_IsBoss = true; }
     }
@@ -213,7 +204,7 @@ public class SpitterFish : BaseEnemy
     private void Retreat()
     {
         m_Rigidbody.drag = 1;
-        m_Rigidbody.velocity = -m_DirectionToSubmarine * m_MoveSpeed *3f;
+        m_Rigidbody.velocity = -m_DirectionToSubmarine * (m_MoveSpeed * 2 +1f);
         LookAtPosition(-m_DirectionToSubmarine);
     }
 

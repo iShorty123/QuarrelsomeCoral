@@ -5,7 +5,8 @@ using UnityEngine;
 public class Bosses : MonoBehaviour
 {
 
-    public GameObject BossPrefab = null;
+    public GameObject EelBoss = null;
+    public GameObject SpitterFishBoss = null;
 
     GameObject MapGrid = null;
     Camera MainCamera = null;
@@ -57,7 +58,11 @@ public class Bosses : MonoBehaviour
             mapPosition = Vector3Int.RoundToInt(position);
         }
 
-        GameObject boss = Instantiate(BossPrefab);
+        int randomBoss = Random.Range(0, 2); //0, 1
+        GameObject boss = null;
+        if (randomBoss == 0) { boss = Instantiate(EelBoss); }
+        else if (randomBoss == 1) { boss = Instantiate(SpitterFishBoss); }
+
         boss.GetComponent<BaseEnemy>().Setup(MapGrid);
         boss.GetComponent<BaseEnemy>().m_TransformIntoBoss.Invoke();
         boss.transform.position = position;

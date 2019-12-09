@@ -79,6 +79,7 @@ public class SpitterFishProjectile : MonoBehaviour
         }
         if (collision.collider.name == "SubmarineRigidbody")
         {
+            if (m_IsBoss) { m_AttackDamage = m_AttackDamage * 2; }
             SubmarineManager.GetInstance().m_Submarine.TakeDamage(m_AttackDamage);
         }
 
