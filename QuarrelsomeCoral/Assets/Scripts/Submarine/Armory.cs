@@ -15,15 +15,24 @@ public class Armory : MonoBehaviour
     private float m_TimeSinceLastReload;
     private const float m_RELOAD_SPEED = 1;
 
+    private Image m_TopAmmoImage;
+    private Image m_BottomAmmoImage;
+    public Image m_PilotAmmoImage;
+
     // Start is called before the first frame update
     void Start()
     {
         m_TimeSinceLastReload = Time.realtimeSinceStartup;
 
-
         m_TopAmmo = GameObject.Find("topAmmoText").GetComponent<Text>();
+        m_TopAmmoImage = GameObject.Find("TopAmmoForeground").GetComponent<Image>();
+
         m_BottomAmmo = GameObject.Find("bottomAmmoText").GetComponent<Text>();
+        m_BottomAmmoImage = GameObject.Find("BottomAmmoForeground").GetComponent<Image>();
+
         m_PilotAmmo = GameObject.Find("frontAmmoText").GetComponent<Text>();
+        m_PilotAmmoImage = GameObject.Find("PilotAmmoForeground").GetComponent<Image>();
+
     }
 
     // Update is called once per frame
@@ -73,8 +82,13 @@ public class Armory : MonoBehaviour
     private void UpdateText()
     {
         m_TopAmmo.text = "" + SubmarineManager.GetInstance().m_TopWeaponStation.m_AmmoCount;
+        m_TopAmmoImage.fillAmount = (float)SubmarineManager.GetInstance().m_TopWeaponStation.m_AmmoCount / 100f;
+
         m_BottomAmmo.text = "" + SubmarineManager.GetInstance().m_BottomWeaponStation.m_AmmoCount;
+        m_BottomAmmoImage.fillAmount = (float)SubmarineManager.GetInstance().m_BottomWeaponStation.m_AmmoCount / 100f;
+
         m_PilotAmmo.text = "" + SubmarineManager.GetInstance().m_Submarine.m_AmmoCount;
+        m_PilotAmmoImage.fillAmount = (float)SubmarineManager.GetInstance().m_Submarine.m_AmmoCount / 50f;
     }
 
     public void SetControls(bool _userControlled, string _reloadButton)
