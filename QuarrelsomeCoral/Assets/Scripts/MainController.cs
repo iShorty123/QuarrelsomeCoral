@@ -5,7 +5,10 @@ using UnityEngine.Tilemaps;
 
 public class MainController : MonoBehaviour
 {
-	public RandomEnemy REnemy = null;
+
+    public GameObject LoadingScreen = null;
+
+    public RandomEnemy REnemy = null;
     public Bosses RBoss = null;
     public Caves Caves = null;
     public Plants Plants = null;
@@ -28,6 +31,8 @@ public class MainController : MonoBehaviour
     private void Awake()
     {
         m_Instance = this;
+
+        showLoadingView();
     }
 
     public static MainController GetInstance()
@@ -68,14 +73,26 @@ public class MainController : MonoBehaviour
         if ((Submarine.transform.position.x - Caves.GetLeftBorder()) < 140) Caves.AddCaveToLeft(); //here
         if ((Caves.GetRightBorder() - Submarine.transform.position.x) < 140) Caves.AddCaveToRight(); //here
 
-        SetupTwoFirstCaves();
+        SetupFirstCaves();
 
         SetupLastCave();
     }
 
-    void SetupTwoFirstCaves()
+    void showLoadingView(){
+        if (LoadingScreen != null) LoadingScreen.SetActive(true);
+    }
+
+    void hideLoadingView()
+    {
+        if (LoadingScreen != null) LoadingScreen.SetActive(false);
+    }
+
+    void SetupFirstCaves()
     {
         if (!Caves.GetFirstCave().IsDone()) return;
+
+        //here stop progress
+        hideLoadingView();
 
         List<RandomCave> caves = Caves.GetCaves();
 
@@ -84,6 +101,7 @@ public class MainController : MonoBehaviour
             SetupCave(cave);
             cave.IsDone();
         }
+
     }
 
     void SetupLastCave() {
@@ -120,7 +138,7 @@ public class MainController : MonoBehaviour
 
     void PositionSubmarine() {
 
-        Vector3 position = new Vector3(80, 80f, 0);
+        Vector3 position = new Vector3(0, 80f, 0);
 
         GameObject submarine = Instantiate(SubmarinePrefab);
         submarine.GetComponent<SubmarineManager>().m_Submarine.m_RigidBody.transform.position = position;

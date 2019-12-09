@@ -73,7 +73,6 @@ public class RandomEnemy : MonoBehaviour
                 }
             }
         }
-        print("enemy pos: " + position);
         GameObject enemy = Instantiate(BlueFish);
         enemy.transform.position = position;
         enemy.transform.parent = this.transform;
@@ -84,12 +83,11 @@ public class RandomEnemy : MonoBehaviour
         float halfHeight = MainCamera.orthographicSize;
         float halfWidth = MainCamera.aspect * halfHeight;
         Vector3 camPosition = MainCamera.transform.position;
-        print(camPosition);
+
         //small square
         float minX = halfWidth;
         float minY = halfHeight;
-        print(halfWidth);
-        print(halfHeight);
+
         //large square
         float maxX = halfWidth * 2;
         float maxY = halfHeight * 2;

@@ -26,4 +26,7 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/LightingTest.unity
     guid: 01bb2fb85e7da7e4aa2eb866d1ce38f0
+  - enabled: 1
+    path: Assets/Scenes/Loading.unity
+    guid: c9f9f5729a8c14aeb96be785b7cfb417
   m_configObjects: {}
