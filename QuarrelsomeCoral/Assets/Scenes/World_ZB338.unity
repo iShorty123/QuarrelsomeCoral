@@ -1722,8 +1722,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 225, y: 0}
-  m_SizeDelta: {x: 200, y: 500}
+  m_AnchoredPosition: {x: 233, y: -10}
+  m_SizeDelta: {x: 180, y: 500}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &648218443
 MonoBehaviour:
@@ -1746,7 +1746,7 @@ MonoBehaviour:
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
     m_FontSize: 12
-    m_FontStyle: 1
+    m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 0
     m_MaxSize: 200
@@ -1756,13 +1756,13 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "STORY\n\nYou and your crew have been tasked by Wazzasoft Enterprises to
-    explore the QRS3 reef, on Planet ZB332 in the Outer Colony zone of the WZ Empire.
-    \n\nYour job is to map the underwater terrain, marking any points of interest
-    Wazzasoft Enterprises deems important to their company. \n\nEach point of interest
-    discovered and submitted to Wazzasoft will earn you bonus compensation. \n\nCan
-    you earn enough money to pay off your submarine and get off world? \n\nOr will
-    you and your crew join the countless other contractors at the bottom of the reef?"
+  m_Text: "You and your crew have been tasked by Wazzasoft Enterprises to explore
+    the QRS3 reef, on Planet ZB332. \n\nYour job is to map the underwater terrain,
+    marking any points of interest Wazzasoft Enterprises deems important to their
+    company. \n\nEach point of interest discovered and submitted to Wazzasoft will
+    earn you bonus compensation. \n\nCan you earn enough money to pay off your submarine
+    and get off world? \n\nOr will you and your crew join the countless other contractors
+    at the bottom of the reef?"
 --- !u!222 &648218444
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2794,7 +2794,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 68da06b3b3d1440dcab5a292f141c545, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 39354ed914a7a4240b34d08184dc3bf4, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
