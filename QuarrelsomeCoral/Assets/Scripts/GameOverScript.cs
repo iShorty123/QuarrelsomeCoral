@@ -53,7 +53,6 @@ public class GameOverScript : MonoBehaviour
 
     public void MainMenuButton()
     {
-        Debug.Log("MainMenuButton");
         PutThingsBack();
         SceneManager.LoadScene("MainMenu");
     }

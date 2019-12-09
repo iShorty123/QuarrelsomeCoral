@@ -16,7 +16,6 @@ public class SubmarineController : MonoBehaviour, ITakeDamage
     private GameObject m_PilotWeapon;
     public GameObject m_Bubbles;
     private float m_MaxSpeed;
-    private float m_MaxY = 92f;
 
     private GameObject m_Ammo;
     private float m_TurretLength;

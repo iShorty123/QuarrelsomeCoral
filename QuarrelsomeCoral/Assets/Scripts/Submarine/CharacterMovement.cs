@@ -25,7 +25,6 @@ public class CharacterMovement : MonoBehaviour
     private string m_Vertical = "Vertical_P";
     private string m_Action1 = "Action1_P";
     private string m_Action2 = "Action2_P";
-    private string m_PauseButton = "Pause";
 
     // Start is called before the first frame update
     void Start()

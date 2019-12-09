@@ -16,6 +16,9 @@ public class LightController : MonoBehaviour
         m_StartingHeight = SubmarineManager.GetInstance().m_Submarine.transform.position.y;
         if (m_StartingHeight == 0) { m_StartingHeight = float.Epsilon; }
         m_IntensityRatio = m_InitialIntensity / m_StartingHeight;
+#if UNITY_WEBGL
+        m_InitialIntensity++;
+#endif
 
     }
 

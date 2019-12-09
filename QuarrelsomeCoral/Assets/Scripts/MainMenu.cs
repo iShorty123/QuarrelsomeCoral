@@ -43,8 +43,11 @@ public class MainMenu : MonoBehaviour
 
         if (Input.GetButtonUp("Pause"))
         {
-            if (isPaused) GotoResumeScene();
-            else GotoPauseScene();
+            if (!SubmarineManager.GetInstance().m_Died) //Only pause if not dead
+            {
+                if (isPaused) GotoResumeScene();
+                else GotoPauseScene();
+            }
         }
     }
 

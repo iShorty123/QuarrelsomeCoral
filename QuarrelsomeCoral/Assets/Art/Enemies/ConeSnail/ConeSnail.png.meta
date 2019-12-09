@@ -1,7 +1,247 @@
 fileFormatVersion: 2
-guid: b118d86274a58d84ea0432b5698a0c48
+guid: eaf1132f0ccac7c4f9c9120eb5b20042
 TextureImporter:
-  internalIDToNameTable: []
+  internalIDToNameTable:
+  - first:
+      213: -8759703337151911619
+    second: ConeSnailFull_0
+  - first:
+      213: -6712905903351756870
+    second: ConeSnailFull_1
+  - first:
+      213: 1417267923797736526
+    second: ConeSnailFull_2
+  - first:
+      213: 4220059739019458385
+    second: ConeSnailFull_3
+  - first:
+      213: -4718013361547824841
+    second: ConeSnailFull_4
+  - first:
+      213: 6974858443945662969
+    second: ConeSnailFull_5
+  - first:
+      213: -6445690784724211188
+    second: ConeSnailFull_6
+  - first:
+      213: 5815259254997966051
+    second: ConeSnailFull_7
+  - first:
+      213: -720358593622007428
+    second: ConeSnailFull_8
+  - first:
+      213: 8770792897948968510
+    second: ConeSnailFull_9
+  - first:
+      213: -4564989111336818519
+    second: ConeSnailFull_10
+  - first:
+      213: -3524829597165832335
+    second: ConeSnailFull_11
+  - first:
+      213: -1850765425409159531
+    second: ConeSnailFull_12
+  - first:
+      213: -8013721326509565611
+    second: ConeSnailFull_13
+  - first:
+      213: 3720819300610012141
+    second: ConeSnailFull_14
+  - first:
+      213: 1980513665120486479
+    second: ConeSnailFull_15
+  - first:
+      213: 7201953406220201199
+    second: ConeSnailFull_16
+  - first:
+      213: 2295957332784415607
+    second: ConeSnailFull_17
+  - first:
+      213: 7037716971447790585
+    second: ConeSnailFull_18
+  - first:
+      213: -6577589653826104471
+    second: ConeSnailFull_19
+  - first:
+      213: -1323969778112012390
+    second: ConeSnailFull_20
+  - first:
+      213: 9014722131874934064
+    second: ConeSnailFull_21
+  - first:
+      213: -8646564391049488470
+    second: ConeSnailFull_22
+  - first:
+      213: -2447657948760088380
+    second: ConeSnailFull_23
+  - first:
+      213: 4940291589937232566
+    second: ConeSnailFull_24
+  - first:
+      213: 220782725320073084
+    second: ConeSnailFull_25
+  - first:
+      213: -5725224808095495539
+    second: ConeSnailFull_26
+  - first:
+      213: 1150946892628523805
+    second: ConeSnailFull_27
+  - first:
+      213: -5229562830864145877
+    second: ConeSnailFull_28
+  - first:
+      213: -1402515747956882927
+    second: ConeSnailFull_29
+  - first:
+      213: 628245307621447030
+    second: ConeSnailFull_30
+  - first:
+      213: -8179078903486754564
+    second: ConeSnailFull_31
+  - first:
+      213: 125898600245263961
+    second: ConeSnailFull_32
+  - first:
+      213: -6601912462155400055
+    second: ConeSnailFull_33
+  - first:
+      213: -5304198756629029202
+    second: ConeSnailFull_34
+  - first:
+      213: -6293445718430594369
+    second: ConeSnailFull_35
+  - first:
+      213: -4433264127424963721
+    second: ConeSnailFull_36
+  - first:
+      213: 4862941992631663019
+    second: ConeSnailFull_37
+  - first:
+      213: 4061876034964720864
+    second: ConeSnailFull_38
+  - first:
+      213: 2329539129861740570
+    second: ConeSnailFull_39
+  - first:
+      213: -8671170087626497426
+    second: ConeSnail_0
+  - first:
+      213: -6131152464885554070
+    second: ConeSnail_1
+  - first:
+      213: -141864836826195987
+    second: ConeSnail_2
+  - first:
+      213: -3243917538166371473
+    second: ConeSnail_3
+  - first:
+      213: 3472779137115520394
+    second: ConeSnail_4
+  - first:
+      213: 3043630177863993258
+    second: ConeSnail_5
+  - first:
+      213: -636036993857770946
+    second: ConeSnail_6
+  - first:
+      213: -2414279141739968205
+    second: ConeSnail_7
+  - first:
+      213: 8542594121843475904
+    second: ConeSnail_8
+  - first:
+      213: 2676270236333334203
+    second: ConeSnail_9
+  - first:
+      213: 5653107313221962663
+    second: ConeSnail_10
+  - first:
+      213: 7073575956086904608
+    second: ConeSnail_11
+  - first:
+      213: -325132591902824139
+    second: ConeSnail_12
+  - first:
+      213: 5497728885959702382
+    second: ConeSnail_13
+  - first:
+      213: 9083057293260447495
+    second: ConeSnail_14
+  - first:
+      213: 2607862694820992095
+    second: ConeSnail_15
+  - first:
+      213: -710689093487694565
+    second: ConeSnail_16
+  - first:
+      213: -8282594606383036673
+    second: ConeSnail_17
+  - first:
+      213: -2623582469303794946
+    second: ConeSnail_18
+  - first:
+      213: 4919818564362885956
+    second: ConeSnail_19
+  - first:
+      213: 9029753971231612511
+    second: ConeSnail_20
+  - first:
+      213: -6343216477041293754
+    second: ConeSnail_21
+  - first:
+      213: 8917162459526960977
+    second: ConeSnail_22
+  - first:
+      213: 2572591909475539912
+    second: ConeSnail_23
+  - first:
+      213: 5268081270031327603
+    second: ConeSnail_24
+  - first:
+      213: -8723656472312189151
+    second: ConeSnail_25
+  - first:
+      213: -3108229192350350491
+    second: ConeSnail_26
+  - first:
+      213: -628971599402933748
+    second: ConeSnail_27
+  - first:
+      213: 3338674845178897320
+    second: ConeSnail_28
+  - first:
+      213: -2167549140242622375
+    second: ConeSnail_29
+  - first:
+      213: 7736583938193350886
+    second: ConeSnail_30
+  - first:
+      213: 6990795345483491782
+    second: ConeSnail_31
+  - first:
+      213: 5221843034936462223
+    second: ConeSnail_32
+  - first:
+      213: 7715788448499181827
+    second: ConeSnail_33
+  - first:
+      213: 602728672335371764
+    second: ConeSnail_34
+  - first:
+      213: -7679906307048480855
+    second: ConeSnail_35
+  - first:
+      213: 8425866679762238593
+    second: ConeSnail_36
+  - first:
+      213: 714944762108006941
+    second: ConeSnail_37
+  - first:
+      213: 3029781927664492454
+    second: ConeSnail_38
+  - first:
+      213: -1306259967782719032
+    second: ConeSnail_39
   externalObjects: {}
   serializedVersion: 10
   mipmaps:
@@ -40,7 +280,7 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 1
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -70,9 +310,873 @@ TextureImporter:
     overridden: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
-    sprites: []
+    sprites:
+    - serializedVersion: 2
+      name: ConeSnail_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 4168
+        width: 1042
+        height: 1042
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f67ef023800766c419c0f4ffbfb62630
+      internalID: -8671170087626497426
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ConeSnail_1
+      rect:
+        serializedVersion: 2
+        x: 1042
+        y: 4168
+        width: 1042
+        height: 1042
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 68912382150c30b44ada5637dc7b6fba
+      internalID: -6131152464885554070
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ConeSnail_2
+      rect:
+        serializedVersion: 2
+        x: 2084
+        y: 4168
+        width: 1042
+        height: 1042
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 03d37a94a2e58744397b6a558981e150
+      internalID: -141864836826195987
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ConeSnail_3
+      rect:
+        serializedVersion: 2
+        x: 3126
+        y: 4168
+        width: 1042
+        height: 1042
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3405fece8778e844187adb3fb71cb2af
+      internalID: -3243917538166371473
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ConeSnail_4
+      rect:
+        serializedVersion: 2
+        x: 4168
+        y: 4168
+        width: 1042
+        height: 1042
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3d8ae5034a8d61e4f8ac6911d648b3fc
+      internalID: 3472779137115520394
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ConeSnail_5
+      rect:
+        serializedVersion: 2
+        x: 5210
+        y: 4168
+        width: 1042
+        height: 1042
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f606e47d292cfdf4bae5f4ca437cdede
+      internalID: 3043630177863993258
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ConeSnail_6
+      rect:
+        serializedVersion: 2
+        x: 6252
+        y: 4168
+        width: 1042
+        height: 1042
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 26ca87d7188d6b547bd53550ce908047
+      internalID: -636036993857770946
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ConeSnail_7
+      rect:
+        serializedVersion: 2
+        x: 7294
+        y: 4168
+        width: 1042
+        height: 1042
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cd29000c02236ea489c495e9a160f4a8
+      internalID: -2414279141739968205
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ConeSnail_8
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 3126
+        width: 1042
+        height: 1042
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7462d1e6a47863f469cb1aabdb56324f
+      internalID: 8542594121843475904
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ConeSnail_9
+      rect:
+        serializedVersion: 2
+        x: 1042
+        y: 3126
+        width: 1042
+        height: 1042
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8334d38f41b73ea45b0113935d5bc9e1
+      internalID: 2676270236333334203
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ConeSnail_10
+      rect:
+        serializedVersion: 2
+        x: 2084
+        y: 3126
+        width: 1042
+        height: 1042
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0f071e8a157e02143895ba431970b209
+      internalID: 5653107313221962663
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ConeSnail_11
+      rect:
+        serializedVersion: 2
+        x: 3126
+        y: 3126
+        width: 1042
+        height: 1042
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2b9606bdbb9c06746bac3b32391c00d2
+      internalID: 7073575956086904608
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ConeSnail_12
+      rect:
+        serializedVersion: 2
+        x: 4168
+        y: 3126
+        width: 1042
+        height: 1042
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3fe893e23594f2f48905fceb430716e2
+      internalID: -325132591902824139
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ConeSnail_13
+      rect:
+        serializedVersion: 2
+        x: 5210
+        y: 3126
+        width: 1042
+        height: 1042
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ce9260412cca70344905acd22b3b28e8
+      internalID: 5497728885959702382
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ConeSnail_14
+      rect:
+        serializedVersion: 2
+        x: 6252
+        y: 3126
+        width: 1042
+        height: 1042
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 12b908e57fd9e914fb1019f58c205cdb
+      internalID: 9083057293260447495
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ConeSnail_15
+      rect:
+        serializedVersion: 2
+        x: 7294
+        y: 3126
+        width: 1042
+        height: 1042
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 684ab41f9a129364790c086cd17414c2
+      internalID: 2607862694820992095
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ConeSnail_16
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 2084
+        width: 1042
+        height: 1042
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 71abc8729f01b1647bc2e0c58b2a5b54
+      internalID: -710689093487694565
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ConeSnail_17
+      rect:
+        serializedVersion: 2
+        x: 1042
+        y: 2084
+        width: 1042
+        height: 1042
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 356b7c0fee780004892b19b4a8a0bcc7
+      internalID: -8282594606383036673
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ConeSnail_18
+      rect:
+        serializedVersion: 2
+        x: 2084
+        y: 2084
+        width: 1042
+        height: 1042
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7d5691a0b339c324487ad0eab04ac236
+      internalID: -2623582469303794946
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ConeSnail_19
+      rect:
+        serializedVersion: 2
+        x: 3126
+        y: 2084
+        width: 1042
+        height: 1042
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 41d48bdbcdbb3c24e8a7b4734ea63aef
+      internalID: 4919818564362885956
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ConeSnail_20
+      rect:
+        serializedVersion: 2
+        x: 4168
+        y: 2084
+        width: 1042
+        height: 1042
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6fbc7a9afe55aaf48b8d712497533f7e
+      internalID: 9029753971231612511
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ConeSnail_21
+      rect:
+        serializedVersion: 2
+        x: 5210
+        y: 2084
+        width: 1042
+        height: 1042
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a26e871ac5fc6ab4aa8fe8b425285566
+      internalID: -6343216477041293754
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ConeSnail_22
+      rect:
+        serializedVersion: 2
+        x: 6252
+        y: 2084
+        width: 1042
+        height: 1042
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 25e6744c82edcb4418a7a9dd8acf359c
+      internalID: 8917162459526960977
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ConeSnail_23
+      rect:
+        serializedVersion: 2
+        x: 7294
+        y: 2084
+        width: 1042
+        height: 1042
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 94f4b65173f77704a91712ddc83659cc
+      internalID: 2572591909475539912
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ConeSnail_24
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1042
+        width: 1042
+        height: 1042
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9f2f63fe5b85b704f8f5498a2a965ef5
+      internalID: 5268081270031327603
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ConeSnail_25
+      rect:
+        serializedVersion: 2
+        x: 1042
+        y: 1042
+        width: 1042
+        height: 1042
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bb4e936d9d975ae4fb176e1e338f643d
+      internalID: -8723656472312189151
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ConeSnail_26
+      rect:
+        serializedVersion: 2
+        x: 2084
+        y: 1042
+        width: 1042
+        height: 1042
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: de4aafaaf476f0e428bb9a7f0539e876
+      internalID: -3108229192350350491
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ConeSnail_27
+      rect:
+        serializedVersion: 2
+        x: 3126
+        y: 1042
+        width: 1042
+        height: 1042
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b8c320e0a1c6b644ba32ee6138a8aefc
+      internalID: -628971599402933748
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ConeSnail_28
+      rect:
+        serializedVersion: 2
+        x: 4168
+        y: 1042
+        width: 1042
+        height: 1042
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c04884991c0d5834ebc97ab4836b295f
+      internalID: 3338674845178897320
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ConeSnail_29
+      rect:
+        serializedVersion: 2
+        x: 5210
+        y: 1042
+        width: 1042
+        height: 1042
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 844747d1da03e674fad343386e9fb5d6
+      internalID: -2167549140242622375
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ConeSnail_30
+      rect:
+        serializedVersion: 2
+        x: 6252
+        y: 1042
+        width: 1042
+        height: 1042
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b4badf2381985f746aa8bdd2ac5e5f4c
+      internalID: 7736583938193350886
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ConeSnail_31
+      rect:
+        serializedVersion: 2
+        x: 7294
+        y: 1042
+        width: 1042
+        height: 1042
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 48f699ef409dc664b87328ccda90dfdb
+      internalID: 6990795345483491782
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ConeSnail_32
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 1042
+        height: 1042
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9810534373af5f54e882bc7709b0e669
+      internalID: 5221843034936462223
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ConeSnail_33
+      rect:
+        serializedVersion: 2
+        x: 1042
+        y: 0
+        width: 1042
+        height: 1042
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8ea1e30529b639a499fa78d186cb40e3
+      internalID: 7715788448499181827
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ConeSnail_34
+      rect:
+        serializedVersion: 2
+        x: 2084
+        y: 0
+        width: 1042
+        height: 1042
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9638030e01906214d8f4902d43d25096
+      internalID: 602728672335371764
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ConeSnail_35
+      rect:
+        serializedVersion: 2
+        x: 3126
+        y: 0
+        width: 1042
+        height: 1042
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 515a7729248dac6419461fdc879c9926
+      internalID: -7679906307048480855
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ConeSnail_36
+      rect:
+        serializedVersion: 2
+        x: 4168
+        y: 0
+        width: 1042
+        height: 1042
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c945414d36c19fd43b8e4b2bb9839be0
+      internalID: 8425866679762238593
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ConeSnail_37
+      rect:
+        serializedVersion: 2
+        x: 5210
+        y: 0
+        width: 1042
+        height: 1042
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1d1e8dff4afbb7c46b305e5fbfea6fb4
+      internalID: 714944762108006941
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ConeSnail_38
+      rect:
+        serializedVersion: 2
+        x: 6252
+        y: 0
+        width: 1042
+        height: 1042
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b1bd387ba8a089f4b8b355307a07fbd1
+      internalID: 3029781927664492454
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ConeSnail_39
+      rect:
+        serializedVersion: 2
+        x: 7294
+        y: 0
+        width: 1042
+        height: 1042
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 12509021380cbe3478da100b4f3925b7
+      internalID: -1306259967782719032
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []

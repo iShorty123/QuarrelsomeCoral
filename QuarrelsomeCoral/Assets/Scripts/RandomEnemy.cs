@@ -10,6 +10,7 @@ public class RandomEnemy : MonoBehaviour
 
     public GameObject Eel = null;
     public GameObject SpitterFish = null;
+    public GameObject ConeSnail = null;
 
     public int SpawnTime = 10;
 
@@ -75,12 +76,13 @@ public class RandomEnemy : MonoBehaviour
             }
         }
 
-        int randomEnemy = Random.Range(0, 2); //0, 1, 
+        int randomEnemy = Random.Range(0, 3); //0, 1, 2
         GameObject enemy = null;
         if (randomEnemy == 0) { enemy = Instantiate(Eel); }
         else if (randomEnemy == 1) { enemy = Instantiate(SpitterFish); }
+        else if (randomEnemy == 2) { enemy = Instantiate(ConeSnail); }
 
-          
+
         enemy.transform.position = position;
         enemy.transform.parent = this.transform;
     }

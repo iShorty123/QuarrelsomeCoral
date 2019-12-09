@@ -211,7 +211,6 @@ public class SpitterFish : BaseEnemy
     private void RandomPath()
     {
         m_Rigidbody.velocity = m_RandomDirection * m_MoveSpeed;
-        Debug.DrawLine(transform.position, m_RandomDirection * m_MoveSpeed);
         LookAtPosition(m_RandomDirection);
     }
 }

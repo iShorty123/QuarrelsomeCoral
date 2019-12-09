@@ -3443,6 +3443,8 @@ MonoBehaviour:
   Eel: {fileID: 8319210288028765714, guid: b8a7ca336b2a2264a85830207727b009, type: 3}
   SpitterFish: {fileID: 672665230921197195, guid: 389021085d287214fbdd7383910d5174,
     type: 3}
+  ConeSnail: {fileID: 379297544746837611, guid: 5aac7026bf5639a479163a9153950772,
+    type: 3}
   SpawnTime: 15
 --- !u!4 &1166933785
 Transform:
@@ -4725,6 +4727,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   EelBoss: {fileID: 8319210288028765714, guid: b8a7ca336b2a2264a85830207727b009, type: 3}
   SpitterFishBoss: {fileID: 672665230921197195, guid: 389021085d287214fbdd7383910d5174,
+    type: 3}
+  ConeSnail: {fileID: 379297544746837611, guid: 5aac7026bf5639a479163a9153950772,
     type: 3}
   m_CanSpawn: 0
 --- !u!4 &1424007170

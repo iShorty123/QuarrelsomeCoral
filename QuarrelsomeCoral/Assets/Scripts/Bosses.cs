@@ -7,6 +7,7 @@ public class Bosses : MonoBehaviour
 
     public GameObject EelBoss = null;
     public GameObject SpitterFishBoss = null;
+    public GameObject ConeSnail = null;
 
     GameObject MapGrid = null;
     Camera MainCamera = null;
@@ -58,10 +59,11 @@ public class Bosses : MonoBehaviour
             mapPosition = Vector3Int.RoundToInt(position);
         }
 
-        int randomBoss = Random.Range(0, 2); //0, 1
+        int randomBoss = Random.Range(0, 3); //0, 1, 2
         GameObject boss = null;
         if (randomBoss == 0) { boss = Instantiate(EelBoss); }
         else if (randomBoss == 1) { boss = Instantiate(SpitterFishBoss); }
+        else if (randomBoss == 2) { boss = Instantiate(ConeSnail); }
 
         boss.GetComponent<BaseEnemy>().Setup(MapGrid);
         boss.GetComponent<BaseEnemy>().m_TransformIntoBoss.Invoke();
