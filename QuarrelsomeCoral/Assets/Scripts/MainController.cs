@@ -89,18 +89,24 @@ public class MainController : MonoBehaviour
 
     void SetupFirstCaves()
     {
-        if (!Caves.GetFirstCave().IsDone()) return;
+        //if (!Caves.GetFirstCave().IsDone()) return;
 
         //here stop progress
-        hideLoadingView();
 
         List<RandomCave> caves = Caves.GetCaves();
+
+        foreach (RandomCave cave in caves)
+        {
+            if (!cave.IsDoneBuilding()) return;
+        }
 
         foreach (RandomCave cave in caves)
         {
             SetupCave(cave);
             cave.IsDone();
         }
+
+        hideLoadingView();
 
     }
 
