@@ -6,13 +6,14 @@ using UnityEngine.Tilemaps;
 
 public abstract class BaseEnemy : MonoBehaviour, IBaseEnemy, ITakeDamage
 {
-    private float m_LookAtSpeed;
+
     private GameObject MapGrid = null;
     private Vector2Int[] adj = new[] { new Vector2Int(-1, 1), new Vector2Int(0,1), new Vector2Int(1,1), new Vector2Int(-1,0), new Vector2Int(1,0), new Vector2Int(-1,-1),
         new Vector2Int(0,-1), new Vector2Int(1,-1), new Vector2Int(-1, 2), new Vector2Int(0,2), new Vector2Int(1,2), new Vector2Int(-2,0), new Vector2Int(2,0),
         new Vector2Int(-1,-2), new Vector2Int(0,-2), new Vector2Int(1,-2), new Vector2Int(0,3), new Vector2Int(0,-3), new Vector2Int(-3,0), new Vector2Int(3,0),
         new Vector2Int(-2,-1), new Vector2Int(-2,1), new Vector2Int(2,-1), new Vector2Int(2,1)};
     private Vector3 m_Target;
+    private float m_TargetAdjustment;
 
     protected int m_Health;
     protected int m_MaxHealth;
@@ -27,6 +28,7 @@ public abstract class BaseEnemy : MonoBehaviour, IBaseEnemy, ITakeDamage
     protected float m_ShieldPushBackForce;
     protected bool m_HitShieldFlag;
     protected float m_TimeWhenStunnedByShield;
+    protected float m_LookAtSpeed;
 
     /// <summary>How long it has been since your last attack</summary>
     protected float m_AttackCoolDownTime;
@@ -72,6 +74,8 @@ public abstract class BaseEnemy : MonoBehaviour, IBaseEnemy, ITakeDamage
 
     public abstract void TakeDamage(int _damage);
 
+    protected abstract void LookAtPosition(Vector3 _position);
+
     // Start is called before the first frame update
     protected virtual void Start()
     {
@@ -95,24 +99,18 @@ public abstract class BaseEnemy : MonoBehaviour, IBaseEnemy, ITakeDamage
     // Update is called once per frame
     protected virtual void Update()
     {
+        m_Target = new Vector3(m_SubmarineRigidbody.transform.position.x + m_TargetAdjustment,
+            m_SubmarineRigidbody.transform.position.y, m_SubmarineRigidbody.transform.position.z);
         Vector3 direction = m_Target - m_Rigidbody.transform.position;        
         m_DistanceToSubmarine = direction.magnitude;
         m_DirectionToSubmarine = direction.normalized;
     }
 
-    protected void LookAtSubmarine()
-    {
-        float angle = Mathf.Atan2(m_DirectionToSubmarine.y, m_DirectionToSubmarine.x) * Mathf.Rad2Deg;
-        transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.AngleAxis(angle + 90, Vector3.forward), Time.deltaTime * m_LookAtSpeed); 
-        // +90 is specific to the Eel right now
-        //if others need different adjustment then we'll take this function out of the base class and place into IBaseEnemy
 
-    }
 
     private IEnumerator AimAtRandomSubmarinePosition()
     {
-        m_Target = new Vector3(Random.Range(m_SubmarineRigidbody.transform.position.x - 4, m_SubmarineRigidbody.transform.position.x + 4), 
-            m_SubmarineRigidbody.transform.position.y, m_SubmarineRigidbody.transform.position.z);
+        m_TargetAdjustment = Random.Range(-4, 4);
         yield return new WaitForSeconds(1);
         StartCoroutine(AimAtRandomSubmarinePosition());
     }

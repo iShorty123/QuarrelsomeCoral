@@ -53,7 +53,7 @@ public class Eel : BaseEnemy
         if (!CurrentlyLunging()) //&& !CurrentlyStunned()) //Only change direction we look in if not lunging
         {
             m_CanLunge = true;
-            LookAtSubmarine();
+            LookAtPosition(m_DirectionToSubmarine);
         }
         if (CurrentlyStunned()) //If currently stunned, look towards the reflection angle
         {
@@ -61,7 +61,7 @@ public class Eel : BaseEnemy
         }
         if (CurrentlyShieldStunned())
         {
-            LookAtSubmarine();
+            LookAtPosition(m_DirectionToSubmarine);
         }
     }
 
@@ -207,5 +207,11 @@ public class Eel : BaseEnemy
         {
             m_RestTimeAfterLunge -= 1;
         }
+    }
+
+    protected override void LookAtPosition(Vector3 _position)
+    {
+        float angle = Mathf.Atan2(_position.y, _position.x) * Mathf.Rad2Deg;
+        transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.AngleAxis(angle + 90, Vector3.forward), Time.deltaTime * m_LookAtSpeed);
     }
 }
