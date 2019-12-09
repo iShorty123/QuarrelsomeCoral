@@ -23,7 +23,7 @@ public class Eel : BaseEnemy
         base.Start();
         m_ReadyToLunge = false;
         m_SubmarineContactPushBackForce = 400;
-        m_Health = m_MaxHealth = 75;
+        m_Health = m_MaxHealth = 50;
         m_AttackDamage = 3;
         m_AttackSpeed = 1f;
         m_MoveSpeed = 6f;
@@ -34,7 +34,7 @@ public class Eel : BaseEnemy
         if (m_IsBoss)
         {
             m_Rigidbody.mass = 2;
-            m_Health = m_MaxHealth = m_Health * 5;
+            m_Health = m_MaxHealth = m_Health * 3;
             m_AttackDamage = m_AttackDamage * 2;
             m_MoveSpeed = m_MoveSpeed * 3;
             m_SubmarineContactPushBackForce = m_SubmarineContactPushBackForce * 2;
