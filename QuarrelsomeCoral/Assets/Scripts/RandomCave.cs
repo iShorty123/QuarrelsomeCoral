@@ -111,6 +111,11 @@ public class RandomCave : MonoBehaviour
         return ret;
     }
 
+    public bool IsDoneBuilding()
+    {
+        return isDone;
+    }
+
     public void SetAsFirstCave() {
         isFirstCave = true;
     }

@@ -7,10 +7,11 @@ public class MainMenu : MonoBehaviour
 {
     public GameObject PauseMenu = null;
     public GameObject TutorialMenu = null;
+    public GameObject LoadingScreen = null;
 
     public Camera MainCamera = null;
     public GameObject PauseBG = null;
-    public Canvas Canvas = null;
+
     GameObject submarine = null;
 
     bool isPaused = false;
@@ -49,7 +50,6 @@ public class MainMenu : MonoBehaviour
 
     public void GotoPlayScene()
     {
-        //show a spinner
         SceneManager.LoadScene("World_ZB338");
     }
 

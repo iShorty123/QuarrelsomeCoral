@@ -49,7 +49,15 @@ public class Caves : MonoBehaviour
         caves = new List<RandomCave>();
 
         AddFirstCave();
-        AddCaveToRight(true);
+        //AddCaveToRight(true);
+        //AddCaveToLeft(true);
+        //AddCaveToRight(true);
+        //AddCaveToLeft(true);
+        AddCaveToRight(false);
+        AddCaveToLeft(false);
+        AddCaveToRight(false);
+        AddCaveToLeft(false);
+
     }
 
     // Start is called before the first frame update
@@ -61,7 +69,7 @@ public class Caves : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
     public List<RandomCave> GetCaves() {
@@ -91,7 +99,7 @@ public class Caves : MonoBehaviour
         cave.transform.parent = this.transform;
 
         //setup and create cave
-        caveScript.SetAsFirstCave();
+        //caveScript.SetAsFirstCave();
         caveScript.Setup(MapGrid, MainCamera, FarCamera, Tile);
         caveScript.ConstructCave();
 
