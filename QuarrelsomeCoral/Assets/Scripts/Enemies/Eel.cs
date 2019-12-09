@@ -67,13 +67,11 @@ public class Eel : BaseEnemy
 
     private void FixedUpdate()
     {
-        m_Rigidbody.angularVelocity = 0; //No spinning allowed
         Move();
     }
 
     private bool CurrentlyLunging()
     {
-
         if (Time.realtimeSinceStartup - m_RestTimeAfterLunge > 1) { m_Animator.speed = 1; return false; }
         else { if (!CurrentlyShieldStunned() && m_CanLunge) { m_Animator.speed = 3; } else { m_Animator.speed = 1; } return true; }
     }
