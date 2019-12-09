@@ -84,7 +84,6 @@ public class MainController : MonoBehaviour
 
     void hideLoadingView()
     {
-        Debug.Log("Hide");
         if (LoadingScreen != null) LoadingScreen.SetActive(false);
     }
 
@@ -96,17 +95,17 @@ public class MainController : MonoBehaviour
 
         List<RandomCave> caves = Caves.GetCaves();
 
-        foreach (RandomCave cave in caves)
-        {
-            if (!cave.IsDoneBuilding()) return;
-        }
+        //foreach (RandomCave cave in caves)
+        //{
+        //    Debug.Log("h");
+        //    if (!cave.IsDoneBuilding()) { Debug.Log("r"); return; }
+        //}
 
         foreach (RandomCave cave in caves)
         {
             SetupCave(cave);
             cave.IsDone();
         }
-        Debug.Log("About to be done");
         hideLoadingView();
 
     }
