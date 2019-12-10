@@ -24,6 +24,8 @@ public class SubmarineController : MonoBehaviour, ITakeDamage
 
     public int m_AmmoCount;
 
+    public List<GameObject> m_Cracks = new List<GameObject>();
+
     // Start is called before the first frame update
     void Start()
     {
@@ -33,6 +35,12 @@ public class SubmarineController : MonoBehaviour, ITakeDamage
         m_MaxHealth = m_Health = 100;
         m_AmmoCount = 50;
         m_Bubbles.SetActive(false);
+
+        foreach (var go in GameObject.FindGameObjectsWithTag("ActualCrack"))
+        {
+            m_Cracks.Add(go);
+        }
+
     }
 
     // Update is called once per frame
@@ -130,6 +138,37 @@ public class SubmarineController : MonoBehaviour, ITakeDamage
 
     public void TakeDamage(int _damage)
     {
+        foreach (GameObject _crack in m_Cracks)
+        {
+            if (!_crack.activeSelf)
+            {
+                _crack.SetActive(true);
+                _crack.GetComponent<Crack>().m_LocalHealth += _damage;
+                break;
+            }
+            else if (_crack.GetComponent<Crack>().m_LocalHealth + _damage < _crack.GetComponent<Crack>().m_MaxLocalHealth)
+            {
+                _crack.GetComponent<Crack>().m_LocalHealth += _damage;
+                break;
+            }
+            else
+            {
+                if (_crack.GetComponent<Crack>().m_LocalHealth != _crack.GetComponent<Crack>().m_MaxLocalHealth)
+                {
+                    _damage = _crack.GetComponent<Crack>().m_LocalHealth - _crack.GetComponent<Crack>().m_MaxLocalHealth + _damage;
+                    m_Health -= Mathf.Abs(_crack.GetComponent<Crack>().m_LocalHealth - _crack.GetComponent<Crack>().m_MaxLocalHealth);
+                    _crack.GetComponent<Crack>().m_LocalHealth = _crack.GetComponent<Crack>().m_MaxLocalHealth;
+                }              
+            }
+        }
+
+        Shuffle(m_Cracks);
+
+        foreach (var g in m_Cracks)
+        {
+            Debug.Log(g.name);
+        }
+
         m_Health -= _damage;
         if (m_Health <= 0)
         {
@@ -137,6 +176,19 @@ public class SubmarineController : MonoBehaviour, ITakeDamage
             GameOverScript.m_GameOverFlag = true;
             SubmarineManager.GetInstance().m_Died = true;
             Debug.Log("DEAD");
+        }
+    }
+
+    public void Shuffle<T>(IList<T> list)
+    {
+        int n = list.Count;
+        while (n > 1)
+        {
+            n--;
+            int k = Random.Range(0, n + 1);
+            T value = list[k];
+            list[k] = list[n];
+            list[n] = value;
         }
     }
 

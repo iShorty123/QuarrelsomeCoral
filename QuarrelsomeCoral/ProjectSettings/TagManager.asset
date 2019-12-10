@@ -12,6 +12,8 @@ TagManager:
   - Music
   - LeftWall
   - RightWall
+  - Crack
+  - ActualCrack
   layers:
   - Default
   - TransparentFX

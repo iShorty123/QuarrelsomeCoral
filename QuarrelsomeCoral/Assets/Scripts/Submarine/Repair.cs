@@ -10,6 +10,7 @@ public class Repair : MonoBehaviour
     private float m_TimeSinceLastRepair;
     private const float m_REPAIR_SPEED = 1;
     private string m_GrabScrapButton;
+    private GameObject m_Player;
 
     // Start is called before the first frame update
     void Start()
@@ -20,20 +21,22 @@ public class Repair : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (m_UserControlled && m_TimeSinceLastRepair + m_REPAIR_SPEED < Time.realtimeSinceStartup)
+        if (m_UserControlled && m_Player != null)
         {
-            if (SubmarineManager.GetInstance().m_Submarine.m_Health < SubmarineManager.GetInstance().m_Submarine.m_MaxHealth)
-            {
-                m_TimeSinceLastRepair = Time.realtimeSinceStartup;
-                SubmarineManager.GetInstance().m_Submarine.m_Health += 1;
-            }
+            //Only carry 1 at a time
+            m_Player.GetComponent<CharacterMovement>().m_HasAmmo = false;
+            m_Player.GetComponent<CharacterMovement>().m_AmmoCrate.SetActive(false);
+
+            m_Player.GetComponent<CharacterMovement>().m_HasRepairPanel = true;
+            m_Player.GetComponent<CharacterMovement>().m_RepairPanel.SetActive(true);
+            m_Player.GetComponent<CharacterMovement>().ExitStation();
         }
     }
 
-    public void SetControls(bool _userControlled, string _grabScrapButton)
+    public void SetControls(bool _userControlled, string _grabScrapButton, GameObject _player)
     {
         m_UserControlled = _userControlled;
         m_GrabScrapButton = _grabScrapButton;
-
+        m_Player = _player;
     }
 }

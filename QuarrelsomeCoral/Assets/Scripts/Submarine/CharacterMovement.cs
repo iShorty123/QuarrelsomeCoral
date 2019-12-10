@@ -20,6 +20,11 @@ public class CharacterMovement : MonoBehaviour
     private const float DISTANCE_ALLOWED_BETWEEN_WALL_AND_PLAYER = 0.1f;
     private Animator m_Animator;
     private bool m_CanMoveRight, m_CanMoveLeft;
+    public bool m_HasAmmo;
+    public GameObject m_AmmoCrate;
+    public bool m_HasRepairPanel;
+    public GameObject m_RepairPanel;
+
 
     private string m_Horizontal = "Horizontal_P";
     private string m_Vertical = "Vertical_P";
@@ -44,13 +49,17 @@ public class CharacterMovement : MonoBehaviour
         m_Animator.SetBool("Ladder", false);
         m_CanMoveRight = true;
         m_CanMoveLeft = true;
+        m_HasAmmo = false;
+        m_AmmoCrate.SetActive(false);
+        m_HasRepairPanel = false;
+        m_RepairPanel.SetActive(false);
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        EnterOrExitStation();
-        PauseGame();
+        EnterOrExitStation();    
     }
 
     private void FixedUpdate()
@@ -80,13 +89,19 @@ public class CharacterMovement : MonoBehaviour
         {
             m_OnLaddder = true;
         }
-        
-        
-        if (collision.tag == "Station")
+             
+        else if (collision.tag == "Station")
         {
             m_ClosestStation = collision.gameObject;
+            CheckIfAmmoStation();
+        }
+        else if (collision.tag == "Crack")
+        {
+            CheckIfCanRepair(collision.gameObject);
         }
     }
+
+
 
     private void OnTriggerStay2D(Collider2D collision)
     {
@@ -105,6 +120,14 @@ public class CharacterMovement : MonoBehaviour
             {
                 m_RigidBody.velocity = new Vector2(m_RigidBody.velocity.x, 0); //Remove y velocity
             }
+        }
+        else if (collision.tag == "Station")
+        {
+            CheckIfAmmoStation();
+        }
+        else if (collision.tag == "Crack")
+        {
+            CheckIfCanRepair(collision.gameObject);
         }
     }
 
@@ -125,6 +148,11 @@ public class CharacterMovement : MonoBehaviour
         if (collision.tag == "Station")
         {
             m_ClosestStation = null;
+            CheckIfAmmoStation();
+        }
+        else if (collision.tag == "Crack")
+        {
+            CheckIfCanRepair(collision.gameObject);
         }
     }
 
@@ -166,29 +194,6 @@ public class CharacterMovement : MonoBehaviour
 
     private void MoveCharacter()
     {
-        //Determine if against a wall
-        //int layerMask = 1 << LayerMask.NameToLayer("SubmarineInterior"); //Layer: Submarine Walls
-        //bool canMoveRight, canMoveLeft;
-        //RaycastHit2D hitWall;
-        //if (hitWall = Physics2D.Raycast(transform.position, Vector2.right, DISTANCE_ALLOWED_BETWEEN_WALL_AND_PLAYER, layerMask))
-        //{
-        //    //transform.localPosition = new Vector3(transform.localPosition.x + (hitWall.distance - DISTANCE_ALLOWED_BETWEEN_WALL_AND_PLAYER), transform.localPosition.y, transform.localPosition.z);
-        //    canMoveRight = false;
-        //}
-        //else
-        //{
-        //    canMoveRight = true;
-        //}
-        //if (Physics2D.Raycast(transform.position, Vector2.left, DISTANCE_ALLOWED_BETWEEN_WALL_AND_PLAYER, layerMask))
-        //{
-        //    //transform.localPosition = new Vector3(transform.localPosition.x - (hitWall.distance - DISTANCE_ALLOWED_BETWEEN_WALL_AND_PLAYER), transform.localPosition.y, transform.localPosition.z);
-        //    canMoveLeft = false;
-        //}
-        //else
-        //{
-        //    canMoveLeft = true;
-        //}
-
         //Horizontally
         float moveHorizontally = Input.GetAxis(m_Horizontal);
         float moveVertically = Input.GetAxis(m_Vertical);
@@ -233,6 +238,32 @@ public class CharacterMovement : MonoBehaviour
             m_RigidBody.velocity = new Vector2(moveHorizontally * m_Speed, -m_Speed); //Fall down until on the first or second floor
         }
 
+        if (moveHorizontally > 0 && m_AmmoCrate.activeSelf)
+        {
+            m_AmmoCrate.transform.localPosition = new Vector3(-4, 14, 0);
+        }
+        else if (moveHorizontally < 0 && m_AmmoCrate.activeSelf)
+        {
+            m_AmmoCrate.transform.localPosition = new Vector3(4, 14, 0);
+        }
+        else if (moveHorizontally == 0 && m_AmmoCrate.activeSelf && m_OnLaddder)
+        {
+            m_AmmoCrate.transform.localPosition = new Vector3(0, 14, 0);
+        }
+
+        if (moveHorizontally > 0 && m_RepairPanel.activeSelf)
+        {
+            m_RepairPanel.transform.localPosition = new Vector3(-4, 14, 0);
+        }
+        else if (moveHorizontally < 0 && m_RepairPanel.activeSelf)
+        {
+            m_RepairPanel.transform.localPosition = new Vector3(4, 14, 0);
+        }
+        else if (moveHorizontally == 0 && m_RepairPanel.activeSelf && m_OnLaddder)
+        {
+            m_RepairPanel.transform.localPosition = new Vector3(0, 14, 0);
+        }
+
         SetWalkingAnimation();
     }
 
@@ -259,6 +290,15 @@ public class CharacterMovement : MonoBehaviour
         {
             m_Animator.SetBool("Ladder", false);
         }
+    }
+
+    public void ExitStation()
+    {
+        m_InStation = false;
+        DetermineStationExit(m_CurrentStation.name);
+        m_ClosestStation.GetComponent<StationController>().m_PlayerControlled = false;
+        m_ClosestStation.GetComponent<StationController>().AddNoPlayerLight(m_Player);
+        m_CurrentStation = null;
     }
 
     private void EnterOrExitStation()
@@ -321,17 +361,17 @@ public class CharacterMovement : MonoBehaviour
                 SubmarineManager.GetInstance().m_MiniMap.SetControls(true, m_Horizontal, m_Vertical, m_Action2);
                 break;
             case SubmarineManager.REPAIR_STATION:
-                SubmarineManager.GetInstance().m_RepairStation.SetControls(true, m_Action2);
+                SubmarineManager.GetInstance().m_RepairStation.SetControls(true, m_Action2, gameObject);
                 break;
             case SubmarineManager.ARMORY_STATION:
-                SubmarineManager.GetInstance().m_ArmoryStation.SetControls(true, m_Action2);
+                SubmarineManager.GetInstance().m_ArmoryStation.SetControls(true, m_Action2, gameObject);
                 break;
             default: 
                 break;
         }
     }
 
-    private void DetermineStationExit(string _stationName)
+    public void DetermineStationExit(string _stationName)
     {
         m_CanMove = true;
         switch (_stationName)
@@ -352,29 +392,59 @@ public class CharacterMovement : MonoBehaviour
                 SubmarineManager.GetInstance().m_MiniMap.SetControls(false, string.Empty, string.Empty, string.Empty);
                 break;
             case SubmarineManager.REPAIR_STATION:
-                SubmarineManager.GetInstance().m_RepairStation.SetControls(false, string.Empty);
+                SubmarineManager.GetInstance().m_RepairStation.SetControls(false, string.Empty, null);
                 break;
             case SubmarineManager.ARMORY_STATION:
-                SubmarineManager.GetInstance().m_ArmoryStation.SetControls(false, string.Empty);
+                SubmarineManager.GetInstance().m_ArmoryStation.SetControls(false, string.Empty, null);
                 break;
             default:
                 break;
         }
     }
-
-    private void PauseGame()
+   
+    private void Reload()
     {
-        //if (m_Player == 1 && !SubmarineManager.GetInstance().m_Died)
-        //{
-            //if (Input.GetButtonUp(m_PauseButton) && !SubmarineManager.GetInstance().m_MainMenu.PauseMenu.activeSelf)
-            //{
-            //    SubmarineManager.GetInstance().m_MainMenu.GotoPauseScene();
-            //}
-            //else if (Input.GetButtonUp(m_PauseButton) && SubmarineManager.GetInstance().m_MainMenu.PauseMenu.activeSelf)
-            //{
-            //    SubmarineManager.GetInstance().m_MainMenu.GotoResumeScene();
-            //}
-        //}
+        m_HasAmmo = false;
+        m_AmmoCrate.SetActive(false);
     }
 
+    private void CheckIfAmmoStation()
+    {
+        //If an ammo station, and hit reload button, and have ammo
+        if (Input.GetButtonUp(m_Action2) && m_HasAmmo)
+        {
+            if (m_ClosestStation.name == SubmarineManager.TOP_WEAPON_STATION)
+            {
+                if (SubmarineManager.GetInstance().m_TopWeaponStation.GetComponent<GunController>().m_AmmoCount + 10 > 100) 
+                { SubmarineManager.GetInstance().m_TopWeaponStation.GetComponent<GunController>().m_AmmoCount = 100; }
+                else { SubmarineManager.GetInstance().m_TopWeaponStation.GetComponent<GunController>().m_AmmoCount += 10; }
+                Reload();
+            }
+            else if( m_ClosestStation.name == SubmarineManager.BOTTOM_WEAPON_STATION)
+            {
+                if (SubmarineManager.GetInstance().m_BottomWeaponStation.GetComponent<GunController>().m_AmmoCount + 10 > 100)
+                { SubmarineManager.GetInstance().m_BottomWeaponStation.GetComponent<GunController>().m_AmmoCount = 100; }
+                else { SubmarineManager.GetInstance().m_BottomWeaponStation.GetComponent<GunController>().m_AmmoCount += 10; }
+                Reload();
+            }
+            else if (m_ClosestStation.name == SubmarineManager.PILOT_STATION)
+            {
+                if (SubmarineManager.GetInstance().m_Submarine.GetComponent<SubmarineController>().m_AmmoCount + 5 > 50)
+                { SubmarineManager.GetInstance().m_Submarine.GetComponent<SubmarineController>().m_AmmoCount = 50; }
+                else { SubmarineManager.GetInstance().m_Submarine.GetComponent<SubmarineController>().m_AmmoCount += 5; }
+                Reload();
+            }
+        }
+    }
+
+    private void CheckIfCanRepair(GameObject _crack)
+    {
+        //If at a crack, hit action2, and has repair panel
+        if (Input.GetButtonUp(m_Action2) && m_HasRepairPanel)
+        {
+            _crack.GetComponent<FollowCrack>().m_MyCrack.GetComponent<Crack>().Repair();
+            m_HasRepairPanel = false;
+            m_RepairPanel.SetActive(false);
+        }
+    }
 }

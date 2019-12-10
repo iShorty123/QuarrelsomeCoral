@@ -19,6 +19,8 @@ public class Armory : MonoBehaviour
     private Image m_BottomAmmoImage;
     public Image m_PilotAmmoImage;
 
+    private GameObject m_Player;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -40,41 +42,15 @@ public class Armory : MonoBehaviour
     {
         UpdateText();
 
-        if (m_UserControlled && m_TimeSinceLastReload + m_RELOAD_SPEED < Time.realtimeSinceStartup)
-        {
-            int smallestCount = int.MaxValue;
-            GameObject stationToReload = null;
-            if (SubmarineManager.GetInstance().m_TopWeaponStation.m_AmmoCount < smallestCount && SubmarineManager.GetInstance().m_TopWeaponStation.m_AmmoCount < 100)
-            {
-                smallestCount = SubmarineManager.GetInstance().m_TopWeaponStation.m_AmmoCount;
-                stationToReload = SubmarineManager.GetInstance().m_TopWeaponStation.gameObject;
-            }
-            if (SubmarineManager.GetInstance().m_BottomWeaponStation.m_AmmoCount <= smallestCount && SubmarineManager.GetInstance().m_BottomWeaponStation.m_AmmoCount < 100)
-            {
-                smallestCount = SubmarineManager.GetInstance().m_BottomWeaponStation.m_AmmoCount;
-                stationToReload = SubmarineManager.GetInstance().m_BottomWeaponStation.gameObject;
-            }
-            if (SubmarineManager.GetInstance().m_PilotStation.m_AmmoCount <= smallestCount && SubmarineManager.GetInstance().m_PilotStation.m_AmmoCount < 50)
-            {
-                smallestCount = SubmarineManager.GetInstance().m_PilotStation.m_AmmoCount;
-                stationToReload = SubmarineManager.GetInstance().m_PilotStation.gameObject;
-            }
-            if (stationToReload != null)
-            {
-                if (stationToReload.GetComponent<GunController>())
-                {
-                    if (stationToReload.GetComponent<GunController>().m_AmmoCount + 3 > 100) { stationToReload.GetComponent<GunController>().m_AmmoCount = 100; }
-                    else { stationToReload.GetComponent<GunController>().m_AmmoCount += 3; }
-                }
-                else
-                {
-                    if (stationToReload.GetComponent<SubmarineController>().m_AmmoCount + 1 > 50) { stationToReload.GetComponent<SubmarineController>().m_AmmoCount = 50; }
-                    else { stationToReload.GetComponent<SubmarineController>().m_AmmoCount += 1; }
-                }
-                m_TimeSinceLastReload = Time.realtimeSinceStartup;
+        if (m_UserControlled && m_Player != null)
+        { 
+            //Only carry 1 at a time
+            m_Player.GetComponent<CharacterMovement>().m_HasRepairPanel = false;
+            m_Player.GetComponent<CharacterMovement>().m_RepairPanel.SetActive(false);
 
-            }
-            
+            m_Player.GetComponent<CharacterMovement>().m_HasAmmo = true;
+            m_Player.GetComponent<CharacterMovement>().m_AmmoCrate.SetActive(true);
+            m_Player.GetComponent<CharacterMovement>().ExitStation();
         }
 
     }
@@ -91,10 +67,10 @@ public class Armory : MonoBehaviour
         m_PilotAmmoImage.fillAmount = (float)SubmarineManager.GetInstance().m_Submarine.m_AmmoCount / 50f;
     }
 
-    public void SetControls(bool _userControlled, string _reloadButton)
+    public void SetControls(bool _userControlled, string _reloadButton, GameObject _player)
     {
         m_UserControlled = _userControlled;
         m_ReloadButton = _reloadButton;
-
+        m_Player = _player;
     }
 }
