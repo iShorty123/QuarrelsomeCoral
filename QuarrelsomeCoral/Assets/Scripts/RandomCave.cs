@@ -18,6 +18,7 @@ public class RandomCave : MonoBehaviour
     Camera MainCamera = null;
     public Transform BgImage = null;
     public Transform MidImage = null;
+    public bool plantsDone = false;
 
     private CaveCluster borderTile = null;
 
@@ -53,6 +54,7 @@ public class RandomCave : MonoBehaviour
     Vector3Int origin;
 
     bool isDone = false;
+    public bool finishedOnceAlready = false;
     bool isFirstCave = false;
 
     //WaitForSeconds waitFor = new WaitForSeconds(.07f);
@@ -114,6 +116,11 @@ public class RandomCave : MonoBehaviour
     public bool IsDoneBuilding()
     {
         return isDone;
+    }
+
+    public bool FinishedOnceAlready()
+    {
+        return finishedOnceAlready;
     }
 
     public void SetAsFirstCave() {
@@ -327,6 +334,7 @@ public class RandomCave : MonoBehaviour
         for (int i = 0; i < clusters.Count; i++){
            //if (!clusters[i].ShouldBeRemoved()) 
             BuildCavesR(clusters[i], clusters[(i + 1) % clusters.Count]);
+            Debug.Log("Working");
             if (!isFirstCave) yield return waitFor;
         }
 
@@ -334,8 +342,9 @@ public class RandomCave : MonoBehaviour
         //{
         //    if (cluster.ShouldBeRemoved()) clusters.Remove(cluster);
         //}
-
+        Debug.Log("Finished");
         isDone = true;
+        finishedOnceAlready = false;
     }
 
     void BuildCavesR(CaveCluster cluster, CaveCluster neighb)

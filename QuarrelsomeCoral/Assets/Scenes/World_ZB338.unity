@@ -1271,13 +1271,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PlantTypes:
-  - {fileID: 9001713069763073102, guid: 244a6100fc6b24644a892def2d1e7d9f, type: 3}
-  - {fileID: 8387591823078556588, guid: 9185e450c48d24899af0d9830e5c0146, type: 3}
-  - {fileID: 7175735178307849577, guid: 746282de7264d49bf8855212a9d8c685, type: 3}
-  - {fileID: 8885380011520980944, guid: 193cbde76094a40e5b1f60d467f8263a, type: 3}
-  - {fileID: 8185005297946425855, guid: 11fc2eb076ee14c76a53bc4c0d6067f4, type: 3}
-  - {fileID: 3494501720907599184, guid: 5ca11895d03474fd68bc05f8d7d6b037, type: 3}
-  - {fileID: 2313868027006946354, guid: 924c125e154664706b18cbe53be75d94, type: 3}
+  - {fileID: 1681548321638463985, guid: 43987a7412d5bd14d8b0b63d8f6985cb, type: 3}
+  - {fileID: 7331812248597560793, guid: b0d5f7c23101fe744b4f27ee6e314065, type: 3}
+  - {fileID: 5152171413424829831, guid: ddaab7fccf4a356448c9822965fc0479, type: 3}
+  - {fileID: 615593812845700950, guid: 2c8c2c06e6761e5458d10bda9bf89762, type: 3}
+  - {fileID: 859335567529684971, guid: 23969b3be19da4b44902b85f1e74e53d, type: 3}
 --- !u!4 &385254307
 Transform:
   m_ObjectHideFlags: 0
@@ -2182,7 +2180,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &766340380
 MonoBehaviour:
   m_ObjectHideFlags: 0

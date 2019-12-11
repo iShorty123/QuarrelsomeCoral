@@ -38,7 +38,8 @@ public class RandomPlant : MonoBehaviour
     }
 
     public void AddPlants() {
-        foreach (var pos in Map.cellBounds.allPositionsWithin) {
+        foreach (var pos in Map.cellBounds.allPositionsWithin)
+        {
             PlantObjects[pos.x + Map.size.x / 2, pos.y + Map.size.y / 2] = SpawnPlant(pos);
         }
 

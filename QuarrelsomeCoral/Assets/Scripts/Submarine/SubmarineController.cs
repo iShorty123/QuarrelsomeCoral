@@ -164,11 +164,6 @@ public class SubmarineController : MonoBehaviour, ITakeDamage
 
         Shuffle(m_Cracks);
 
-        foreach (var g in m_Cracks)
-        {
-            Debug.Log(g.name);
-        }
-
         m_Health -= _damage;
         if (m_Health <= 0)
         {

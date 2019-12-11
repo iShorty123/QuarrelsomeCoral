@@ -122,8 +122,10 @@ public class HomingBullet : MonoBehaviour
             RandomPlant plant = plantObject.GetComponent<RandomPlant>();
             GameObject[,] plantArray = plant.GetPlants();
 
+
             //delete hit tile
             map.SetTile(pos, null);
+            
             Vector2Int plantPos = new Vector2Int(pos.x + map.size.x / 2, pos.y + map.size.y / 2);
             if (plantArray[plantPos.x, plantPos.y] != null) Destroy(plantArray[plantPos.x, plantPos.y]);
 

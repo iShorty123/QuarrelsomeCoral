@@ -10,7 +10,13 @@ public class PushDown : MonoBehaviour
     void Start()
     {
         m_Rigidbody = transform.GetComponent<Rigidbody2D>();
+        StartCoroutine(Gravity());
     }
 
+    IEnumerator Gravity()
+    {
+        yield return new WaitForSeconds(10);
+        m_Rigidbody.isKinematic = true;
+    }
 
 }

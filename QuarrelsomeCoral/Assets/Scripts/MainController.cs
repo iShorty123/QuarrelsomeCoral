@@ -75,7 +75,7 @@ public class MainController : MonoBehaviour
 
         SetupFirstCaves();
 
-        SetupLastCave();
+        StartCoroutine(SetupLastCave());
     }
 
     void showLoadingView(){
@@ -95,51 +95,68 @@ public class MainController : MonoBehaviour
 
         List<RandomCave> caves = Caves.GetCaves();
 
-        //foreach (RandomCave cave in caves)
-        //{
-        //    Debug.Log("h");
-        //    if (!cave.IsDoneBuilding()) { Debug.Log("r"); return; }
-        //}
+        foreach (RandomCave cave in caves)
+        {
+            Debug.Log("h");
+            if (!cave.IsDoneBuilding() && !cave.FinishedOnceAlready()) { Debug.Log("r"); return; }
+        }
 
         foreach (RandomCave cave in caves)
         {
-            SetupCave(cave);
+            if (!cave.plantsDone) SetupCave(cave);          
+        }
+
+        foreach (RandomCave cave in caves)
+        {
+            SetupPoints(cave);
             cave.IsDone();
         }
+
         hideLoadingView();
 
     }
 
-    void SetupLastCave() {
+    IEnumerator SetupLastCave() {
 
         RandomCave lastCave = Caves.GetLastCave();
-        if (lastCave.IsDone()) SetupCave(lastCave);
+        if (lastCave.IsDone())
+        {
+            SetupCave(lastCave);
+            yield return new WaitForEndOfFrame();
+            SetupPoints(lastCave);
+        }
+
        
     }
 
+
     void SetupCave(RandomCave cave) {
         Tilemap map = cave.GetMap();
-
         GameObject Plant = new GameObject();
         Plant.SetActive(false);
         RandomPlant plantScript = Plant.AddComponent<RandomPlant>();
         plantScript.Setup(map, MainCamera, map.transform.position + new Vector3(1, 1, 0), Plants.GetPlantTypes());
         plantScript.AddPlants();
         Plant.SetActive(true);
-        Plant.name = "Plant" + Plants.transform.childCount.ToString();
+        Plant.name = "Plant" + map.name[map.name.Length - 1];
         Plant.transform.parent = Plants.gameObject.transform;
 
+        cave.plantsDone = true;
+    }
 
-
+    public void SetupPoints(RandomCave cave)
+    {
+        Tilemap map = cave.GetMap();
         GameObject PointOfInterest = new GameObject();
         PointOfInterest.SetActive(false);
         RandomPointOfInterest pointOfInterestScript = PointOfInterest.AddComponent<RandomPointOfInterest>();
         pointOfInterestScript.Setup(map, MainCamera, map.transform.position + new Vector3(1, 1, 0), PointsOfInterest.GetPointOfInterestTypes());
         pointOfInterestScript.AddPointsOfInterest();
         PointOfInterest.SetActive(true);
-        PointOfInterest.name = "PointOfInterest" + PointsOfInterest.transform.childCount.ToString();
+        PointOfInterest.name = "PointOfInterest" + map.name[map.name.Length - 1];
         PointOfInterest.transform.parent = PointsOfInterest.gameObject.transform;
 
+        cave.finishedOnceAlready = true;
     }
 
     void PositionSubmarine() {
